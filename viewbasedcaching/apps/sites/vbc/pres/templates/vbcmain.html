@@ -1,0 +1,41 @@
+<h1>View based caching</h1>
+This is a sample implementation of the view based caching concept. Please visit the
+<a href="http://en.adventure-php-framework.org/Page/086-How-to-implement-view-based-caching" title="APF documentation page">APF documentation page</a>
+to get the details on the implementation. The following box definedes a view, that is <strong>not</strong>
+cached, the second box includes the content of a cached view using the
+<strong>&lt;cache:importdesign /&gt;</strong> taglib's functionality:
+<br />
+<br />
+<div style="border: 1px dashed #aaaaaa; background-color: #efefef;">
+  <core:importdesign
+     namespace="sites::vbc::pres::templates::views"
+     template="view_one"
+  />
+</div>
+<br />
+<br />
+<div style="border: 1px dashed #aaaaaa; background-color: #efefef;">
+  <core:addtaglib namespace="sites::vbc::pres::taglib" prefix="cache" class="importdesign" />
+  <cache:importdesign
+     namespace="sites::vbc::pres::templates::views"
+     template="view_two"
+     cachekey="sites_vbc_vbcmain_view_two"
+     cacheconfig="view_cache"
+  />
+</div>
+<br />
+<strong>Usage:</strong>
+<ul>
+  <li>Press F5 to see, that the timestamp in the second view is not refreshed.</li>
+  <li>Add clearcache=true to the url to clear the cache.</li>
+  <li>Add benchmarkreport=true to the url to see the benchmark report.</li>
+</ul>
+<strong>Note:</strong>
+<ul>
+  <li>The caching is done by the filesystem cache provider.</li>
+  <li>The folder, where the index.php resides must be writable for the webserver user.</li>
+  <li>
+    This demo is written for PHP5 only. To get it working with PHP 4, download the suitable codepack
+    release and extract it to the <em>./apps</em> folder.
+  </li>
+</ul>
