@@ -28,7 +28,7 @@
    ini_set('html_errors','off');
 
    // include the pagecontroller
-   include_once('d:/Apache2/htdocs/apps/core/pagecontroller/pagecontroller.php5');
+   include_once('./apps/core/pagecontroller/pagecontroller.php');
 
    // Create new Page object
    $Page = new Page();
