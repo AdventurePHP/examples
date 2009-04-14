@@ -1,0 +1,222 @@
+<h3>My first steps</h3>
+This tutorial describes the first few steps of the framework's handling and gives some advice to
+modify the demo website.
+<br />
+<br />
+<br />
+<h4>1. Expansion of the content</h4>
+Within the current web page, the content is included using the <strong>&lt;core:importdesign /&gt;</strong>
+tag. This tag includes the feature, that the name of the template that is included as a child node
+can be controlled by an url parameter. For this reason the following tag definition was placed in the
+<strong>website.html</strong> template:
+<pre class="tagexample">
+  &lt;core:importdesign
+                  namespace="sites::apfexample::pres::templates::en::content"
+                  template="[pagepart = start]"
+  /&gt;
+</pre>
+The functionality of the tag can be described by the next sentence: "Please include that template
+which name is defined by the URL parameter <strong>pagepart</strong> from the namespace
+<em>sites::apfexample::pres::templates::de::content</em>. If the parameter is not present in the
+requested URL, then please include the template <strong>start</strong>!".
+<br />
+<br />
+In order to include more content pages the developer must create further template files in the
+<pre class="tagexample">
+apps/sites/apfexample/pres/templates/en/content
+</pre>
+folder. Please note, that the name of the files must directly correspont with the content of the
+URL parameter <strong>pagepart</strong> and the file extension must be <strong>.html</strong>. Beyond
+that the file name must only contain the characters <strong>a-z</strong> and the numbers
+<strong>0-9</strong>. FIf you want to address a new content page by the URL
+<pre class="tagexample">
+/en/?pagepart=mynewpage
+</pre>
+the name of the content file must be <strong>mynewpage.html</strong>.
+<br />
+<br />
+This method of including dynamic content into a website is only <u>one</u> possibility out of
+several ways the framework offers to you. The online tutorial
+<a href="http://www.adventure-php-framework.org/Page/048-My-first-website/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" target="_blank" title="Erste Webseite erstellen">my first website</a>
+describes more alternatives that are more common with bigger pages.
+<br />
+<br />
+<br />
+<h4>2. Adaptation of the page's design</h4>
+The design - or in other words spoken - the layout of the website is defined by the initial template.
+It defines the HTML skeleton and includes areas for the header, the menu, the language switch, content
+and footer. If you intend to add another navigation on the left part of the content area, the main
+template must be extended.
+<br />
+<br />
+This tutorial wants to show how a second navigation area can be included in the page using a seperate
+template for the menu's content. The result of this part of the tutorial can be seen on the
+<a href="./pagewithmenu.php?pagepart=tutorial" title="Website with a furher menu" target="_blank">pagewithmenu.php</a>
+angezeigt werden.
+<br />
+<br />
+At first, a new area must be added to the main template to display the menu. For this reason a new
+column is included in the template:
+<pre class="tagexample">
+ ...
+ &lt;table cellpadding="0" cellspacing="0" style="width: 100%;"&gt;
+   <span style="color: #759D11; font-weight: bold;">
+   &lt;td style="width: 206px; vertical-align: top; padding-left: 30px;"&gt;
+     &lt;core:importdesign namespace="sites::apfexample::pres::templates::de" template="menu" /&gt;
+   &lt;/td&gt;
+   </span>
+   &lt;tr&gt;
+     &lt;td style="vertical-align: top;"&gt;
+       &lt;div id="top_repeat_border"&gt;
+         &lt;div id="bottom_repeat_border"&gt;
+           &lt;div id="left_repeat_border"&gt;
+             &lt;div id="right_repeat_border"&gt;
+               &lt;div id="left_top_corner"&gt;
+                 &lt;div id="left_bottom_corner"&gt;
+                   &lt;div id="right_top_corner"&gt;
+                     &lt;div id="right_bottom_corner"&gt;
+                       &lt;div id="scalable_content_div"&gt;
+                         &lt;core:importdesign
+                                        namespace="sites::apfexample::pres::templates::en::content"
+                                        template="[pagepart = start]"
+                         /&gt;
+                       &lt;/div&gt;
+                     &lt;/div&gt;
+                   &lt;/div&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+             &lt;/div&gt;
+           &lt;/div&gt;
+         &lt;/div&gt;
+       &lt;/div&gt;
+     &lt;/td&gt;
+   &lt;/tr&gt;
+ &lt;/table&gt;
+ ...
+</pre>
+Subsequently, the menu template <strong>menu.html</strong> must be created in the folder
+<strong>apps/sites/apfexample/pres/templates/en</strong>. Due to the fact, that the content of the
+menu is not dynamic content, the creation of the content of the template is not discussed here.
+<br />
+<br />
+<br />
+<h4>3. Inclusion of modules</h4>
+Modules in case of the adventure php framework are isolated parts of generic software, that can be
+integrated in any project. Any configuration is done by configuration files and not by source code
+changes. One of the easiest ways of integrating modules is the <strong>&lt;core:importdesign /&gt;</strong>
+tag. It offers the possibility to "snap in" modules within the presentation layer without any worry
+about the rest of the software parts.
+<br />
+<br />
+Usually, modules are stored in the <strong>apps/modules</strong> directory. Hence, the weather rss
+module that is taken as an example in this chapter is stored in the <strong>modules::weather</strong>
+namespace. Therefor, the following folder structure exists:
+<pre class="tagexample">
+apps/ (<em>Directory for all source code files</em>)
+     modules/ (<em>Directory for modules</em>)
+             weather/ (<em>Directory for the rss weather module; see tutorial</em>)
+                     pres/ (<em>Directory for the presentation layer components</em>)
+                          documentcontroller/  (<em>Directory for all document controller</em>)
+                          templates/ (<em>Directory for all templates</em>)
+</pre>
+The module was created as an example for this page and it consumes and displays weather rss feeds.
+For a start, the module was developed to display the stream
+<strong>http://feeds.feedburner.com/wettercom/rss</strong> but it is able to display other compatible
+streams as well.
+<br />
+<br />
+As already mentioned above modules can easily added within the presenation layer - more precisely:
+in templates. Commonly the <strong>&lt;core:importdesign /&gt;</strong> tag can be used to include
+any module. Since the tag parser accepts any amount of xml tag attributes a module can also be
+configured by adding more atrtributes. In case of the rss weather module the attribute
+<strong>rss_source</strong> is used to specify the rss source. Including the module goes as follows:
+<pre class="tagexample">
+  &lt;core:importdesign
+             namespace="modules::weather::pres::templates"
+             template="weather"
+             rss_source="http://rss.weather.com/rss/national/rss_nwf_rss.xml?cm_ven=NWF&cm_cat=rss&par=NWF_rss"
+  /&gt;
+</pre>
+To show the content of the desired rss stream in the demo web page a new content file must be created
+as described in chapter 1. The content of the file must be equal to the tag definition above. After
+having done that, the page can be requested in your web browser.
+<br />
+<br />
+<br />
+<h4>4. Create own taglibs or modules</h4>
+Taglibs and modules are an elegant way of enhancing functionality step by step without changing the
+basics. Chapter 4 would like to show you a simple taglib example to print a date and time string
+to the content area.
+<br />
+<br />
+<br />
+<h5>4.1. Definition of the tag</h5>
+Every xml tag is composed of the <strong>prefix</strong> and the <strong>class name</strong>. These
+two parts should be self-documenting to guarantee good recognition within template files. To keep
+things simple our new tag should be named <strong>curr:time</strong>.
+<br />
+<br />
+<br />
+<h5>4.2. Creating the tags</h5>
+Before we are going to implement the tags functionality - the functionality is defined in a class
+that inherits from <strong>Document</strong> - we have to decide where the taglib class must be
+stored. Due to the fact, that the date output should only be included in a website project, the
+taglib belongs to a project. Hence, it is wise to store the class file in a subfolder of the project
+directory. As mentioned in the <a href="./?pagepart=introduction" title="Introduction">introduction</a>
+chapter all files of the current project are stored in the
+<pre class="tagexample">
+apps/sites/apfexample/
+</pre>
+folder. Typically, tags belong to the presenation layer and thus have to be stored in the
+<strong>pres</strong> folder. In order to mark the class files as a taglib another subfolder with
+the name <strong>taglib</strong> is created to store the taglibs.
+<br />
+<br />
+An adventure php framework xml tag is always represented by a php class. The name of the class
+consists of the <strong>prefix</strong> of the tag, the string <strong>_taglib_</strong> and the
+<strong>class name</strong>. For the present example the name of the class is
+<strong>curr_taglib_time</strong>. Further, another convention says, that the class names should be
+identical to the classes file name. This simplifies not only the structurization but also the
+inclusion of tags and components. In order to implement our example tag we are going to create a file
+named
+<pre class="tagexample">
+curr_taglib_date.php
+</pre>
+in the folde
+<pre class="tagexample">
+apps/sites/apfexample/pres/taglib
+</pre>
+The structure of the file is quite simple: it contains the class definition and the implementation of
+the <strong>transform()</strong> method. The latter is called when the DOM tree of the page is
+transformed. The page controller expects that the function returns the content of the transformed
+node. In case of the date and time output taglib the current date must be returned. The taglib class
+therefor looks as follows:
+<br />
+<core:addtaglib namespace="sites::apfexample::pres::taglib" prefix="php" class="highlight" />
+<php:highlight>
+   class curr_taglib_date extends Document
+   {
+
+      function curr_taglib_date(){
+      }
+
+      function transform(){
+         return date('l, d.m.Y, H:i:s');
+       // end function
+      }
+
+    // end class
+   }
+</php:highlight>
+In order to include the tag into a content page the taglib must be introduced to the tag parser
+adding the follwing statement:
+<pre class="tagexample">
+&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" prefix="curr" class="date" /&gt;
+</pre>
+After that - and immediately after that - the tag can be used by providing the string
+<pre class="tagexample">
+&lt;curr:date /&gt;
+</pre>
+in any content page. To demonstrate the functionality the tag was already included in the
+<a href="./?pagepart=playground" title="Playground">playground</a>. For the sake of completeness, the
+tag implementation is already included in the example package.

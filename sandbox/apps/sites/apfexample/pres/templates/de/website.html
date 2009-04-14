@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Adventure PHP Framework Demo-Projekt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../css/apfexample.css" type="text/css" />
+</head>
+<body>
+  <div id="main">
+    <div id="header">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <a href=".." title="Startseite">
+              <img src="../media/header_left.png" border="0" alt="Startseite" />
+            </a>
+          </td>
+          <td style="width: 100%; vertical-align: top;">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;" border="0">
+              <tr>
+                <td id="lang_switch">
+                  <img src="../media/flag_de.png" alt="Deutsch" border="0" align="absmiddle" /> <a href="../de" class="lang_switch">Deutsch</a>
+                  &nbsp;&nbsp;
+                  <img src="../media/flag_en.png" alt="English" border="0" align="absmiddle" /> <a href="../en" class="lang_switch">English</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 100%; height: 50px; text-align: center; padding-right: 20px;">
+                  <img src="../media/apf_claim_2.gif" alt="Adventure PHP Framework - PageController FrontController UML Pattern OO Framework Performance"/>
+                </td>
+              </tr>
+              <tr>
+                <td id="top_menu">
+                  <core:importdesign namespace="sites::apfexample::pres::templates::de" template="topmenu" />
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+      <tr>
+        <td style="vertical-align: top;">
+          <div id="top_repeat_border">
+            <div id="bottom_repeat_border">
+              <div id="left_repeat_border">
+                <div id="right_repeat_border">
+                  <div id="left_top_corner">
+                    <div id="left_bottom_corner">
+                      <div id="right_top_corner">
+                        <div id="right_bottom_corner">
+                          <div id="scalable_content_div">
+                            <core:importdesign namespace="sites::apfexample::pres::templates::de::content" template="[pagepart = start]" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div id="footer">
+      <strong>&copy; 2008 adventure-php-framework.org</strong>&nbsp;&nbsp;
+    </div>
+  </div>
+</body>
+</html>

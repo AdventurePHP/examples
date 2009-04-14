@@ -1,0 +1,479 @@
+/***************************************************************************************************
+*                              CSS definitions for the example page                                *
+*                                                                                                  *
+*  @author Christian Achatz                                                                        *
+*  @version                                                                                        *
+*  Version 0.2, 19.04.2008                                                                         *
+***************************************************************************************************/
+
+/*** elements *************************************************************************************/
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px;	
+   overflow: auto;
+	background-color: #041D21; 
+   text-align: left;
+}
+
+pre.tagexample
+{
+  border: 1px solid blue;
+  background-color: #eeeeee;
+  padding: 10px;
+  page-break-inside: avoid;
+}
+
+pre.phpexample
+{
+  border: 1px solid red;
+  padding: 10px;
+  font-family: Courier;
+  background-color: #eeeeee;
+  page-break-inside: avoid;
+}
+
+pre.phpcode
+{
+  border: 1px solid red;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: Courier;
+  background-color: #eeeeee;
+  page-break-inside: avoid;
+}
+
+div.phpcode
+{
+  border: 1px solid red;
+  padding: 10px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-family: Courier;
+  background-color: #eeeeee;
+  page-break-inside: avoid;
+}
+
+
+h1
+{
+   color: #759D11;
+   font-size: 26px;
+   font-weight: bold;
+   margin-top: 0px;
+   margin-bottom: 7px;
+}
+
+h2
+{
+   color: #759D11;
+   font-size: 20px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 7px;
+}
+
+h3
+{
+   color: #759D11;
+   font-size: 18px;
+   font-weight: bold;
+   margin-top: 0px;
+   margin-bottom: 7px;
+}
+
+h4, h5, h6
+{
+   color: #759D11;
+   font-size: 14px;
+	font-style: italic;
+   font-weight: bold;
+   margin-top: 0px;
+   margin-bottom: 7px;
+}
+
+
+/*** classes **************************************************************************************/
+.eingabe_feld
+{
+	border: 1px solid #000000;
+	background-color: #eeeeee;
+}
+
+.menu_section
+{
+	width: 182px; 
+	height: 33px; 
+	padding-left: 10px; 
+	vertical-align: center; 
+	text-align: left; 
+	color: white; 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px; 
+	font-weight: bold; 
+	background-image: url(../media/menu_section_header.png); 
+	background-repeat: no-repeat;
+}
+
+.menu_item
+{
+	width: 167px; 
+	height: 18px; 
+	padding-left: 5px; 
+	text-align: left; 
+	vertical-align: center; 
+	margin-bottom: 10px; 
+	margin-top: 3px; 
+	margin-left: 5px; 
+	font-size: 12px; 
+	font-family: Arial, Helvetica, sans-serif;	
+	font-weight: bold; 
+	color: black; 
+	background-color: #7EAF77;
+}
+
+.menu
+{
+	padding-left: 10px;
+	padding-top: 40px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: white;
+	border: 0px solid black;
+	text-align: left;
+}
+
+.inhalt
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom: 10px;
+}
+
+
+.news
+{
+   text-align: left;
+   vertical-align: top;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-right: 0px;
+	padding-bottom: 2px;
+	border: 0px solid black;
+}
+
+
+.topmenu
+{
+   text-align: right;
+   vertical-align: bottom;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+}
+
+
+div.phpsource
+{
+	overflow: auto;
+	padding: 5px;
+	text-align: left;
+	background-color: #d6d7e8;
+   border: 1px dashed gray;
+}
+
+
+/*** ids ******************************************************************************************/
+#main
+{
+	 border: 0px solid black; 
+	 background-color: #083643;
+}
+
+#header
+{
+   width: 100%; 	
+	background-image: url(../media/header_repeat.png); 
+	background-repeat: repeat-x;	
+}
+
+#top_repeat_border
+{
+   background-image: url(../media/content_2_scale_top.png); 
+	background-repeat: repeat-x; 
+	background-position: top; 
+	background-color: white;	
+}
+
+#bottom_repeat_border
+{
+   background-image: url(../media/content_2_scale_bottom.png); 
+	background-repeat: repeat-x; 
+	background-position: bottom;	
+}
+
+#left_repeat_border
+{
+   background-image: url(../media/content_2_scale_left.png); 
+	background-repeat: repeat-y; 
+	background-position: left;	
+}
+
+#right_repeat_border
+{
+   background-image: url(../media/content_2_scale_right.png); 
+	background-repeat: repeat-y; 
+	background-position: right;	
+}
+
+#left_top_corner
+{
+   background-image: url(../media/content_2_left_top.png); 
+	background-repeat: no-repeat; 
+	background-position: left top;	
+}
+
+#left_bottom_corner
+{
+   background-image: url(../media/content_2_left_bottom.png); 
+	background-repeat: no-repeat; 
+	background-position: left bottom;	
+}
+
+#right_top_corner
+{
+	background-image: url(../media/content_2_right_top.png); 
+	background-repeat: no-repeat; 
+	background-position: right top;
+}
+
+#right_bottom_corner
+{
+	background-image: url(../media/content_2_right_bottom.png); 
+	background-repeat: no-repeat; 
+	background-position: right bottom;
+}
+
+#scalable_content_div
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;   
+	padding: 30px; 
+}
+
+#footer
+{
+	text-align: right; 
+	padding-top: 8px; 
+	color: white; 
+	width: 100%; 
+	height: 20px; 
+	background-image: url(../media/bottom_scale.png); 
+	background-repeat: repeat-x;
+}
+
+#top_menu
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;   
+	width: 100%; 
+	height: 20px; 
+	text-align: right; 
+	padding-top: 20px; 
+	padding-right: 5px;
+}
+
+
+#lang_switch
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;   
+	width: 100%; 
+	height: 20px; 
+	text-align: right; 
+	padding-top: 5px; 
+	padding-right: 5px;
+}
+
+
+/*** fonts ****************************************************************************************/
+.topmenu_ueberschrift
+{
+   font-weight: bold;
+   font-size: 13px;
+   color: #777BB4;
+}
+
+
+/*** links ****************************************************************************************/
+a:link
+{
+   color: #759D11;
+   text-decoration: none;
+}
+
+a:visited
+{
+   color: #759D11;
+   text-decoration: none;
+}
+
+a:focus
+{
+   color: #759D11;
+   text-decoration: underline;
+}
+
+a:hover
+{
+   color: #759D11;
+   text-decoration: underline;
+}
+
+a:active
+{
+   color: #759D11;
+   text-decoration: underline;
+}
+
+
+/*** menu links ***********************************************************************************/
+a.menu_links:link
+{
+   color: black;
+   text-decoration: none;
+}
+
+a.menu_links:visited
+{
+   color: black;
+   text-decoration: none;
+}
+
+a.menu_links:focus
+{
+   color: black;
+   text-decoration: underline;
+}
+
+a.menu_links:hover
+{
+   color: black;
+   text-decoration: underline;
+}
+
+a.menu_section_links:active
+{
+   color: white;
+   text-decoration: none;
+}
+
+
+/*** section menu links ***************************************************************************/
+a.menu_section_links:link
+{
+   color: white;
+   text-decoration: none;
+}
+
+a.menu_section_links:visited
+{
+   color: white;
+   text-decoration: none;
+}
+
+a.menu_section_links:focus
+{
+   color: white;
+   text-decoration: none;
+}
+
+a.menu_section_links:hover
+{
+   color: white;
+   text-decoration: none;
+}
+
+a.menu_section_links:active
+{
+   color: white;
+   text-decoration: none;
+}
+
+
+/*** top menu links *******************************************************************************/
+a.top_menu_links:link
+{
+   color: black;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+a.top_menu_links:visited
+{
+   color: black;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+a.top_menu_links:focus
+{
+   color: black;
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+a.top_menu_links:hover
+{
+   color: black;
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+a.top_menu_links:active
+{
+   color: black;
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+
+/*** lang switch links ****************************************************************************/
+a.lang_switch:link
+{
+   color: black;
+   text-decoration: none;
+	font-weight: bold;
+}
+
+a.lang_switch:visited
+{
+   color: black;
+   text-decoration: none;
+	font-weight: bold;	
+}
+
+a.lang_switch:focus
+{
+   color: black;
+   text-decoration: underline;
+	font-weight: bold;	
+}
+
+a.lang_switch:hover
+{
+   color: black;
+   text-decoration: underline;
+	font-weight: bold;	
+}
+
+a.lang_switch:active
+{
+   color: black;
+   text-decoration: underline;
+	font-weight: bold;	
+}
