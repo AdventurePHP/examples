@@ -23,7 +23,7 @@ page and it's modules can be delivered using only one single file. This goal is 
 that the complete web page is created as a DOM structure in memory. During transformation the sceleton
 is filled with content and manipulated by the functionality the developer adds. Details on the DOM
 structure can be read about in the
-<a href="http://www.adventure-php-framework.org/Page/016-Classes/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Klassen">classes</a>
+<a href="http://adventure-php-framework.org/Page/016-Classes" target="_blank" title="Klassen">classes</a>
 chapter online.
 <br />
 <br />
@@ -102,9 +102,9 @@ type of application or web page is served must be configured in the bootstrap fi
 <br />
 <br />
 To get a deeper insight into the sense of the folder and components, please have a look at the
-<a href="http://www.adventure-php-framework.org/Page/002-API-documentation/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" target="_blank" title="API documentation">API documentation</a>,
+<a href="http://adventure-php-framework.org/Page/002-API-documentation" target="_blank" title="API documentation">API documentation</a>,
 or the
-<a href="http://www.adventure-php-framework.org/Page/013-Basics/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" target="_blank" title="online documentation">online documentation</a>.
+<a href="http://adventure-php-framework.org/Page/013-Basics" target="_blank" title="online documentation">online documentation</a>.
 <br />
 <br />
 <br />
@@ -141,7 +141,7 @@ The place holders marked with <strong>{x}</strong> signify the following:
     able to load a design the information "namespace" or "path" and "design name" is necessary. The
     first part ("namespace" or "path") is used at the same time as a context for configuration
     interests, if the context is not set before loading a template via <em>loadDesign()</em>.
-    (see <a href="http://www.adventure-php-framework.org/Page/033-Configuration/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" title="configuration">configuration</a> for more details).
+    (see <a href="http://adventure-php-framework.org/Page/033-Configuration" title="configuration">configuration</a> for more details).
   </li>
   <li>
     <strong>{3}</strong>: Name if the basic template. Here either the name of the basic template
@@ -162,7 +162,7 @@ adding
 to the requested url prints the benchmark report on the bottom of a page. This report shows how much
 time is needed by each components to fullfill the asigned task. Further information can be found in
 the online documentation in the
-<a href="http://www.adventure-php-framework.org/Page/004-Benchmark/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" target="_blank" title="benchmark">benchmark chapter</a>.
+<a href="http://adventure-php-framework.org/Page/004-Benchmark" target="_blank" title="benchmark">benchmark chapter</a>.
 <br />
 <br />
 <br />
@@ -192,7 +192,7 @@ number. The initial demo page template mentioned before can be seen in the follo
 The template shown here contains two <strong>&lt;core:importdesign /&gt;</strong> tags. The first one
 includes the menu, the second the content template. To get more information on tags, please visit the
 online documentation page and get into the
-<a href="http://www.adventure-php-framework.org/Page/046-Standard-TagLibs/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" target="_blank" title="Standard taglibs">standard taglibs chapter</a>.
+<a href="http://adventure-php-framework.org/Page/046-Standard-TagLibs" target="_blank" title="Standard taglibs">standard taglibs chapter</a>.
 <br />
 <br />
 <br />
@@ -234,7 +234,7 @@ about concrete applications.
 The registry parameters have the following meaning:
 <ul>
   <li>
-    <strong>Environment</strong>: <em>(used by: configurationManager, MySQLxHandler, MySQLHandler, SQLiteHandler, ...)</em>
+    <strong>Environment</strong>: <em>(used by: configurationManager, MySQLxHandler, SQLiteHandler, ...)</em>
     <br />
     <br />
     Every configuration file exists of four different components:
@@ -251,7 +251,7 @@ The registry parameters have the following meaning:
     different other applications or modules and is executable on different systems at the same time
     without change of the source code. Nevertheless, for the loading of configurations there are
     standardised methods, so that the programmer must not look after it any more. Continuing material
-    can be found under <a href="http://www.adventure-php-framework.org/Page/033-Configuration/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" title="configuration">configuration</a>.
+    can be found under <a href="http://adventure-php-framework.org/Page/033-Configuration" title="configuration">configuration</a>.
     <br />
     <br />
     <strong>Default value:</strong> &quot;DEFAULT&quot;
@@ -260,7 +260,7 @@ The registry parameters have the following meaning:
     <br />
   </li>
   <li>
-    <strong>URLBasePath</strong>: <em>(used by: bbCodeParser, socialBookmarkManager, Suche, ...)</em>
+    <strong>URLBasePath</strong>: <em>(used by: AdvancedBBCodeParser, SocialBookmarkManager, Search, ...)</em>
     <br />
     <br />
     Many modules link on itself or different areas of a module or a web page. That's why it must be
@@ -273,7 +273,7 @@ The registry parameters have the following meaning:
     <br />
   </li>
   <li>
-    <strong>URLRewriting</strong>: <em>(used by: PageController, FrontController, linkHandler, frontcontrollerLinkHandler, ...)</em>
+    <strong>URLRewriting</strong>: <em>(used by: Page-Controller, Front-Controller, LinkHandler, FrontcontrollerLinkHandler, ...)</em>
     <br />
     <br />
     The present page controller supports URL-Rewriting. Rewrited URLs look like
@@ -302,7 +302,7 @@ The registry parameters have the following meaning:
     <br />
   </li>
   <li>
-    <strong>LibPath</strong>: <em>(used by: bbCodeParser, ...)</em>
+    <strong>LibPath</strong>: <em>(used by: AdvancedBBCodeParser, ...)</em>
     <br />
     <br />
     The <strong>LibPath</strong> directive stores the basic path to the framework's code files. The
@@ -320,7 +320,7 @@ In order to create a new web page project the following approach was considered 
   </li>
   <li>
     Download a current codepack-* release on the
-    <a href="http://www.adventure-php-framework.org/Page/008-Downloads/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" title="Downloads" target="_blank">downloads page</a>.
+    <a href="http://adventure-php-framework.org/Page/008-Downloads" title="Downloads" target="_blank">downloads page</a>.
   </li>
   <li>Extract tge framework code into the project folder.</li>
   <li>
@@ -329,4 +329,4 @@ In order to create a new web page project the following approach was considered 
   </li>
 </ol>
 Further information can be seen in the online tutorial
-<a href="http://www.adventure-php-framework.org/Page/048-My-first-website/~/sites_demosite_biz-action/setLanguage/lang/en/~/sites_demosite_biz-action/setReferrer/lang/en" title="my first website" target="_blank">my first website</a>.
+<a href="http://adventure-php-framework.org/Page/048-My-first-website" title="my first website" target="_blank">my first website</a>.

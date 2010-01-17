@@ -26,7 +26,7 @@ f&uuml;r eine Webseite eine einzige Datei ausreicht um alle Inhalte und Module a
 Seite wird dabei aus ihren Einzel-Templates komplett im Speicher aufgebaut und bei der Transformierung
 entsprechend gef&uuml;llt, bzw. manipuliert. Details hierzu k&ouml;nnen in der Online-Dokumentation
 im Kapitel
-<a href="http://www.adventure-php-framework.org/Seite/016-Klassen/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Klassen">Klassen</a>
+<a href="http://adventure-php-framework.org/Seite/016-Klassen" target="_blank" title="Klassen">Klassen</a>
 nachgelesen werden.
 <br />
 <br />
@@ -107,9 +107,9 @@ der Entwickler dabei in der Bootstrap-Datei.
 <br />
 <br />
 Die Bedeutung der einzelnen Ordner und Komponenten kann in der
-<a href="http://www.adventure-php-framework.org/Seite/002-API-Dokumentation/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="API-Dokumentation">API-Dokumentation</a>,
+<a href="http://adventure-php-framework.org/Seite/002-API-Dokumentation" target="_blank" title="API-Dokumentation">API-Dokumentation</a>,
 sowie in der
-<a href="http://www.adventure-php-framework.org/Seite/013-Grundlagen/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Online-Dokumentation">Online-Dokumentation</a>
+<a href="http://adventure-php-framework.org/Seite/013-Grundlagen" target="_blank" title="Online-Dokumentation">Online-Dokumentation</a>
 noch genauer nachgelesen werden.
 <br />
 <br />
@@ -147,7 +147,7 @@ Den mit <strong>{x}</strong> gekennzeichneten Platzhaltern kommt dabei folgende 
     <strong>{2}</strong>: Namespace zum Basis-Template bzw. Context. Um ein Design laden zu
     k&ouml;nnen sind die Angaben "Namespace" bzw. "Pfad" und "Designname" notwendig. Der erste Teil
     ("Namespace" bzw. "Pfad") wird zugleich als Context f&uuml;r Konfigurationsbelange eingesetzt
-    (siehe hierzu <a href="http://www.adventure-php-framework.org/Seite/033-Konfiguration/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Konfiguration">Konfiguration</a>).
+    (siehe hierzu <a href="http://adventure-php-framework.org/Seite/033-Konfiguration" target="_blank" title="Konfiguration">Konfiguration</a>).
   </li>
   <li>
     <strong>{3}</strong>: Name des Basis-Templates. Hier kann entweder der Name des Basis-Templates
@@ -167,7 +167,7 @@ von
 </pre>
 an die URL ein Benchmarkreport ausgegeben, der zeigt, wo welche Zeit zur Verarbeitung ben&ouml;tigt
 wird. N&auml;here Informationen k&ouml;nnen in der Online-Hilfe im Kapitel
-<a href="http://www.adventure-php-framework.org/Seite/004-Benchmark/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Benchmark">Benchmark</a>
+<a href="http://adventure-php-framework.org/Seite/004-Benchmark" target="_blank" title="Benchmark">Benchmark</a>
 nachgelesen werden.
 <br />
 <br />
@@ -197,7 +197,7 @@ folgenden Codebox angezeigt:
 Im Template werden zwei <strong>&lt;core:importdesign /&gt;</strong> Tags verwendet. Das erste bindet
 das Men&uuml;-Template ein, das zweite die Inhaltstemplates. Weitere Informationen zu den im Framework
 enthaltenen Tags k&ouml;nnen in der Onlinehilfe unter
-<a href="http://www.adventure-php-framework.org/Seite/046-Standard-TagLibs/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Standard-TagLibs">Standard-TagLibs</a>
+<a href="http://adventure-php-framework.org/Seite/046-Standard-TagLibs" target="_blank" title="Standard-TagLibs">Standard-TagLibs</a>
 nachgelesen werden.
 <br />
 <br />
@@ -258,7 +258,7 @@ Die aufgef&uuml;hrten Parameter haben folgende Bedeutung:
     gleichen Zeit ohne &Auml;nderung des Quellcodes lauff&auml;hig ist. F&uuml;r das Laden von
     Konfigurationen gibt es jedoch standardisierte Methoden, so dass sich der Programmierer darum nicht
     mehr k&uuml;mmern muss. Weiterf&uuml;hrendes dazu kann im Kapitel
-    <a href="http://www.adventure-php-framework.org/Seite/033-Konfiguration/~/sites_demosite_biz-action/setReferrer/lang/de" target="_blank" title="Konfiguration">Konfiguration</a>
+    <a href="http://adventure-php-framework.org/Seite/033-Konfiguration" target="_blank" title="Konfiguration">Konfiguration</a>
     nachgelesen werden.
     <br />
     <br />
@@ -268,7 +268,7 @@ Die aufgef&uuml;hrten Parameter haben folgende Bedeutung:
     <br />
   </li>
   <li>
-    <strong>URLBasePath</strong>: <em>(verwendet von: bbCodeParser, socialBookmarkManager, Suche, ...)</em>
+    <strong>URLBasePath</strong>: <em>(verwendet von: AdvancedBBCodeParser, SocialBookmarkManager, Suche, ...)</em>
     <br />
     <br />
     Viele Module verlinken auf sich selbst oder ander Bereiche eines Moduls oder einer Webseite. Aus
@@ -282,13 +282,13 @@ Die aufgef&uuml;hrten Parameter haben folgende Bedeutung:
     <br />
   </li>
   <li>
-    <strong>URLRewriting</strong>: <em>(verwendet von: PageController, FrontController, linkHandler, frontcontrollerLinkHandler, ...)</em>
+    <strong>URLRewriting</strong>: <em>(verwendet von: Page-Controller, Front-Controller, LinkHandler, FrontcontrollerLinkHandler, ...)</em>
     <br />
     <br />
     Der vorliegende PageController unterst&uuml;tzt URL-Rewriting. Unter URL-Rewriting versteht der
     Autor die Verwendung von URLs der Form <em>http://www.domain.tld/param1/value1/param2/value2</em>
     statt <em>http://www.domain.tld?param1=value1&amp;param2=value2</em>. Ist der Wert auf "true" gesetzt,
-    so werden die mit den <strong>linkHandler</strong> und <strong>frontcontrollerLinkHandler</strong>
+    so werden die mit den <strong>LinkHandler</strong> und <strong>FrontcontrollerLinkHandler</strong>
     generierten Links in der rewriteten Form ausgegeben.
     <br />
     <br />
@@ -311,7 +311,7 @@ Die aufgef&uuml;hrten Parameter haben folgende Bedeutung:
     <br />
   </li>
   <li>
-    <strong>LibPath</strong>: <em>(verwendet von: bbCodeParser, ...)</em>
+    <strong>LibPath</strong>: <em>(verwendet von: AdvancedBBCodeParser, ...)</em>
     <br />
     <br />
     Die Direktive <strong>LibPath</strong> speichert den Basis-Pfad, in dem die Programmdateien
@@ -330,7 +330,7 @@ Um ein neues Webseitenprojekt zu erstellen wird folgende Vorgehensweise vorgesch
   </li>
   <li>
     Herunterladen eines aktuellen codepack-*-Releases unter
-    <a href="http://www.adventure-php-framework.org/Seite/008-Downloads/~/sites_demosite_biz-action/setReferrer/lang/de" title="Downloads" target="_blank">Downloads</a>.
+    <a href="http://adventure-php-framework.org/Seite/008-Downloads" title="Downloads" target="_blank">Downloads</a>.
   </li>
   <li>Entpacken des Framework-Codes in den Projektordner.</li>
   <li>
@@ -339,5 +339,5 @@ Um ein neues Webseitenprojekt zu erstellen wird folgende Vorgehensweise vorgesch
   </li>
 </ol>
 Weitere Informationen dazu k&ouml;nnen im Online-Tutorial
-<a href="http://www.adventure-php-framework.org/Seite/048-Webseite-erstellen/~/sites_demosite_biz-action/setReferrer/lang/de" title="Eigene Webseite erstellen" target="_blank">Eigene Webseite erstellen</a>
+<a href="http://adventure-php-framework.org/Seite/048-Webseite-erstellen" title="Eigene Webseite erstellen" target="_blank">Eigene Webseite erstellen</a>
 nachgelesen werden.
