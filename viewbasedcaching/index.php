@@ -4,7 +4,7 @@
 
    // create the current page
    $page = new Page();
-   $page->loadDesign('sites::vbc','pres/templates/vbcmain');
+   $page->loadDesign('sites::vbc::pres::templates','vbcmain');
    echo $page->transform();
 
    // display benchmark report if desired

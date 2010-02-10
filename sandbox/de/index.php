@@ -14,7 +14,7 @@
    $Page = new Page();
 
    // Load design to create DOM
-   $Page->loadDesign('sites::apfexample','pres/templates/de/website');
+   $Page->loadDesign('sites::apfexample::pres::templates::de','website');
 
    // Transform and print output
    echo $Page->transform();
