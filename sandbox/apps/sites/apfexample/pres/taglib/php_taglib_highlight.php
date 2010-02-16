@@ -19,7 +19,7 @@
       /**
       *  @public
       *
-      *  Implements the transform() methode of the class coreObject. Returns the HTML code of the tag.
+      *  Implements the transform() methode of the class APFObject. Returns the HTML code of the tag.
       *
       *  @author Christian Achatz
       *  @version
