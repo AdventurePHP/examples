@@ -30,8 +30,7 @@
    *  @version
    *  Version 0.1, 29.11.2008<br />
    */
-   class vbc_controller extends baseController
-   {
+   class vbc_controller extends base_controller {
 
       function vbc_controller(){
       }
