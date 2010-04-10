@@ -210,7 +210,7 @@ about concrete applications.
    // get an instance of the registry
    $Reg = &Singleton::getInstance('Registry');
 
-   // change the environment parameter used by the configurationManager
+   // change the environment parameter used by the ConfigurationManager
    $Reg->register('apf::core','Environment','MY_ENV');
 
    // change the base path to your application
@@ -234,7 +234,7 @@ about concrete applications.
 The registry parameters have the following meaning:
 <ul>
   <li>
-    <strong>Environment</strong>: <em>(used by: configurationManager, MySQLxHandler, SQLiteHandler, ...)</em>
+    <strong>Environment</strong>: <em>(used by: ConfigurationManager, MySQLxHandler, SQLiteHandler, ...)</em>
     <br />
     <br />
     Every configuration file exists of four different components:
