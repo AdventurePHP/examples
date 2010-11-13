@@ -19,7 +19,6 @@
    *  -->
    */
 
-
    /**
    *  @namespace sites::vbc::pres::documentcontroller
    *  @class vbc_controller
@@ -32,10 +31,6 @@
    */
    class vbc_controller extends base_controller {
 
-      function vbc_controller(){
-      }
-
-
       /**
       *  @public
       *
@@ -45,11 +40,9 @@
       *  @version
       *  Version 0.1, 29.11.2008<br />
       */
-      function transformContent(){
+      public function transformContent(){
          $this->setPlaceHolder('Timestamp',date('Y-m-d H:i:s'));
-       // end function
       }
 
-    // end function
    }
 ?>
