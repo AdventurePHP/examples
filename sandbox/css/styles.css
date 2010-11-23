@@ -1,0 +1,195 @@
+body {
+   margin: 0;
+   padding: 0;
+   font-size: 14px;
+   font-family: Verdana, Helvetica, sans-serif;
+   color: black;
+}
+
+h1 {
+   margin: 0;
+   padding: 0;
+}
+
+a {
+   color: black;
+   font-weight: bold;
+   text-decoration: none;
+}
+
+a:hover {
+   color: black;
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+#navi,
+#content,
+#footer {
+   margin: 0 2em;
+}
+
+#footer,
+#content {
+   margin-top: 1em;
+}
+
+#navi,
+#content {
+   border-bottom: 1px solid silver;
+}
+
+#content {
+   min-height: 25em;
+}
+
+#navi {
+   padding: 0 0 1em 0;
+}
+
+#navi ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+#navi ul li:after {
+   content: '|';
+}
+
+#navi ul li {
+   float: left;
+}
+
+#navi ul li a {
+   padding: .5em;
+   font-weight: bold;
+}
+
+#navi ul:after,
+#footer:after {
+   content: ' ';
+   clear: both;
+   display: block;
+   height: 0;
+}
+
+#footer {
+   font-weight: bold;
+   padding-bottom: 1em;
+}
+
+#footer p {
+   margin: 0;
+   float: left;
+   font-size: .85em;
+   width: 30%;
+}
+
+#footer ul {
+   margin: 0;
+   float: left;
+   font-size: .85em;
+   font-weight: normal;
+   width: 30%;
+}
+
+.date-tag {
+   border: 1px solid silver;
+   background: #efefef;
+   margin-bottom: 1em;
+   padding: .5em;
+   font-size: 2em;
+}
+
+#new-page fieldset,
+#new-db-config fieldset,
+#add-content fieldset {
+   border: none;
+   margin: 0;
+   padding: 0;
+}
+
+#new-page label,
+#new-page input[type=submit],
+#new-db-config label,
+#new-db-config input[type=submit],
+#add-content label,
+#add-content input[type=submit] {
+   display: block;
+}
+
+#new-page input,
+#new-page textarea,
+#new-db-config input,
+#new-db-config textarea,
+#add-content input,
+#add-content textarea,
+#create-table input {
+   border: 1px solid silver;
+   background: #efefef;
+}
+
+#new-page input[type=text],
+#new-page textarea,
+#add-content input[type=text],
+#add-content textarea {
+   width: 500px;
+}
+
+#new-db-config input[type=text] {
+   width: 300px;
+}
+
+#new-page textarea,
+#add-content textarea {
+   height: 300px;
+}
+
+#new-page input[type=submit],
+#new-db-config input[type=submit],
+#add-content input[type=submit] {
+   margin: 1em 0 0 0;
+}
+
+.apf-form-error {
+   border: 2px solid red !important;
+}
+
+.apf-form-val-msg {
+   color: red;
+   font-weight: bold;
+   font-size: .8em;
+}
+
+.err, .warn, .hint, .ok {
+    background: #ff8 url('../images/warning-box.png') 10px 10px no-repeat;
+    border: 2px solid #fb3;
+    color: #333;
+    margin: 1em 0;
+    min-height: 3em;
+    padding: 10px 10px 10px 68px;
+}
+.hint {
+    background: #e7f2f9 url('../images/hint-box.png') 10px 10px no-repeat;
+    border-color: #adf;
+}
+.err {
+    background: #fee url('../images/err-box.png') no-repeat scroll 10px 10px;
+    border-color: #900;
+}
+.ok {
+   background: #E1FCC4 url('../images/ok-box.png') no-repeat scroll 10px 10px;
+   border-color: green;
+}
+
+.db-config dt {
+   font-weight: bold;
+}
+
+.db-content {
+   padding: .8em;
+   border: 1px dotted gray;
+   background: #efefef;
+   min-height: 10em;
+}

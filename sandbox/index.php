@@ -1,41 +1,22 @@
 <?php
-   // Redirect to language pages, if language was sent by the browser
-   if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
-
-      // Show german pages
-      if(substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'],'de') > 0){
-         header('Location: ./de');
-         exit(0);
-       // end if
+   // initialize language if language was sent by the browser
+   $lang = 'en';
+   if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+      if (substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') > 0) {
+         $lang = 'de';
       }
-
-      // Show english pages
-      if(substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'],'en') > 0){
-         header('Location: ./en');
-         exit(0);
-       // end if
-      }
-
-    // end if
    }
 
-   // PHP_EOL fix
-   if(!defined('PHP_EOL')){
-      define('PHP_EOL',"\n");
-   }
-
-   // Configure PHP's error message type
-   ini_set('html_errors','off');
+   // configure PHP's error message type
+   ini_set('html_errors', 'off');
 
    // include the pagecontroller
    include_once('./apps/core/pagecontroller/pagecontroller.php');
 
-   // Create new Page object
-   $Page = new Page();
-
-   // Load design to create DOM
-   $Page->loadDesign('sites::apfexample::pres::templates','website');
-
-   // Transform and print output
-   echo $Page->transform();
+   // create the sandbox page
+   $page = new Page();
+   $page->setContext('myapp');
+   $page->setLanguage($lang);
+   $page->loadDesign('sandbox::pres::templates', 'main');
+   echo $page->transform();
 ?>

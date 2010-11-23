@@ -1,0 +1,20 @@
+<@controller namespace="sandbox::pres::controller" file="db_content_controller" class="db_content_controller" @>
+<h2>Database content</h2>
+<p>
+   This page shows the content from tha database table created with the
+   <a href="./?page=db-wizzard#step-3">database wizzard</a>.
+</p>
+<p>
+   The subsequent area contains the content that is refered to with the url name
+   &quot;<html:placeholder name="urlname" />&quot;:
+</p>
+<html:template name="no-content">
+   <div class="err">
+      The database contains no content for the given url name.
+   </div>
+</html:template>
+<html:template name="content">
+   <div class="db-content">
+      <template:placeholder name="content" />
+   </div>
+</html:template>
