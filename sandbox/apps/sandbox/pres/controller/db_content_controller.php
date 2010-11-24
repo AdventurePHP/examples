@@ -12,21 +12,29 @@
          $urlName = RequestHandler::getValue('name');
          $this->setPlaceHolder('urlname', $urlName);
 
-         $conn = &$this->getConnection();
+         // in case the page is called from the template wizzard and no configuration is
+         // created, display a note instead of an exception
+         try {
 
-         $urlName = $conn->escapeValue($urlName);
-         $select = 'SELECT * FROM `'.self::$TABLE_NAME.'` WHERE `urlname` = \''.$urlName.'\'';
-         $data = $conn->fetchData($conn->executeTextStatement($select));
-         
-         if($data === false){
-            $tmpl = &$this->__getTemplate('no-content');
+            $conn = &$this->getConnection();
+
+            $urlName = $conn->escapeValue($urlName);
+            $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` WHERE `urlname` = \'' . $urlName . '\'';
+            $data = $conn->fetchData($conn->executeTextStatement($select));
+
+            if ($data === false) {
+               $tmpl = &$this->__getTemplate('no-content');
+               $tmpl->transformOnPlace();
+               return;
+            }
+
+            $tmpl = &$this->__getTemplate('content');
+            $tmpl->setPlaceHolder('content', $data['content']);
             $tmpl->transformOnPlace();
-            return;
+            
+         } catch (ConfigurationException $e) {
+            $this->__getTemplate('no-config')->transformOnPlace();
          }
-
-         $tmpl = &$this->__getTemplate('content');
-         $tmpl->setPlaceHolder('content', $data['content']);
-         $tmpl->transformOnPlace();
 
       }
 
