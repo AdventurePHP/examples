@@ -1,0 +1,105 @@
+<@controller namespace="custom-modules::calc::pres::controller" file="calc_controller" class="calc_controller" @>
+<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
+<style type="text/css">
+.apf-calc-mod {
+   border: 1px solid gray;
+   background-color: #eeeeee; 
+   width: 210px;
+   padding: 10px;
+   font-family: Arial, Helvetica, sans-serif; 
+   font-size: 11px;
+}
+.apf-calc-mod h3 {
+   font-size: 16px;
+   font-weight: bold;
+}
+.apf-calc-mod form input,
+.apf-calc-mod form select {
+   border: 1px solid gray;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+}
+.apf-calc-mod form fieldset {
+   border: 0 none;
+   margin: 0;
+   padding: 0;
+}
+.apf-calc-mod form input {
+   width: 150px;
+}
+.apf-calc-mod form label:before {
+   display: inline-block;
+   height: 0;
+   width: 100%;
+   content: ' ';
+}
+.apf-calc-mod form label {
+   margin-right: 5px;
+}
+.apf-calc-mod form input[type=submit] {
+   margin: 0 0 0 28%;
+}
+.apf-calc-mod p.error {
+   color: red;
+   font-weight: bold;
+}
+.apf-calc-mod p.result {
+   color: green;
+   font-weight: bold;
+}
+.apf-calc-mod .apf-form-error {
+   border: 2px solid red;
+}
+</style>
+<div class="apf-calc-mod">
+   <h3>APF module "calc"</h3>
+
+   <html:form name="Calc" method="post">
+      <fieldset>
+         <form:error>
+            <p class="error">The input fields contain wrong content!</p>
+         </form:error>
+         <form:success name="result">
+            <p class="result">The result of the calculation is: <success:placeholder name="result" /></p>
+         </form:success>
+
+         <label>Operand1:</label>
+         <form:text name="operand1" />
+
+         <label>Operation:</label>
+         <form:select name="operation">
+            <select:option value="plus">+</select:option>
+            <select:option value="minus">-</select:option>
+            <select:option value="div">/</select:option>
+            <select:option value="multiply">*</select:option>
+         </form:select>
+         <form:addfilter
+            class="FloatFilter"
+            button="docalc"
+            control="operand1|operand2"
+         />
+         <form:addvalidator
+            class="NumberValidator"
+            button="docalc"
+            control="operand1|operand2"
+         />
+
+         <label>Operand2:</label>
+         <form:text name="operand2" />
+         <form:addvalidator
+            namespace="custom-modules::calc::pres::validator"
+            class="ZeroDivisionValidator"
+            button="docalc"
+            control="operand2"
+            type="special"
+         />
+
+         <form:listener control="operand2" validator="ZeroDivisionValidator">
+            <p class="error">Error: detected division by zero!</p>
+         </form:listener>
+
+         <form:button name="docalc" value="Calculate" />
+      </fieldset>
+   </html:form>
+</div>
