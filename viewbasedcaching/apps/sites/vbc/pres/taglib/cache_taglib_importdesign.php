@@ -1,126 +1,124 @@
 <?php
+/**
+ * <!--
+ * This file is part of the adventure php framework (APF) published under
+ * http://adventure-php-framework.org.
+ *
+ * The APF is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The APF is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
+ * -->
+ */
+
+import('tools::cache::key', 'SimpleCacheKey');
+
+/**
+ * @namespace sites::vbc::pres::taglib
+ * @class cache_taglib_importdesign
+ *
+ * Implements the view based caching taglib, based on the core:importdesign
+ * tag. The tag expects the following parameters:
+ * <ul>
+ * <li>namespace: the namespace of the template to include</li>
+ * <li>template: the name of the template to include</li>
+ * <li>cachekey: the cachekey used for caching</li>
+ * <li>cacheconfig: the cache configuration key</li>
+ * </ul>
+ *
+ * @author Christian Achatz
+ * @version
+ * Version 0.1, 29.11.2008<br />
+ */
+class cache_taglib_importdesign extends core_taglib_importdesign {
+
    /**
-    * <!--
-    * This file is part of the adventure php framework (APF) published under
-    * http://adventure-php-framework.org.
-    *
-    * The APF is free software: you can redistribute it and/or modify
-    * it under the terms of the GNU Lesser General Public License as published
-    * by the Free Software Foundation, either version 3 of the License, or
-    * (at your option) any later version.
-    *
-    * The APF is distributed in the hope that it will be useful,
-    * but WITHOUT ANY WARRANTY; without even the implied warranty of
-    * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    * GNU Lesser General Public License for more details.
-    *
-    * You should have received a copy of the GNU Lesser General Public License
-    * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
-    * -->
+    * @private
+    * Stores the cache content if applicable.
     */
+   private $cacheContent = null;
 
-   import('tools::cache', 'CacheManager');
+   public function __construct() {
+      parent::__construct();
+   }
 
    /**
-    * @namespace sites::vbc::pres::taglib
-    * @class cache_taglib_importdesign
+    * @public
     *
-    * Implements the view based caching taglib, based on the core:importdesign
-    * tag. The tag expects the following parameters:
-    * <ul>
-    * <li>namespace: the namespace of the template to include</li>
-    * <li>template: the name of the template to include</li>
-    * <li>cachekey: the cachekey used for caching</li>
-    * <li>cacheconfig: the cache configuration key</li>
-    * </ul>
+    * Reimplements the onParseTime() method. Validates the tag attributes and tries
+    * to fetch the content from the cache. If ni cache content is applicable, the
+    * parent class' functionality is called.
     *
     * @author Christian Achatz
     * @version
     * Version 0.1, 29.11.2008<br />
     */
-   class cache_taglib_importdesign extends core_taglib_importdesign {
+   public function onParseTime() {
 
-      /**
-       * @private
-       * Stores the cache content if applicable.
-       */
-      var $cacheContent = null;
+      // gather tag configuration
+      $cacheConfig = $this->getAttribute('cacheconfig');
+      $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
-      public function __construct() {
-         parent::__construct();
+      // get the cache manager
+      $cMF = &$this->__getServiceObject('tools::cache', 'CacheManagerFabric');
+      $cM = &$cMF->getCacheManager($cacheConfig);
+
+      // clear the cache if desired
+      if (isset($_REQUEST['clearcache']) && $_REQUEST['clearcache'] == 'true') {
+         $cM->clearCache($cacheKey);
       }
 
-      /**
-       * @public
-       *
-       * Reimplements the onParseTime() method. Validates the tag attributes and tries
-       * to fetch the content from the cache. If ni cache content is applicable, the
-       * parent class' functionality is called.
-       *
-       * @author Christian Achatz
-       * @version
-       * Version 0.1, 29.11.2008<br />
-       */
-      public function onParseTime() {
+      // try to read from the cache
+      $this->cacheContent = $cM->getFromCache($cacheKey);
+
+      // check if the document was cached before. If not
+      // execute the parent's onParseTime()
+      if ($this->cacheContent === null) {
+         parent::onParseTime();
+      }
+   }
+
+   /**
+    * @public
+    *
+    * Reimplements the transform() method. Returns the cache content loaded within the
+    * onParseTime() method or executes the parent class' functionality.
+    *
+    * @author Christian Achatz
+    * @version
+    * Version 0.1, 29.11.2008<br />
+    */
+   public function transform() {
+
+      // generate the node's output or return the cached content
+      if ($this->cacheContent === null) {
 
          // gather tag configuration
          $cacheConfig = $this->getAttribute('cacheconfig');
-         $cacheKey = $this->getAttribute('cachekey');
+         $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
          // get the cache manager
          $cMF = &$this->__getServiceObject('tools::cache', 'CacheManagerFabric');
          $cM = &$cMF->getCacheManager($cacheConfig);
 
-         // clear the cache if desired
-         if (isset($_REQUEST['clearcache']) && $_REQUEST['clearcache'] == 'true') {
-            $cM->clearCache($cacheKey);
-         }
+         // generate output and cache it
+         $output = parent::transform();
+         $cM->writeToCache($cacheKey, $output);
 
-         // try to read from the cache
-         $this->cacheContent = $cM->getFromCache($cacheKey);
-
-         // check if the document was cached before. If not
-         // execute the parent's onParseTime()
-         if ($this->cacheContent === null) {
-            parent::onParseTime();
-         }
-
+         // return the tag's output
+         return $output;
       }
 
-      /**
-       * @public
-       *
-       * Reimplements the transform() method. Returns the cache content loaded within the
-       * onParseTime() method or executes the parent class' functionality.
-       *
-       * @author Christian Achatz
-       * @version
-       * Version 0.1, 29.11.2008<br />
-       */
-      public function transform() {
-
-         // generate the node's output or return the cached content
-         if ($this->cacheContent === null) {
-
-            // gather tag configuration
-            $cacheConfig = $this->getAttribute('cacheconfig');
-            $cacheKey = $this->getAttribute('cachekey');
-
-            // get the cache manager
-            $cMF = &$this->__getServiceObject('tools::cache', 'CacheManagerFabric');
-            $cM = &$cMF->getCacheManager($cacheConfig);
-
-            // generate output and cache it
-            $output = parent::transform();
-            $cM->writeToCache($cacheKey, $output);
-
-            // return the tag's output
-            return $output;
-         }
-
-         return $this->cacheContent;
-      }
-
-    // end class
+      return $this->cacheContent;
    }
+
+}
 ?>
