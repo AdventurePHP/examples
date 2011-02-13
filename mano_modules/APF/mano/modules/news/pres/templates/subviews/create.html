@@ -1,0 +1,32 @@
+<@controller
+   namespace="mano::modules::news::pres::controller"
+   file="news_create_controller"
+   class="news_create_controller"
+@>
+<h3>Create news entry</h3>
+<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
+<html:form name="create-entry">
+   <form:success>
+      <p class="success">The entry has been created</p>
+   </form:success>
+
+   <label for="category">Category</label>
+   <form:select name="category" id="category">
+      <select:option value="">--- please choose ---</select:option>
+      <select:option value="1">Politics</select:option>
+      <select:option value="2">Finance</select:option>
+      <select:option value="3">Health</select:option>
+   </form:select>
+
+   <label for="title">Title</label>
+   <form:text name="title" id="title" />
+
+   <label for="date">Date</label>
+   <form:date name="date" id="date"/>
+
+   <label for="text">Text</label>
+   <form:area name="text" id="text" />
+
+   <form:button name="create" value="Create" />
+
+</html:form>
