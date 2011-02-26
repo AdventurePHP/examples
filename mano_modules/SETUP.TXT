@@ -1,0 +1,1 @@
+In order to run this project, please create a new database, execute the setup.sql file and adapt the /APF/config/core/database/app-context/DEFAULT_connections.ini to fit yout local setup.
