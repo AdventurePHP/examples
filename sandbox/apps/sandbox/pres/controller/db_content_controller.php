@@ -42,7 +42,7 @@
        * @return MySQLxHandler The database connection.
        */
       private function &getConnection(){
-         return $this->__getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+         return $this->getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
       }
 
    }

@@ -68,7 +68,7 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
       $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
       // get the cache manager
-      $cMF = &$this->__getServiceObject('tools::cache', 'CacheManagerFabric');
+      $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
       $cM = &$cMF->getCacheManager($cacheConfig);
 
       // clear the cache if desired
@@ -106,7 +106,7 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
          $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
          // get the cache manager
-         $cMF = &$this->__getServiceObject('tools::cache', 'CacheManagerFabric');
+         $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
          $cM = &$cMF->getCacheManager($cacheConfig);
 
          // generate output and cache it
