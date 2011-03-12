@@ -11,7 +11,7 @@
       public function transformContent() {
 
          // step 1: create database config file
-         $formNewConfig = &$this->__getForm('new-db-config');
+         $formNewConfig = &$this->getForm('new-db-config');
 
          if($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
@@ -49,7 +49,7 @@
          $configAvailable = false;
          try {
             $config = $this->getConfiguration('core::database', 'connections.ini');
-            $tmpl = &$this->__getTemplate('db-config-exists');
+            $tmpl = &$this->getTemplate('db-config-exists');
 
             $section = $config->getSection(self::$CONFIG_SECTION_NAME)->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
@@ -95,7 +95,7 @@
                }
 
                if ($tableExists) {
-                  $this->__getTemplate('table-exists')->transformOnPlace();
+                  $this->getTemplate('table-exists')->transformOnPlace();
                } else {
                   $create = 'CREATE TABLE `'.self::$TABLE_NAME.'` (
 `id` INT(5) NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ PRIMARY KEY (`id`),
 UNIQUE (`urlname`)
 ) ENGINE = MYISAM;';
 
-                  $formCreateTable = &$this->__getForm('create-table');
+                  $formCreateTable = &$this->getForm('create-table');
 
                   if($formCreateTable->isSent()){
                      $conn->executeTextStatement($create);
@@ -116,7 +116,7 @@ UNIQUE (`urlname`)
 
                      HeaderManager::forward('./?page=db-wizzard#step-3');
                   } else {
-                     $tmpl = &$this->__getTemplate('step-2');
+                     $tmpl = &$this->getTemplate('step-2');
                      $tmpl->setPlaceHolder('statement', $create);
                      $tmpl->transformOnPlace();
 
@@ -125,23 +125,23 @@ UNIQUE (`urlname`)
                }
 
             } catch (DatabaseHandlerException $e) {
-               $tmpl = &$this->__getTemplate('db-conn-error');
+               $tmpl = &$this->getTemplate('db-conn-error');
                $tmpl->setPlaceHolder('exception', $e->getMessage());
                $tmpl->transformOnPlace();
             }
 
          } else {
-            $this->__getTemplate('step-1-req')->transformOnPlace();
+            $this->getTemplate('step-1-req')->transformOnPlace();
          }
 
          // step 3: create some contents
          if ($configAvailable && $tableExists) {
 
             // display entry text
-            $this->__getTemplate('step-3')->transformOnPlace();
+            $this->getTemplate('step-3')->transformOnPlace();
 
             // handle for behaviour
-            $formCreateContent = &$this->__getForm('add-content');
+            $formCreateContent = &$this->getForm('add-content');
             if ($formCreateContent->isSent() && $formCreateContent->isValid()) {
 
                $urlName = $formCreateContent->getFormElementByName('content-urlname')->getAttribute('value');
@@ -158,13 +158,13 @@ UNIQUE (`urlname`)
             $formCreateContent->transformOnPlace();
 
          } else {
-            $this->__getTemplate('step-1-2-req')->transformOnPlace();
+            $this->getTemplate('step-1-2-req')->transformOnPlace();
          }
 
          // step 4: display content
          if ($configAvailable && $tableExists) {
 
-            $tmpl = &$this->__getTemplate('step-4');
+            $tmpl = &$this->getTemplate('step-4');
 
             $select = 'SELECT * FROM `'.self::$TABLE_NAME.'` ORDER BY `urlname` ASC';
             $result = $conn->executeTextStatement($select);
@@ -179,7 +179,7 @@ UNIQUE (`urlname`)
             $tmpl->transformOnPlace();
 
          } else {
-            $this->__getTemplate('step-1-2-3-req')->transformOnPlace();
+            $this->getTemplate('step-1-2-3-req')->transformOnPlace();
          }
 
       }

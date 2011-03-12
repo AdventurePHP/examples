@@ -23,17 +23,17 @@
             $data = $conn->fetchData($conn->executeTextStatement($select));
 
             if ($data === false) {
-               $tmpl = &$this->__getTemplate('no-content');
+               $tmpl = &$this->getTemplate('no-content');
                $tmpl->transformOnPlace();
                return;
             }
 
-            $tmpl = &$this->__getTemplate('content');
+            $tmpl = &$this->getTemplate('content');
             $tmpl->setPlaceHolder('content', $data['content']);
             $tmpl->transformOnPlace();
             
          } catch (ConfigurationException $e) {
-            $this->__getTemplate('no-config')->transformOnPlace();
+            $this->getTemplate('no-config')->transformOnPlace();
          }
 
       }

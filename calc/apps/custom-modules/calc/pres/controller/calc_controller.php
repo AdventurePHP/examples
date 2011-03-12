@@ -33,7 +33,7 @@ class calc_controller extends base_controller {
 
    public function transformContent() {
 
-      $form = &$this->__getForm('Calc');
+      $form = &$this->getForm('Calc');
 
       if ($form->isSent() && $form->isValid()) {
 
