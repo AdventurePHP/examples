@@ -12,9 +12,9 @@ ini_set('html_errors', 'off');
 include_once('./apps/core/pagecontroller/pagecontroller.php');
 
 // create the sandbox page
-$page = new Page();
-$page->setContext('myapp');
-$page->setLanguage($lang);
-$page->loadDesign('sandbox::pres::templates', 'main');
-echo $page->transform();
+import('core::frontcontroller', 'Frontcontroller');
+$fC = &Singleton::getInstance('Frontcontroller');
+$fC->setContext('myapp');
+$fC->setLanguage($lang);
+echo $fC->start('sandbox::pres::templates', 'main');
 ?>

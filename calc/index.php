@@ -1,6 +1,6 @@
 <?php
 include_once('./apps/core/pagecontroller/pagecontroller.php');
-$page = new Page();
-$page->loadDesign('custom-modules::calc::pres::templates', 'calc');
-echo $page->transform();
+import('core::frontcontroller', 'Frontcontroller');
+$fC = &Singleton::getInstance('Frontcontroller');
+echo $fC->start('custom-modules::calc::pres::templates', 'calc');
 ?>
