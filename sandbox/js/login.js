@@ -1,0 +1,30 @@
+/**
+ * Initializes the login form with prefilled values in case the labels are not displayed.
+ */
+function init(fieldSelector, defaultValue, bgColor, fgColor) {
+   var currentValue = $('.umgt-fe-login ' + fieldSelector).attr('value');
+
+   if(currentValue.length == 0) {
+      $('.umgt-fe-login ' + fieldSelector)
+      .attr('value', defaultValue)
+      .css('color', bgColor);
+   }
+
+   $('.umgt-fe-login ' + fieldSelector)
+   .focus(function(){
+      if($(this).attr('value') == defaultValue){
+         $(this).attr('value', '').css('color', fgColor);
+      }
+   })
+   .blur(function(){
+      if($(this).attr('value').length < 1){
+         $(this).attr('value', defaultValue).css('color', bgColor);
+      }
+   });
+   $('.umgt-fe-login').submit(function(){
+      var field = $(this).find(fieldSelector);
+      if(field.attr('value') == defaultValue){
+         field.attr('value', '');
+      }
+   });
+}

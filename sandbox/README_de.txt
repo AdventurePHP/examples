@@ -1,4 +1,4 @@
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+﻿~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~                                     INSTALLATION                                                 ~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -16,8 +16,8 @@ Anschließend kann die Beispiel-Webseite im Browser aufgerufen werden.
 Hinweise:
 ~~~~~~~~~
 
-1. Um den Betrieb auf LINUX-/UNIX-Systemen sicher zu stellen, sollten die Dateien mit den Berechtigungen
-desjenigen Benutzers ausgestattet werden, mit dem der Webserver betriebe wird.
+1. Um den Betrieb auf LINUX-/UNIX-Systemen sicher zu stellen, sollten die Dateien mit den 
+Berechtigungen desjenigen Benutzers ausgestattet werden, mit dem der Webserver betrieben wird.
 
 2. Sollten Probleme bei der Installation auftreten, so verfassen Sie bitte einen Thread im
 Forum unter http://forum.adventure-php-framework.org/de/viewforum.php?f=2.

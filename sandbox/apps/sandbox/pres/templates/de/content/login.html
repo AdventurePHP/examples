@@ -1,0 +1,128 @@
+<h2>Login</h2>
+<p>
+   Auf dieser Seite können Sie sich an der Sandbox anmelden. Bitte beachten Sie, dass ein Login
+   nur möglich ist, wenn sie den <a href="?page=umgt-wizzard">Usermanagement-Wizzard</a> bereits
+   ausgeführt haben.
+</p>
+<p>
+   Das Login-Formular selbst ist eine Komponente, die mit dem Usermanagement-Modul mitgeliefert wird.
+   Um dieses einzubinden ist folgendes notwendig:
+</p>
+<pre>
+&lt;core:importdesign
+   namespace="modules::usermanagement::pres::templates::login"
+   template="login"
+/&gt;
+</pre>
+<p>
+   Die Darstellung ist per CSS frei definierbar und die hier präsentierte Vor-Ausfüllung ist über
+   wenige Zeilen jQuery-Code geregelt. Details hierzu können den Dateien
+   <em>/css/login.css</em>, <em>/js/login.js</em> und dem Template unter
+   <em>/apps/sandbox/pres/templates/de/content/login.html</em> entnommen werden.
+</p>
+
+<div class="login-wrapper">
+   <script type="text/javascript">
+      $(document).ready(function(){
+         init('#umgt-fe-login-user', 'Benutzer', '#ccc', 'black');
+         init('#umgt-fe-login-pass', 'Passwort', '#ccc', 'black');         
+      });
+   </script>
+   <core:importdesign
+      namespace="modules::usermanagement::pres::templates::login"
+      template="login"
+      />
+</div>
+
+<p>
+   Das Login-Formular erlaubt es, Benutzer über Benutzer-Namen und Passwort sowie E-Mail-Adresse und
+   Passwort zu authentifizieren. Die Steuerung erfolgt über die Konfigurations-Datei
+   <em>/apps/config/modules/usermanagement/pres/myapp/DEFAULT_login.ini</em>. Diese hat aktuell
+   folgenden Inhalt:
+</p>
+<pre>
+[Default]
+login.type = "username"
+</pre>
+
+<div class="hint">
+   Um neue Benutzer anzulegen oder bestehende zu bearbeiten, können Sie nach der Ausführung des
+   <a href="?page=umgt-wizzard">Usermanagement-Wizzard</a> das <a href="?page=umgt">Usermanagement Backend</a>
+   nutzen.
+</div>
+<p>
+   In der horizontalen Navigation findet sich je nach Login-Zustand des Benutzers ein Login- bzw. 
+   Logout-Button.
+</p>
+<div class="hint">
+   Sofern der Benutzer zur Gruppe <em>Administratoren</em> gehört, wird zusätzlich ein 
+   <em>Admin</em>-Button angezeigt. Um diesen zu aktivieren, wechseln Sie bitte zur
+   <a href="?page=umgt">Benutzer-Administration</a>, legen die Gruppe <em>Administratoren</em> an
+   und fügen den angemeldeten Benutzer zu dieser Gruppe hinzu.
+</div>
+<p>
+   Dieser ist über eine Tag des Usermanagement-Moduls realisiert, dessen
+   Funktionalität im Wesentlichen einem <em>&lt;html:template/&gt;</em>-Tag entspricht:
+</p>
+<pre>
+&lt;core:addtaglib
+   namespace="modules::usermanagement::pres::taglib"
+   prefix="umgt"
+   class="template"
+   /&gt;
+&lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=login&amp;modules_usermanagement_biz-action:login=logout:true"&gt;Logout&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+&lt;umgt:template condition="logged-out" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=login"&gt;Login&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+&lt;umgt:template condition="group" options="Administratoren" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=umgt"&gt;Admin&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+</pre>
+<p>
+   Das erste Template wird ausgegeben, wenn der Benutzer eingeloggt ist. Hierzu fragt das Tag den
+   <em>UmgtUserSessionSore</em>, ob ein Benutzer für diese Session registriert wurde. Das zweite
+   Template wird ausgegeben, sofern der Benutzer nicht eingelogt ist.
+</p>
+<p>
+   Die Steuerung der Ausgabe ist über einen Document-Controller oder direkt im Template möglich.
+   Sofern kein Document-Controller zur Initiierung der Ausgabe vorhanden ist, kann das Attribut 
+   <em>transform-on-place</em> auf den Wert <em>true</em> gesetzt werden. Wird weder im Template
+   noch im Controller die Ausgabe des Templates angestoßen (z.B. per <em>transformOnPlace()</em>),
+   wird keine Ausgabe erzeugt.
+</p>
+<p>
+   Sofern die Art der Ausgabe auf Basis von komplette Templates entschieden werden möchte, steht dem
+   Entwickler der <em>&lt;umgt:importdesign/&gt;</em>-Tag zur Verfügung. Der obige Anwendungsfall
+   kann damit auch wie folgt abgebildet werden:
+</p>
+<pre>
+&lt;core:addtaglib
+   namespace="modules::usermanagement::pres::taglib"
+   prefix="umgt"
+   class="importdesign"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="logged-in"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="logged-out"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="group"
+   options="Admins"
+/&gt;
+</pre>

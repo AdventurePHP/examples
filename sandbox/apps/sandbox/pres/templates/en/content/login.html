@@ -1,0 +1,127 @@
+<h2>Login</h2>
+<p>
+   On this page you can login to the sandbox. Please note, that loggin in is only possible after
+   executing the <a href="?page=umgt-wizzard">user management wizzard</a>.
+</p>
+<p>
+   The form itself is a component of the user management module. To include it to your page, just
+   add this to your template:
+</p>
+<pre>
+&lt;core:importdesign
+   namespace="modules::usermanagement::pres::templates::login"
+   template="login"
+/&gt;
+</pre>
+<p>
+   The appearance of the form can be defined using CSS freely. The prefill feature is implemented
+   with a few lines of jQuery code. Details can be taken from the <em>/css/login.css</em> and
+   <em>/js/login.js</em> files and this template that is located under
+   <em>/apps/sandbox/pres/templates/en/content/login.html</em>.
+</p>
+
+<div class="login-wrapper">
+   <script type="text/javascript">
+      $(document).ready(function(){
+         init('#umgt-fe-login-user', 'User', '#ccc', 'black');
+         init('#umgt-fe-login-pass', 'Password', '#ccc', 'black');
+      });
+   </script>
+   <core:importdesign
+      namespace="modules::usermanagement::pres::templates::login"
+      template="login"
+      />
+</div>
+
+<p>
+   The login form allows to authenticate users by their user name and password as well as by their
+   email address and password. Switching between the two modes can be done by editing the
+   configuration file <em>/apps/config/modules/usermanagement/pres/myapp/DEFAULT_login.ini</em>.
+   At present the file contains the following content:
+</p>
+<pre>
+[Default]
+login.type = "username"
+</pre>
+
+<div class="hint">
+   In order to create new or manage existing users please use the
+   <a href="?page=umgt">user management backend</a> after execution of the 
+   <a href="?page=umgt-wizzard">user management wizzard</a>.
+</div>
+
+<p>
+   The horizontal navigation contains a login/logout button according to the user's login state.
+</p>
+<div class="hint">
+   In case the current user belongs to the <em>Admins</em> group, the <em>Admin</em> button is 
+   displayed, too. In order to activate the button please call the 
+   <a href="?page=umgt">user management</a>, add the <em>Admins</em> group and add the present user
+   to this group.
+</div>
+<p>
+   This is done using a tag from the user management module that is similar to the 
+   <em>&lt;html:template/&gt;</em> tag:
+</p>
+<pre>
+&lt;core:addtaglib
+   namespace="modules::usermanagement::pres::taglib"
+   prefix="umgt"
+   class="template"
+   /&gt;
+&lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=login&amp;modules_usermanagement_biz-action:login=logout:true"&gt;Logout&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+&lt;umgt:template condition="logged-out" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=login"&gt;Login&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+&lt;umgt:template condition="group" options="Admins" transform-on-place="true"&gt;
+   &lt;li&gt;
+      &lt;a href="?page=umgt"&gt;Admin&lt;/a&gt;
+   &lt;/li&gt;
+&lt;/umgt:template&gt;
+</pre>
+<p>
+   The first template is displayed in case the user is logged in. For this reason, the tag queries
+   the <em>UmgtUserSessionSore</em> to retrieve the login state. The second template is displayed
+   if the user is not logged in.
+</p>
+<p>
+   Controlling the output of the tag is both possibly via document controller and template. No
+   controller beeing present to tell the template to display itself, the <em>transform-on-place</em> 
+   attribute can be set to <em>true</em>. This tells the template to output it's content directly
+   dependent on the login state. In case no ouput generation is initiated (e.g. by <em>transformOnPlace()</em>)
+   no content is displayed.
+</p>
+<p>
+   Given the fact, that an entire template should be included depending on the login state, you can
+   use the <em>&lt;umgt:importdesign/&gt;</em> tag. The above use case can be realized with this tag
+   as follows:
+</p>
+<pre>
+&lt;core:addtaglib
+   namespace="modules::usermanagement::pres::taglib"
+   prefix="umgt"
+   class="importdesign"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="logged-in"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="logged-out"
+/&gt;
+&lt;umgt:importdesign
+   namespace="..."
+   template="..."
+   condition="group"
+   options="Admins"
+/&gt;
+</pre>

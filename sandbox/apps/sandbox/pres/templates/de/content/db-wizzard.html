@@ -1,4 +1,5 @@
 <@controller namespace="sandbox::pres::controller" file="db_wizzard_controller" class="db_wizzard_controller" @>
+<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
 <h2>Datenbank-Konfigurations-Wizzard</h2>
 <p>
    Mit diesem Wizzard kann eine Datenbank-Konfiguration angelegt und anschließend eine Tabelle
@@ -11,66 +12,8 @@
 <p>
    Bitte füllen Sie das folgende Formular aus um eine Datenbank konnektieren zu können:
 </p>
-<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
-<html:form id="new-db-config" name="new-db-config" method="post" action="#new-db-config">
-   <fieldset>
-      <label for="db-host">Datenbank-Server:</label>
-      <form:text id="db-host" name="db-host" minlength="2" />
-
-      <label for="db-port">Datenbank-Port:</label>
-      <form:text id="db-port" name="db-port" minlength="4" maxlength="5" value="3306" />
-
-      <label for="db-user">Datenbank-Benutzer:</label>
-      <form:text id="db-user" name="db-user" minlength="2" />
-
-      <label for="db-pass">Datenbank-Passwort:</label>
-      <form:text id="db-pass" name="db-pass" minlength="2" />
-
-      <label for="db-name">Datenbank-Name:</label>
-      <form:text id="db-name" name="db-name" minlength="2" />
-
-      <form:addvalidator
-         class="TextLengthValidator"
-         control="db-host|db-port|db-user|db-pass|db-name"
-         button="save"
-      />
-
-      <form:button name="save" value="Speichern" />
-   </fieldset>
-</html:form>
-
-<html:template name="db-config-exists">
-   <div class="ok">
-      Die Datenbank-Konfiguration ist bereits vorhanden. Folgende Parameter wurden konfiguriert:
-      <dl class="db-config">
-         <dt>Datenbank-Server:</dt>
-         <dd><template:placeholder name="host" /></dd>
-
-         <dt>Datenbank-Port:</dt>
-         <dd><template:placeholder name="port" /></dd>
-
-         <dt>Datenbank-Benutzer:</dt>
-         <dd><template:placeholder name="user" /></dd>
-
-         <dt>Datenbank-Passwort:</dt>
-         <dd><template:placeholder name="pass" /></dd>
-
-         <dt>Datenbank-Name:</dt>
-         <dd><template:placeholder name="name" /></dd>
-
-         <dt>Collation der Verbindung:</dt>
-         <dd><template:placeholder name="collation" /></dd>
-
-         <dt>Charset der Verbindung:</dt>
-         <dd><template:placeholder name="charset" /></dd>
-
-         <dt>Connection-Typ:</dt>
-         <dd><template:placeholder name="type" /></dd>
-      </dl>
-      Falls diese nicht den gewünschten Werten entsprechen, können diese in der Datei
-      <em>/apps/config/core/database/myapp/DEFAULT_connections.ini</em> geändert werden.
-   </div>
-</html:template>
+<core:addtaglib namespace="core::pagecontroller" prefix="core" class="appendnode" />
+<core:appendnode namespace="sandbox::pres::templates::de::content::fragments" template="db_config"/>
 
 <h3 id="step-2">Schritt 2: Anlegen der Inhalte-Tabelle</h3>
 <html:template name="db-conn-error">

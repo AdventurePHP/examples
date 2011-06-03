@@ -1,0 +1,60 @@
+<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
+<html:form id="new-db-config" name="new-db-config" method="post" action="#new-db-config">
+   <fieldset>
+      <label for="db-host">Database server:</label>
+      <form:text id="db-host" name="db-host" minlength="2" />
+
+      <label for="db-port">Database port:</label>
+      <form:text id="db-port" name="db-port" minlength="4" maxlength="5" value="3306" />
+
+      <label for="db-user">Database user:</label>
+      <form:text id="db-user" name="db-user" minlength="2" />
+
+      <label for="db-pass">Database password:</label>
+      <form:text id="db-pass" name="db-pass" minlength="2" />
+
+      <label for="db-name">Database name:</label>
+      <form:text id="db-name" name="db-name" minlength="2" />
+
+      <form:addvalidator
+         class="TextLengthValidator"
+         control="db-host|db-port|db-user|db-pass|db-name"
+         button="save"
+      />
+
+      <form:button name="save" value="Save" />
+   </fieldset>
+</html:form>
+
+<html:template name="db-config-exists">
+   <div class="ok">
+      The database configuration has already been created and contains the listed parmeters:
+      <dl class="db-config">
+         <dt>Database server:</dt>
+         <dd><template:placeholder name="host" /></dd>
+
+         <dt>Database port:</dt>
+         <dd><template:placeholder name="port" /></dd>
+
+         <dt>Database user:</dt>
+         <dd><template:placeholder name="user" /></dd>
+
+         <dt>Database password:</dt>
+         <dd><template:placeholder name="pass" /></dd>
+
+         <dt>Database name:</dt>
+         <dd><template:placeholder name="name" /></dd>
+
+         <dt>Collation of the connection:</dt>
+         <dd><template:placeholder name="collation" /></dd>
+
+         <dt>Charset of the connection:</dt>
+         <dd><template:placeholder name="charset" /></dd>
+
+         <dt>Connection type:</dt>
+         <dd><template:placeholder name="type" /></dd>
+      </dl>
+      In case these are not the values that you'd expect, please change them within the
+      <em>/apps/config/core/database/myapp/DEFAULT_connections.ini</em> file.
+   </div>
+</html:template>

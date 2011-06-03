@@ -23,6 +23,11 @@ a:hover {
    text-decoration: underline;
 }
 
+#wrapper {
+   width: 1024px;
+   margin: 0 auto;
+}
+
 #navi,
 #content,
 #footer {
@@ -41,6 +46,7 @@ a:hover {
 
 #content {
    min-height: 25em;
+   padding-bottom: 1em;
 }
 
 #navi {
@@ -64,6 +70,7 @@ a:hover {
 #navi ul li a {
    padding: .5em;
    font-weight: bold;
+   font-size: .95em;
 }
 
 #navi ul:after,
@@ -102,9 +109,7 @@ a:hover {
    font-size: 2em;
 }
 
-#new-page fieldset,
-#new-db-config fieldset,
-#add-content fieldset {
+fieldset {
    border: none;
    margin: 0;
    padding: 0;
@@ -115,7 +120,9 @@ a:hover {
 #new-db-config label,
 #new-db-config input[type=submit],
 #add-content label,
-#add-content input[type=submit] {
+#add-content input[type=submit],
+#create-user input[type=submit],
+#create-user label {
    display: block;
 }
 
@@ -125,7 +132,9 @@ a:hover {
 #new-db-config textarea,
 #add-content input,
 #add-content textarea,
-#create-table input {
+#create-table input,
+#init-db input,
+#create-user input {
    border: 1px solid silver;
    background: #efefef;
 }
@@ -133,7 +142,10 @@ a:hover {
 #new-page input[type=text],
 #new-page textarea,
 #add-content input[type=text],
-#add-content textarea {
+#add-content textarea,
+#create-user input[type=text],
+#create-user input[type=password],
+#create-user textarea {
    width: 500px;
 }
 
@@ -148,7 +160,8 @@ a:hover {
 
 #new-page input[type=submit],
 #new-db-config input[type=submit],
-#add-content input[type=submit] {
+#add-content input[type=submit],
+#create-user input[type=submit] {
    margin: 1em 0 0 0;
 }
 
@@ -163,20 +176,20 @@ a:hover {
 }
 
 .err, .warn, .hint, .ok {
-    background: #ff8 url('../images/warning-box.png') 10px 10px no-repeat;
-    border: 2px solid #fb3;
-    color: #333;
-    margin: 1em 0;
-    min-height: 3em;
-    padding: 10px 10px 10px 68px;
+   background: #ff8 url('../images/warning-box.png') 10px 10px no-repeat;
+   border: 2px solid #fb3;
+   color: #333;
+   margin: 1em 0;
+   min-height: 3em;
+   padding: 10px 10px 10px 68px;
 }
 .hint {
-    background: #e7f2f9 url('../images/hint-box.png') 10px 10px no-repeat;
-    border-color: #adf;
+   background: #e7f2f9 url('../images/hint-box.png') 10px 10px no-repeat;
+   border-color: #adf;
 }
 .err {
-    background: #fee url('../images/err-box.png') no-repeat scroll 10px 10px;
-    border-color: #900;
+   background: #fee url('../images/err-box.png') no-repeat scroll 10px 10px;
+   border-color: #900;
 }
 .ok {
    background: #E1FCC4 url('../images/ok-box.png') no-repeat scroll 10px 10px;
@@ -192,4 +205,8 @@ a:hover {
    border: 1px dotted gray;
    background: #efefef;
    min-height: 10em;
+}
+
+.user-list li {
+   font-weight: bold;
 }
