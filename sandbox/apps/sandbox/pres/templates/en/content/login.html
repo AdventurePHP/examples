@@ -70,9 +70,12 @@ login.type = "username"
    class="template"
    /&gt;
 &lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
-   &lt;li&gt;
-      &lt;a href="?page=login&amp;modules_usermanagement_biz-action:login=logout:true"&gt;Logout&lt;/a&gt;
-   &lt;/li&gt;
+   &lt;template:addtaglib
+         namespace="modules::usermanagement::pres::taglib"
+         prefix="umgt"
+         class="logoutlink"
+         /&gt;
+   &lt;li&gt;&lt;a href="&lt;umgt:logoutlink /&gt;"&gt;Logout&lt;/a&gt;&lt;/li&gt;
 &lt;/umgt:template&gt;
 &lt;umgt:template condition="logged-out" transform-on-place="true"&gt;
    &lt;li&gt;
@@ -97,6 +100,11 @@ login.type = "username"
    dependent on the login state. In case no ouput generation is initiated (e.g. by <em>transformOnPlace()</em>)
    no content is displayed.
 </p>
+<div class="hint">
+   The generation of the logout link is done by the <em>&lt;umgt:logoutlink /&gt;</em> tag. It
+   generates a url that addresses a front controller action causing the logout and redirecting
+   to the desired page.
+</div>
 <p>
    Given the fact, that an entire template should be included depending on the login state, you can
    use the <em>&lt;umgt:importdesign/&gt;</em> tag. The above use case can be realized with this tag

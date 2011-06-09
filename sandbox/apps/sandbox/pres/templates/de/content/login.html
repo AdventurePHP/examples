@@ -71,9 +71,12 @@ login.type = "username"
    class="template"
    /&gt;
 &lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
-   &lt;li&gt;
-      &lt;a href="?page=login&amp;modules_usermanagement_biz-action:login=logout:true"&gt;Logout&lt;/a&gt;
-   &lt;/li&gt;
+   &lt;template:addtaglib
+         namespace="modules::usermanagement::pres::taglib"
+         prefix="umgt"
+         class="logoutlink"
+         /&gt;
+   &lt;li&gt;&lt;a href="&lt;umgt:logoutlink /&gt;"&gt;Logout&lt;/a&gt;&lt;/li&gt;
 &lt;/umgt:template&gt;
 &lt;umgt:template condition="logged-out" transform-on-place="true"&gt;
    &lt;li&gt;
@@ -98,6 +101,11 @@ login.type = "username"
    noch im Controller die Ausgabe des Templates angestoßen (z.B. per <em>transformOnPlace()</em>),
    wird keine Ausgabe erzeugt.
 </p>
+<div class="hint">
+   Die Generierung des Logout-Links wird vom <em>&lt;umgt:logoutlink /&gt;</em>-Tag übernommen.
+   Dieser generiert eine URL, die eine Front-Controller-Action aufruft, die den Logout veranlasst
+   und anschließend auf die gewünschte Seite weiterleitet.
+</div>
 <p>
    Sofern die Art der Ausgabe auf Basis von komplette Templates entschieden werden möchte, steht dem
    Entwickler der <em>&lt;umgt:importdesign/&gt;</em>-Tag zur Verfügung. Der obige Anwendungsfall

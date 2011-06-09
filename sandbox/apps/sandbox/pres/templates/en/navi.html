@@ -6,14 +6,19 @@
    <li><a href="?page=tmpl-wizzard">Template wizzard</a></li>
    <li><a href="?page=examples">Taglib example</a></li>
    <li><a href="?page=umgt-wizzard">User management wizzard</a></li>
-   
+
    <core:addtaglib
-      namespace="modules::usermanagement::pres::taglib"
-      prefix="umgt"
-      class="template"
-      />
+         namespace="modules::usermanagement::pres::taglib"
+         prefix="umgt"
+         class="template"
+         />
    <umgt:template condition="logged-in" transform-on-place="true">
-      <li><a href="?page=login&amp;modules_usermanagement_biz-action:login=logout:true">Logout</a></li>
+      <template:addtaglib
+            namespace="modules::usermanagement::pres::taglib"
+            prefix="umgt"
+            class="logoutlink"
+            />
+      <li><a href="<umgt:logoutlink />">Logout</a></li>
    </umgt:template>
    <umgt:template condition="logged-out" transform-on-place="true">
       <li><a href="?page=login">Login</a></li>
