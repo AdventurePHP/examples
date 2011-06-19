@@ -1,0 +1,100 @@
+<@controller
+   namespace="sandbox::pres::controller"
+   file="news_wizzard_controller"
+   class="news_wizzard_controller"
+@>
+<core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
+
+<h2>News Wizzard</h2>
+<p>
+   Der News-Wizzard ist dazu gedacht, die Extension <em>News</em> zu konfigurieren 
+   und die Datenbank zu initialisieren. Anschließend können im Backend 
+   Neuigkeiten erstellt und bearbeitet werden, welche dann auf der News-Seite angezeigt 
+   werden.   
+</p>
+<p>
+   Wie auch der <a href="?page=db-wizzard">Datenbank-Wizzard</a> ist das Setup in verschiedene
+   Bereiche aufgeteilt, die Schritt für Schritt durchlaufen werden müssen.
+</p>
+
+<h3 id="step-1">Schritt 1: Datenbank-Konfiguration</h3>
+<p>
+   Für die Verbindung zur News-Datanbank wird eine neue Konfiguration erzeugt.
+</p>
+<p>
+   Bitte füllen Sie das folgende Formular aus um eine Datenbank konnektieren zu können:
+</p>
+
+<core:addtaglib namespace="core::pagecontroller" prefix="core" class="appendnode" />
+<core:appendnode namespace="sandbox::pres::templates::de::content::fragments" template="db_config"/>
+
+<h3 id="step-2">Schritt 2: Datenbank-Setup</h3>
+<p>
+   In diesem Schritt werden die notwendigen Tabellen in der Datenbank angelegt, und damit das Arbeiten
+   mit dem Backend ermöglicht.
+</p>
+
+<html:template name="step-1-req">
+   <div class="hint">
+      Um die Datenbank initialsieren zu können Tabelle anlegen zu können wird eine Datenbank-Konfiguration benötigt. Bitte führen Sie
+      zuerst <a href="#step-1">Schritt 1</a> aus.
+   </div>
+</html:template>
+
+<html:form name="init-db" id="init-db" method="post" action="#step-3">
+   <p>
+      Mit dem Abschicken des Formulars werden die Datenbank-Tabellen automatisiert angelegt. Hierzu
+      wird das <em>GenericORMapperSetup</em>-Tool aus dem Namespace
+      <em>modules::genericormapper::data::tools</em> wie folgt genutzt:
+   </p>
+   <pre>
+$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
+$setup->setupDatabase('extensions::news', 'news', self::$CONFIG_SECTION_NAME);
+   </pre>
+   <p>
+      Bitte bestätigen sie mit dem Button, das Anlegen der Tabelle:
+   </p>
+   <form:button name="init-db" value="Setup ausführen" />
+</html:form>
+
+<html:template name="db-conn-error">
+   <div class="err">
+      <p>
+         Die angegebenen Datenbank-Verbindungsdaten sind wahrscheinlich falsch. Es konnte leider
+         keine Verbindung hergestellt werden. Bitte überprüfen Sie die Einstellungen in der Datei
+         <em>/apps/config/core/database/myapp/DEFAULT_connections.ini</em>!
+      </p>
+      <p>
+         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+      </p>
+   </div>
+</html:template>
+
+<html:template name="tables-exist">
+   <div class="ok">
+      Die Datenbank ist bereits installiert. Sie können nun mit <a href="#step-3">Schritt 3</a> fortfahren.
+   </div>
+</html:template>
+
+<h3 id="step-3">Schritt 3: Nutzen der Extension</h3>
+
+<html:template name="step-2-req">
+   <div class="hint">
+      Um das News-Backend aufrufen oder News anzeigen zu können, muss zunächst die Datenbank 
+      initialisiert werden. Bitte führen Sie zunächst <a href="#step-2">Schritt 2</a> aus.
+   </div>
+</html:template>
+
+<html:template name="step-3">
+   <div class="ok">
+       <p>
+           Nachdem das Setup und die Einrichtung vollständig ausgeführt wurde, können Sie nun das
+           <a href="?page=news-backend">News-Backend</a> aufrufen oder sich vorhandene <a href="?page=news">News ansehen</a>, 
+           falls sie bereits welche im Backend erstellt haben.
+       </p>
+       <p>
+           Weitere Informationen zur Verwendung und zusätzlichen Konfigurationsmöglichkeiten 
+           finden sie in der <a href="http://wiki.adventure-php-framework.org/de/Extensions">Dokumentation im Wiki</a>.
+       </p>
+   </div>
+</html:template>
