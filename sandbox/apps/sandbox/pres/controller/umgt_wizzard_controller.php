@@ -150,7 +150,9 @@ class umgt_wizzard_controller extends base_controller {
             $user->setProperty('Username', $username);
             $user->setProperty('Password', $password);
 
-            // assume display name to have valid display in mgmt backend!
+            // assume typical user attributes to have valid display in mgmt backend!
+            $user->setProperty('FirstName', $username);
+            $user->setProperty('LastName', $username);
             $user->setProperty('DisplayName', $username);
 
             $umgt->saveUser($user);

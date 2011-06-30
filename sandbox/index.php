@@ -14,6 +14,7 @@ include_once('./apps/core/pagecontroller/pagecontroller.php');
 // create the sandbox page
 import('core::frontcontroller', 'Frontcontroller');
 $fC = &Singleton::getInstance('Frontcontroller');
+/* @var $fC Frontcontroller */
 $fC->setContext('myapp');
 $fC->setLanguage($lang);
 echo $fC->start('sandbox::pres::templates', 'main');
