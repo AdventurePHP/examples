@@ -6,7 +6,12 @@
 }
 
 .register-wrapper h3 {
-   margin-top:  0;
+   margin: 0;
+}
+
+.umgt-fe-reg p:last-child {
+   width: 487px;
+   text-align: right;
 }
 
 .umgt-fe-reg label {
@@ -31,7 +36,6 @@
 }
 
 .umgt-fe-reg #umgt-fe-reg-send {
-   margin-left: 406px;
    border: 1px solid black;
 }
 
