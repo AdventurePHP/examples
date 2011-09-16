@@ -1,0 +1,45 @@
+.register-wrapper {
+   border: 1px solid gray;
+   margin: 2em 0;
+   padding: 2em;
+   border-radius: 0.25em;
+}
+
+.register-wrapper h3 {
+   margin-top:  0;
+}
+
+.umgt-fe-reg label {
+   width: 200px;
+   display: inline-block;
+}
+
+.umgt-fe-reg #umgt-fe-reg-street,
+.umgt-fe-reg #umgt-fe-reg-city {
+   width: 233px;
+}
+
+.umgt-fe-reg #umgt-fe-reg-number,
+.umgt-fe-reg #umgt-fe-reg-zip {
+   width: 40px;
+}
+
+.umgt-fe-reg input[type='text'],
+.umgt-fe-reg input[type='password'] {
+   width: 280px;
+   border: 1px solid black;
+}
+
+.umgt-fe-reg #umgt-fe-reg-send {
+   margin-left: 406px;
+   border: 1px solid black;
+}
+
+.umgt-fe-reg .registration-error {
+   background: #fee url('../images/err-box.png') no-repeat scroll 10px 10px;
+   border-color: #900;
+   color: #333;
+   margin: 0 0 1em 0;
+   min-height: 3em;
+   padding: 10px 10px 10px 68px;
+}

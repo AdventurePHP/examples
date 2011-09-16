@@ -56,7 +56,7 @@ class umgt_wizzard_controller extends base_controller {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-                    . '" is not contained in the current configuration!', E_USER_ERROR);
+                                             . '" is not contained in the current configuration!', E_USER_ERROR);
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
@@ -89,7 +89,7 @@ class umgt_wizzard_controller extends base_controller {
          $formInitDb = &$this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('core::database', 'ConnectionManager')
-                            ->getConnection(self::$CONFIG_SECTION_NAME);
+                  ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
             // check for db layout...
@@ -110,12 +110,12 @@ class umgt_wizzard_controller extends base_controller {
 
                   // setup database layout
                   $setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
-                  $setup->setupDatabase('modules::usermanagement', 'umgt', self::$CONFIG_SECTION_NAME);
+                  $setup->setupDatabase('modules::usermanagement::data', 'umgt', self::$CONFIG_SECTION_NAME);
 
                   // initialize application
                   $umgt = &$this->getUmgtManager();
-                  $app = new GenericDomainObject('Application');
-                  $app->setProperty('DisplayName', 'Sandbox');
+                  $app = new UmgtApplication();
+                  $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
 
                   HeaderManager::forward('?page=umgt-wizzard#step-3');
@@ -146,14 +146,14 @@ class umgt_wizzard_controller extends base_controller {
             $username = $formCreateUser->getFormElementByName('username')->getAttribute('value');
             $password = $formCreateUser->getFormElementByName('password')->getAttribute('value');
 
-            $user = new GenericDomainObject('User');
-            $user->setProperty('Username', $username);
-            $user->setProperty('Password', $password);
+            $user = new UmgtUser();
+            $user->setUsername($username);
+            $user->setPassword($password);
 
             // assume typical user attributes to have valid display in mgmt backend!
-            $user->setProperty('FirstName', $username);
-            $user->setProperty('LastName', $username);
-            $user->setProperty('DisplayName', $username);
+            $user->setFirstName($username);
+            $user->setLastName($username);
+            $user->setDisplayName($username);
 
             $umgt->saveUser($user);
 
@@ -172,8 +172,7 @@ class umgt_wizzard_controller extends base_controller {
 
                $buffer = '';
                foreach ($users as $user) {
-                  /* @var $user GenericDomainObject */
-                  $buffer .= '<li>' . $user->getProperty('Username') . '</li>' . PHP_EOL;
+                  $buffer .= '<li>' . $user->getUsername() . '</li>' . PHP_EOL;
                }
 
                $userListTmpl->setPlaceHolder('user-list-entries', $buffer);
@@ -198,8 +197,9 @@ class umgt_wizzard_controller extends base_controller {
     * @return UmgtManager The instance of the current umgt manager.
     */
    private function &getUmgtManager() {
-      return $this->getAndInitServiceObject('modules::usermanagement::biz', 'UmgtManager', 'Default');
+      return $this->getDIServiceObject('modules::usermanagement::biz', 'UmgtManager');
    }
 
 }
+
 ?>
