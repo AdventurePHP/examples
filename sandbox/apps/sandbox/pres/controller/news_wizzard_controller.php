@@ -24,10 +24,11 @@ class news_wizzard_controller extends base_controller {
          $dbSection = new IniConfiguration();
 
          $section = new IniConfiguration();
-         $section->setValue('Host', $host . ':' . $port);
+         $section->setValue('Host', $host);
          $section->setValue('User', $user);
          $section->setValue('Pass', $pass);
          $section->setValue('Name', $name);
+         $section->setValue('Port', $port);
          $section->setValue('Collation', 'utf8_general_ci');
          $section->setValue('Charset', 'utf8');
          $section->setValue('Type', 'MySQLx');
