@@ -62,13 +62,8 @@ class db_wizzard_controller extends base_controller {
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
-         $rawHost = $subSection->getValue('Host');
-         $colon = strpos($rawHost, ':');
-         $host = substr($rawHost, 0, $colon);
-         $port = substr($rawHost, $colon + 1);
-
-         $tmpl->setPlaceHolder('host', $host);
-         $tmpl->setPlaceHolder('port', $port);
+         $tmpl->setPlaceHolder('host', $subSection->getValue('Host'));
+         $tmpl->setPlaceHolder('port', $subSection->getValue('Port'));
          $tmpl->setPlaceHolder('user', $subSection->getValue('User'));
          $tmpl->setPlaceHolder('pass', $subSection->getValue('Pass'));
          $tmpl->setPlaceHolder('name', $subSection->getValue('Name'));

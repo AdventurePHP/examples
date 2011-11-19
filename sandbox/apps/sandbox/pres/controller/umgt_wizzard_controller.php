@@ -13,7 +13,7 @@ class umgt_wizzard_controller extends base_controller {
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
-         // rerieve the form values
+         // retrieve the form values
          $host = $formNewConfig->getFormElementByName('db-host')->getAttribute('value');
          $port = $formNewConfig->getFormElementByName('db-port')->getAttribute('value');
          $user = $formNewConfig->getFormElementByName('db-user')->getAttribute('value');
@@ -61,14 +61,8 @@ class umgt_wizzard_controller extends base_controller {
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
-         $rawHost = $subSection->getValue('Host');
-         $colon = strpos($rawHost, ':');
-         $host = substr($rawHost, 0, $colon);
-         $port = substr($rawHost, $colon + 1);
-
-
-         $tmpl->setPlaceHolder('host', $host);
-         $tmpl->setPlaceHolder('port', $port);
+         $tmpl->setPlaceHolder('host', $subSection->getValue('Host'));
+         $tmpl->setPlaceHolder('port', $subSection->getValue('Port'));
          $tmpl->setPlaceHolder('user', $subSection->getValue('User'));
          $tmpl->setPlaceHolder('pass', $subSection->getValue('Pass'));
          $tmpl->setPlaceHolder('name', $subSection->getValue('Name'));
