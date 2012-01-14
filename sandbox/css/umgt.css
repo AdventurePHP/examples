@@ -1,8 +1,3 @@
-.umgt-content .formfield {
-   border: 1px solid #000000;
-   background-color: #eeeeee;
-}
-
 .umgt-header {
    font-size: 28px;
    font-weight: bolder;
@@ -11,7 +6,6 @@
 
 .umgt-menu {
    margin-bottom: 1em;
-   font-size: .95em;
 }
 
 .umgt-content .umgt-warn {
@@ -37,13 +31,24 @@
    display: block;
 }
 
+.umgt-content form input[type=text],
+.umgt-content form input[type=password],
+.umgt-content form select,
+.umgt-content form textarea {
+   border: 1px solid #000000;
+   background-color: #eeeeee;
+   width: 200px;
+}
+
 .umgt-content form input[type=submit] {
    display: block;
    margin-top: 20px;
+   border: 1px solid #000000;
+   background-color: #eeeeee;
 }
 
 .umgt-content table.vis-def {
-   border: 0px solid gray;
+   border: 0 solid gray;
 }
 
 .umgt-content table.vis-def td {
@@ -66,9 +71,8 @@
 }
 
 .umgt-content table.vis-def ul {
-   list-style-type: none;
    margin: 0;
-   padding: 0;
+   padding: 0 0 0 14px;
 }
 
 .umgt-content form.type-filter {
