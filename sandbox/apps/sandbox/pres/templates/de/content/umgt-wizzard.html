@@ -3,9 +3,9 @@
    class="umgt_wizzard_controller"
 @>
 <core:addtaglib namespace="tools::form::taglib" prefix="html" class="form" />
-<h2>Usermanagement-Wizzard</h2>
+<h2>Benutzer-Verwaltungs-Wizzard</h2>
 <p>
-   Der Usermanagement-Wizzard ist dazu gedacht, das Modul <em>usermanagement</em> zu konfigurieren
+   Der Benutzer-Verwaltungs-Wizzard ist dazu gedacht, das Modul <em>usermanagement</em> zu konfigurieren
    und zu initialisieren um anschließend innerhalb der Sandbox die Administration der Benutzer
    durchführen zu können. Ebenfalls kann später das Login-Formular eingebunden werden um einen
    angelegten Benutzer zu authentifizieren.
@@ -138,15 +138,15 @@ $setup->setupDatabase('modules::usermanagement::data', 'umgt', self::$CONFIG_SEC
 
 <html:template name="step-3-req">
    <div class="hint">
-      Um das Usermanagement-Backend aufrufen oder sich einloggen zu können, muss zunächst ein
+      Um die Benutzer-Verwaltung aufrufen oder sich einloggen zu können, muss zunächst ein
       Benutzer eingerichtet sein. Bitte führen Sie zunächst <a href="#step-3">Schritt 3</a> aus.
    </div>
 </html:template>
 
 <html:template name="step-4">
    <div class="ok">
-      Nachdem das Setup und die Einrichtung vollständig ausgeführt wurde, können Sie nun das
-      <a href="?page=umgt">Usermanagement-Backend</a> aufrufen oder sich <a href="?page=login">einloggen</a>.
+      Nachdem das Setup und die Einrichtung vollständig ausgeführt wurde, können Sie nun die
+      <a href="?page=umgt">Benutzer-Verwaltung</a> aufrufen oder sich <a href="?page=login">einloggen</a>.
       Nach dem Login stehen ihnen dann auf der Seite ein Passwort ändern-Dialog zur Verfügung.
    </div>
 </html:template>
