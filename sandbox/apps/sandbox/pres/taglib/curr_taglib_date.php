@@ -1,6 +1,6 @@
 <?php
 /**
- * @namespace sites::apfexample::pres::taglib
+ * @package sites::apfexample::pres::taglib
  *
  *  TagLib implementation to display the current date and time.<br />
  *

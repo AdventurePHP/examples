@@ -22,7 +22,7 @@
 import('tools::cache::key', 'SimpleCacheKey');
 
 /**
- * @namespace sites::vbc::pres::taglib
+ * @package sites::vbc::pres::taglib
  * @class cache_taglib_importdesign
  *
  * Implements the view based caching taglib, based on the core:importdesign
@@ -121,4 +121,5 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
    }
 
 }
+
 ?>
