@@ -58,7 +58,7 @@ class db_wizzard_controller extends base_controller {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-                    . '" is not contained in the current configuration!', E_USER_ERROR);
+                  . '" is not contained in the current configuration!', E_USER_ERROR);
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
@@ -148,7 +148,7 @@ UNIQUE (`urlname`)
             $urlName = $formCreateContent->getFormElementByName('content-urlname')->getAttribute('value');
             $content = $formCreateContent->getFormElementByName('content-text')->getContent();
 
-            $content = $conn->escapeValue(html_entity_decode($content));
+            $content = $conn->escapeValue(html_entity_decode($content, ENT_QUOTES, Registry::retrieve('apf::core', 'Charset')));
 
             $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'' . $urlName . '\', \'' . $content . '\');';
             $conn->executeTextStatement($insert);
@@ -190,4 +190,5 @@ UNIQUE (`urlname`)
    }
 
 }
+
 ?>

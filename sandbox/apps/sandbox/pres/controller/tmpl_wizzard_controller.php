@@ -1,39 +1,38 @@
 <?php
-   import('tools::http', 'HeaderManager');
-   
-   class tmpl_wizzard_controller extends base_controller {
+import('tools::http', 'HeaderManager');
 
-      public function transformContent() {
+class tmpl_wizzard_controller extends base_controller {
 
-         // display pages for th current language
-         $buffer = '';
-         $files = glob(APPS__PATH . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/*.html');
-         foreach ($files as $file) {
-            $fileName = basename($file);
-            $urlName = str_replace('.html', '', $fileName);
-            $buffer .= '<li><a href="?page=' . $urlName . '">' . basename($file) . '</a></li>';
-         }
-         $this->setPlaceHolder('existing-tmpl', $buffer);
+   public function transformContent() {
 
-         // handle and display form
-         $form = &$this->getForm('new-page');
+      // display pages for th current language
+      $buffer = '';
+      $files = glob(APPS__PATH . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/*.html');
+      foreach ($files as $file) {
+         $fileName = basename($file);
+         $urlName = str_replace('.html', '', $fileName);
+         $buffer .= '<li><a href="?page=' . $urlName . '">' . basename($file) . '</a></li>';
+      }
+      $this->setPlaceHolder('existing-tmpl', $buffer);
 
-         if($form->isSent() && $form->isValid()){
+      // handle and display form
+      $form = &$this->getForm('new-page');
 
-            $filePath = APPS__PATH . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/';
+      if ($form->isSent() && $form->isValid()) {
 
-            $fileName = $form->getFormElementByName('tmpl-name')->getAttribute('value');
-            $content = $form->getFormElementByName('tmpl-content')->getContent();
+         $filePath = APPS__PATH . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/';
 
-            file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content));
-            
-            HeaderManager::forward('./?page=tmpl-wizzard');
+         $fileName = $form->getFormElementByName('tmpl-name')->getAttribute('value');
+         $content = $form->getFormElementByName('tmpl-content')->getContent();
 
-         }
+         file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content, ENT_QUOTES, Registry::retrieve('apf::core', 'Charset')));
 
-         $form->transformOnPlace();
-         
+         HeaderManager::forward('./?page=tmpl-wizzard');
+
       }
 
+      $form->transformOnPlace();
+
    }
-?>
+
+}
