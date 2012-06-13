@@ -7,4 +7,3 @@ $fc = &Singleton::getInstance('Frontcontroller');
 $fc->setContext('app-context');
 $fc->registerAction('mano::core::biz', 'modules-init');
 echo $fc->start('mano::site::pres::templates', 'main');
-?>

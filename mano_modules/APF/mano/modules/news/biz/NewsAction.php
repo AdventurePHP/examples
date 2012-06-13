@@ -4,4 +4,3 @@ class NewsAction extends AbstractFrontcontrollerAction {
       echo 'I\'am the news module action...';
    }
 }
-?>

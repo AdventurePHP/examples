@@ -4,4 +4,3 @@ class news_create_controller extends base_controller {
       $this->getForm('create-entry')->transformOnPlace();
    }
 }
-?>

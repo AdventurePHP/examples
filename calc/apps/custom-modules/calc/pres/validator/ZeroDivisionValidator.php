@@ -18,14 +18,13 @@
  * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
  * -->
  */
-
 import('tools::form::validator', 'TextFieldValidator');
 
 /**
  * @package custom-modules::pres::validator
  * @class ZeroDivisionValidator
  *
- * Implements a validator that checks for division by zero. 
+ * Implements a validator that checks for division by zero.
  *
  * @author Christian Achatz
  * @version
@@ -39,14 +38,13 @@ class ZeroDivisionValidator extends TextFieldValidator {
       /* @var $form html_taglib_form */
 
       $operation = $form->getFormElementByName('operation')
-                      ->getSelectedOption()
-                      ->getAttribute('value');
+            ->getSelectedOption()
+            ->getAttribute('value');
 
-      if ($operation === 'div' && (float) $input === 0.0) {
+      if ($operation === 'div' && (float)$input === 0.0) {
          return false;
       }
       return true;
    }
 
 }
-?>

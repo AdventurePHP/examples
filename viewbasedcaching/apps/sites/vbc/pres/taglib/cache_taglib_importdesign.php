@@ -68,6 +68,7 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
       $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
       // get the cache manager
+      /* @var $cMF CacheManagerFabric */
       $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
       $cM = &$cMF->getCacheManager($cacheConfig);
 
@@ -89,7 +90,7 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
    /**
     * @public
     *
-    * Reimplements the transform() method. Returns the cache content loaded within the
+    * Re-implements the transform() method. Returns the cache content loaded within the
     * onParseTime() method or executes the parent class' functionality.
     *
     * @author Christian Achatz
@@ -106,6 +107,7 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
          $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
 
          // get the cache manager
+         /* @var $cMF CacheManagerFabric */
          $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
          $cM = &$cMF->getCacheManager($cacheConfig);
 
@@ -121,5 +123,3 @@ class cache_taglib_importdesign extends core_taglib_importdesign {
    }
 
 }
-
-?>

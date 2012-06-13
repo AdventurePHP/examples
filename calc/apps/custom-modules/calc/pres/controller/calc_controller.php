@@ -42,16 +42,17 @@ class calc_controller extends base_controller {
          $value1 = (float) $operand1->getAttribute('value');
          $operand2 = &$form->getFormElementByName('operand2');
          $value2 = (float) $operand2->getAttribute('value');
+         /* @var $operator form_taglib_select */
          $operator = &$form->getFormElementByName('operation');
          $currentOperator = &$operator->getSelectedOption();
-         $operaturType = $currentOperator->getAttribute('value');
+         $operatorType = $currentOperator->getAttribute('value');
 
          // execute operations
-         if ($operaturType == 'plus') {
+         if ($operatorType == 'plus') {
             $result = $value1 + $value2;
-         } elseif ($operaturType == 'minus') {
+         } elseif ($operatorType == 'minus') {
             $result = $value1 - $value2;
-         } elseif ($operaturType == 'div') {
+         } elseif ($operatorType == 'div') {
             $result = $value1 / $value2;
          } else {
             $result = $value1 * $value2;
@@ -66,4 +67,3 @@ class calc_controller extends base_controller {
    }
 
 }
-?>

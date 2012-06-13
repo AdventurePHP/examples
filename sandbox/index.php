@@ -11,6 +11,9 @@ ini_set('html_errors', 'off');
 // include the pagecontroller
 include_once('./apps/core/pagecontroller/pagecontroller.php');
 
+GlobalErrorHandler::disable();
+GlobalExceptionHandler::disable();
+
 // create the sandbox page
 import('core::frontcontroller', 'Frontcontroller');
 $fC = &Singleton::getInstance('Frontcontroller');
@@ -18,4 +21,3 @@ $fC = &Singleton::getInstance('Frontcontroller');
 $fC->setContext('myapp');
 $fC->setLanguage($lang);
 echo $fC->start('sandbox::pres::templates', 'main');
-?>

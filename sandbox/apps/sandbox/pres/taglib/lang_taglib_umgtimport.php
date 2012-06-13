@@ -20,5 +20,3 @@ class lang_taglib_umgtimport extends core_taglib_importdesign {
    }
 
 }
-
-?>
