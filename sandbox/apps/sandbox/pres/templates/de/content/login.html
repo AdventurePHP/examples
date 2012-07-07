@@ -70,14 +70,16 @@ login.type = "username"
 <pre>
 &lt;core:addtaglib
    namespace="modules::usermanagement::pres::taglib"
+   class="umgt_taglib_template"
    prefix="umgt"
-   class="template"
+   name="template"
    /&gt;
 &lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
    &lt;template:addtaglib
          namespace="modules::usermanagement::pres::taglib"
+         class="umgt_taglib_logoutlink"
          prefix="umgt"
-         class="logoutlink"
+         name="logoutlink"
          /&gt;
    &lt;li&gt;&lt;a href="&lt;umgt:logoutlink /&gt;"&gt;Logout&lt;/a&gt;&lt;/li&gt;
 &lt;/umgt:template&gt;
@@ -117,8 +119,9 @@ login.type = "username"
 <pre>
 &lt;core:addtaglib
    namespace="modules::usermanagement::pres::taglib"
+   class="umgt_taglib_importdesign"
    prefix="umgt"
-   class="importdesign"
+   name="importdesign"
 /&gt;
 &lt;umgt:importdesign
    namespace="..."

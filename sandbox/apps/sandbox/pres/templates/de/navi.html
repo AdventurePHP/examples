@@ -17,8 +17,9 @@
    <umgt:template condition="logged-in" transform-on-place="true">
       <template:addtaglib
             namespace="modules::usermanagement::pres::taglib"
+            class="umgt_taglib_logoutlink"
             prefix="umgt"
-            class="logoutlink"
+            name="logoutlink"
             />
       <li><a href="<umgt:logoutlink />">Logout</a></li>
    </umgt:template>
