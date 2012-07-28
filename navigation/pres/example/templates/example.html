@@ -1,0 +1,26 @@
+<@controller
+   namespace="examples::navigation::pres::example::controller"
+   class="NavigationTagExampleController"
+@>
+<core:addtaglib
+   namespace="examples::navigation::pres::tags"
+   class="NavigationNodeTag"
+   prefix="navi"
+   name="template"
+/>
+<navi:template id="main-navi"><!-- NavigationNodeTag -->
+   <navi:item status="active"><!-- NavigationItemTag -->
+      <li class="active">
+         <item:content/><!-- ItemTemplateContentTag -->
+      </li>
+   </navi:item>
+   <navi:item status="inactive">
+      <li>
+         <item:content/>
+      </li>
+   </navi:item>
+
+   <ul id="main-navigation">
+      <navi:content/><!-- NavigationContentTag -->
+   </ul>
+</navi:template>
