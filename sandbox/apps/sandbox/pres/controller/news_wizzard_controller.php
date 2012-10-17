@@ -57,7 +57,7 @@ class news_wizzard_controller extends base_controller {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-                    . '" is not contained in the current configuration!', E_USER_ERROR);
+                  . '" is not contained in the current configuration!', E_USER_ERROR);
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
@@ -90,7 +90,7 @@ class news_wizzard_controller extends base_controller {
          $formInitDb = &$this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('core::database', 'ConnectionManager')
-                            ->getConnection(self::$CONFIG_SECTION_NAME);
+                  ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
             // check for db layout...
@@ -136,4 +136,3 @@ class news_wizzard_controller extends base_controller {
    }
 
 }
-?>

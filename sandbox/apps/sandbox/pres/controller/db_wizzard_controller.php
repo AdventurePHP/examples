@@ -79,17 +79,15 @@ class db_wizzard_controller extends base_controller {
       }
 
       // step 2: create the database table
+      $conn = &$this->getConnection();
       $tableExists = false;
       if ($configAvailable) {
 
          // evaluate, whether the table is already existing
          try {
-
-            $conn = &$this->getConnection();
             $select = 'SHOW TABLES';
 
             $result = $conn->executeTextStatement($select);
-            $tables = array();
             while ($data = $conn->fetchData($result)) {
                $keys = array_keys($data);
                if (self::$TABLE_NAME == $data[$keys[0]]) {
@@ -183,12 +181,10 @@ UNIQUE (`urlname`)
    }
 
    /**
-    * @return MySQLxHandler The database connection.
+    * @return AbstractDatabaseHandler The database connection.
     */
    private function &getConnection() {
       return $this->getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
    }
 
 }
-
-?>

@@ -1,5 +1,4 @@
 <?php
-
 import('modules::usermanagement::biz::login', 'UmgtRedirectUrlProvider');
 
 class SandboxLogoutRedirectProvider extends APFObject implements UmgtRedirectUrlProvider {
@@ -9,5 +8,3 @@ class SandboxLogoutRedirectProvider extends APFObject implements UmgtRedirectUrl
    }
 
 }
-
-?>

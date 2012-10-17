@@ -1,49 +1,48 @@
 <?php
-   import('tools::request', 'RequestHandler');
+import('tools::request', 'RequestHandler');
 
-   class db_content_controller extends base_controller {
+class db_content_controller extends base_controller {
 
-      private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
+   private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
 
-      private static $TABLE_NAME = 'sandbox_content';
-      
-      public function transformContent() {
+   private static $TABLE_NAME = 'sandbox_content';
 
-         $urlName = RequestHandler::getValue('name');
-         $this->setPlaceHolder('urlname', $urlName);
+   public function transformContent() {
 
-         // in case the page is called from the template wizzard and no configuration is
-         // created, display a note instead of an exception
-         try {
+      $urlName = RequestHandler::getValue('name');
+      $this->setPlaceHolder('urlname', $urlName);
 
-            $conn = &$this->getConnection();
+      // in case the page is called from the template wizzard and no configuration is
+      // created, display a note instead of an exception
+      try {
 
-            $urlName = $conn->escapeValue($urlName);
-            $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` WHERE `urlname` = \'' . $urlName . '\'';
-            $data = $conn->fetchData($conn->executeTextStatement($select));
+         $conn = &$this->getConnection();
 
-            if ($data === false) {
-               $tmpl = &$this->getTemplate('no-content');
-               $tmpl->transformOnPlace();
-               return;
-            }
+         $urlName = $conn->escapeValue($urlName);
+         $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` WHERE `urlname` = \'' . $urlName . '\'';
+         $data = $conn->fetchData($conn->executeTextStatement($select));
 
-            $tmpl = &$this->getTemplate('content');
-            $tmpl->setPlaceHolder('content', $data['content']);
+         if ($data === false) {
+            $tmpl = &$this->getTemplate('no-content');
             $tmpl->transformOnPlace();
-            
-         } catch (ConfigurationException $e) {
-            $this->getTemplate('no-config')->transformOnPlace();
+            return;
          }
 
-      }
+         $tmpl = &$this->getTemplate('content');
+         $tmpl->setPlaceHolder('content', $data['content']);
+         $tmpl->transformOnPlace();
 
-      /**
-       * @return MySQLxHandler The database connection.
-       */
-      private function &getConnection(){
-         return $this->getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+      } catch (ConfigurationException $e) {
+         $this->getTemplate('no-config')->transformOnPlace();
       }
 
    }
-?>
+
+   /**
+    * @return MySQLxHandler The database connection.
+    */
+   private function &getConnection() {
+      return $this->getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+   }
+
+}

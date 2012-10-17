@@ -57,7 +57,7 @@ class umgt_wizzard_controller extends base_controller {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-                                             . '" is not contained in the current configuration!', E_USER_ERROR);
+                  . '" is not contained in the current configuration!', E_USER_ERROR);
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
@@ -196,5 +196,3 @@ class umgt_wizzard_controller extends base_controller {
    }
 
 }
-
-?>
