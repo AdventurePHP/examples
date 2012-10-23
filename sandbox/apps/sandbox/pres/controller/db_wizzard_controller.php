@@ -14,7 +14,7 @@ class db_wizzard_controller extends base_controller {
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
-         // rerieve the form values
+         // retrieve the form values
          $host = $formNewConfig->getFormElementByName('db-host')->getAttribute('value');
          $port = $formNewConfig->getFormElementByName('db-port')->getAttribute('value');
          $user = $formNewConfig->getFormElementByName('db-user')->getAttribute('value');
@@ -79,9 +79,10 @@ class db_wizzard_controller extends base_controller {
       }
 
       // step 2: create the database table
-      $conn = &$this->getConnection();
+      $conn = null;
       $tableExists = false;
       if ($configAvailable) {
+         $conn = &$this->getConnection();
 
          // evaluate, whether the table is already existing
          try {
