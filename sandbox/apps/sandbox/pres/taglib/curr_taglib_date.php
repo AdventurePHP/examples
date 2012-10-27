@@ -18,7 +18,7 @@ class curr_taglib_date extends Document {
     *
     * @author Christian Achatz
     * @version
-    *  Version 0.1, 20.04.2008<br />
+    * Version 0.1, 20.04.2008<br />
     */
    public function transform() {
       return date('l, d.m.Y, H:i:s');
