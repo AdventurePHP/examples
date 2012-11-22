@@ -1,7 +1,7 @@
 <?php
 import('tools::request', 'RequestHandler');
 
-class html_taglib_content extends Document {
+class DocumentationContentTag extends Document {
 
    public function onAfterAppend() {
 

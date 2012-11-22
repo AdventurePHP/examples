@@ -1,4 +1,6 @@
 <?php
+define('APPS__PATH', 'D:/Apache2.2/htdocs/www/sandbox/apps');
+
 // initialize language if is is sent by the browser
 $lang = 'en';
 if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') > 0) {
@@ -21,3 +23,9 @@ $fC->setLanguage($lang);
 $fC->registerAction('modules::usermanagement::biz', 'UmgtAutoLoginAction');
 
 echo $fC->start('sandbox::pres::templates', 'main');
+
+if (isset($_REQUEST['benchmark']) && $_REQUEST['benchmark'] == 'true') {
+   /* @var $t BenchmarkTimer */
+   $t = & Singleton::getInstance('BenchmarkTimer');
+   echo $t->createReport();
+}

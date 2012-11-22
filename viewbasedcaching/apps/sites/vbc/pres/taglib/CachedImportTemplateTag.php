@@ -23,7 +23,7 @@ import('tools::cache::key', 'SimpleCacheKey');
 
 /**
  * @package sites::vbc::pres::taglib
- * @class cache_taglib_importdesign
+ * @class CachedImportTemplateTag
  *
  * Implements the view based caching taglib, based on the core:importdesign
  * tag. The tag expects the following parameters:
@@ -38,7 +38,7 @@ import('tools::cache::key', 'SimpleCacheKey');
  * @version
  * Version 0.1, 29.11.2008<br />
  */
-class cache_taglib_importdesign extends core_taglib_importdesign {
+class CachedImportTemplateTag extends ImportTemplateTag {
 
    /**
     * @private

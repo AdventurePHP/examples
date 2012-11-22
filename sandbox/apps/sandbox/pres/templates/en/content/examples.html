@@ -29,14 +29,13 @@
    An adventure php framework xml tag is always represented by a php class. The name of the class
    consists of the <em>prefix</em> of the tag, the string <em>_taglib_</em> and the
    <em>class name</em>. For the present example the name of the class is
-   <em>curr_taglib_date</em>. Further, another convention says, that the class names should be
+   <em>CurrentDateTag</em>. Further, another convention says, that the class names should be
    identical to the classes file name. This simplifies not only the structurization but also the
    inclusion of tags and components. In order to implement our example tag we are going to create a file
    named
 </p>
 <pre>
-curr_taglib_date.php
-</pre>
+CurrentDateTag.php/pre>
 <p>in the folder</p>
 <pre>
 /apps/sandbox/pres/taglib/
@@ -49,7 +48,7 @@ curr_taglib_date.php
    therefor looks as follows:
 </p>
 <pre>
-class curr_taglib_date extends Document {
+class CurrentDateTag extends Document {
 
    public function transform(){
       return date('l, d.m.Y, H:i:s');
@@ -62,7 +61,7 @@ class curr_taglib_date extends Document {
    adding the follwing statement:
 </p>
 <pre>
-&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="curr_taglib_date" prefix="curr" name="date" /&gt;
+&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" /&gt;
 </pre>
 <p>After that - and immediately after that - the tag can be used by providing the string</p>
 <pre>
@@ -73,6 +72,6 @@ class curr_taglib_date extends Document {
    now:
 </p>
 <div class="date-tag">
-   <core:addtaglib namespace="sandbox::pres::taglib" class="curr_taglib_date" prefix="curr" name="date" />
+   <core:addtaglib namespace="sandbox::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" />
    <curr:date />
 </div>

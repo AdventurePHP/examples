@@ -1,7 +1,7 @@
 <?php
 import('mano::core::biz', 'DynamicModulesModel');
 
-class menu_taglib_importdesign extends core_taglib_importdesign {
+class MenuImportTag extends ImportTemplateTag {
 
    public function onParseTime() {
       $model = &Singleton::getInstance('DynamicModulesModel');

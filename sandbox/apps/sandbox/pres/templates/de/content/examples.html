@@ -31,13 +31,13 @@
    Ein Tag besteht immer aus der Implementierung einer TagLib-Klasse. Der Namen der Klasse setzt sich
    aus dem <em>Prefix</em> des Tags, der Zeichenfolge <em>_taglib_</em> und dem
    <em>Klassennamen</em> zusammen. F&uuml;r das hier beschriebene Beispiel ergibt sich somit
-   der Name <em>curr_taglib_date</em>. Das Adventure PHP Framework definiert dar&uuml;ber
+   der Name <em>CurrentDateTag</em>. Das Adventure PHP Framework definiert dar&uuml;ber
    hinaus die Konvention, dass Dateinamen identisch den Klassenamen gehalten werden m&uuml;ssen. Das
    vereinfacht nicht nur die Strukturierung, sondern auch die Einbindung von TagLibs und Komponenten.
    Wir erstellen also eine Datei mit dem Namen
 </p>
 <pre>
-curr_taglib_date.php
+CurrentDateTaghp
 </pre>
 <p>im Ordner</p>
 <pre>
@@ -51,7 +51,7 @@ curr_taglib_date.php
    Die TagLib-Klasse sieht damit wie folgt aus:
 </p>
 <pre>
-class curr_taglib_date extends Document {
+class CurrentDateTag extends Document {
 
    public function transform(){
       return date('l, d.m.Y, H:i:s');
@@ -64,7 +64,7 @@ class curr_taglib_date extends Document {
    gemacht werden. Das passiert mit einem
 </p>
 <pre>
-&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="curr_taglib_date" prefix="curr" name="date" /&gt;
+&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" /&gt;
 </pre>
 <p>Anschlie&szlig;end - und unmittelbar danach - kann der Tag per</p>
 <pre>
@@ -75,6 +75,6 @@ class curr_taglib_date extends Document {
    eingebaut. Es ist jetzt:
 </p>
 <div class="date-tag">
-   <core:addtaglib namespace="sandbox::pres::taglib" class="curr_taglib_date" prefix="curr" name="date" />
+   <core:addtaglib namespace="sandbox::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" />
    <curr:date />
 </div>

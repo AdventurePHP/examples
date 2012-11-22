@@ -1,7 +1,7 @@
 <?php
 /**
  * @package sites::apfexample::pres::taglib
- * @class curr_taglib_date
+ * @class CurrentDateTag
  *
  * TagLib implementation to display the current date and time.<br />
  *
@@ -9,7 +9,7 @@
  * @version
  * Version 0.1, 20.04.2008<br />
  */
-class curr_taglib_date extends Document {
+class CurrentDateTag extends Document {
 
    /**
     * @public
