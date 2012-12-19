@@ -29,7 +29,7 @@
  * @version
  *  Version 0.1, 29.11.2008<br />
  */
-class vbc_controller extends base_controller {
+class vbc_controller extends BaseDocumentController {
 
    /**
     * @public

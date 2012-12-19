@@ -29,7 +29,7 @@
  * @version
  * Version 0.1, 04.01.2011<br />
  */
-class calc_controller extends base_controller {
+class calc_controller extends BaseDocumentController {
 
    public function transformContent() {
 

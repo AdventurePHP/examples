@@ -1,7 +1,7 @@
 <?php
 import('examples::navigation::biz', 'SimpleNavigationNode');
 
-class NavigationTagExampleController extends base_controller {
+class NavigationTagExampleController extends BaseDocumentController {
    public function transformContent() {
 
       $root = new SimpleNavigationNode(null, null, null);

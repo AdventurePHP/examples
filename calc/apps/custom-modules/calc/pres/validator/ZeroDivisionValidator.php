@@ -35,7 +35,7 @@ class ZeroDivisionValidator extends TextFieldValidator {
    public function validate($input) {
 
       $form = &$this->__Control->getParentObject();
-      /* @var $form html_taglib_form */
+      /* @var $form HtmlFormTag */
 
       $operation = $form->getFormElementByName('operation')
             ->getSelectedOption()

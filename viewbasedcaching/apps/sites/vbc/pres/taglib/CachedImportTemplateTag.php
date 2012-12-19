@@ -18,7 +18,6 @@
  * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
  * -->
  */
-
 import('tools::cache::key', 'SimpleCacheKey');
 
 /**
@@ -46,10 +45,6 @@ class CachedImportTemplateTag extends ImportTemplateTag {
     */
    private $cacheContent = null;
 
-   public function __construct() {
-      parent::__construct();
-   }
-
    /**
     * @public
     *
@@ -69,8 +64,8 @@ class CachedImportTemplateTag extends ImportTemplateTag {
 
       // get the cache manager
       /* @var $cMF CacheManagerFabric */
-      $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
-      $cM = &$cMF->getCacheManager($cacheConfig);
+      $cMF = & $this->getServiceObject('tools::cache', 'CacheManagerFabric');
+      $cM = & $cMF->getCacheManager($cacheConfig);
 
       // clear the cache if desired
       if (isset($_REQUEST['clearcache']) && $_REQUEST['clearcache'] == 'true') {
@@ -108,8 +103,8 @@ class CachedImportTemplateTag extends ImportTemplateTag {
 
          // get the cache manager
          /* @var $cMF CacheManagerFabric */
-         $cMF = &$this->getServiceObject('tools::cache', 'CacheManagerFabric');
-         $cM = &$cMF->getCacheManager($cacheConfig);
+         $cMF = & $this->getServiceObject('tools::cache', 'CacheManagerFabric');
+         $cM = & $cMF->getCacheManager($cacheConfig);
 
          // generate output and cache it
          $output = parent::transform();
