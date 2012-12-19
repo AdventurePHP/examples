@@ -42,7 +42,7 @@ class calc_controller extends BaseDocumentController {
          $value1 = (float) $operand1->getAttribute('value');
          $operand2 = &$form->getFormElementByName('operand2');
          $value2 = (float) $operand2->getAttribute('value');
-         /* @var $operator form_taglib_select */
+         /* @var $operator SelectBoxTag */
          $operator = &$form->getFormElementByName('operation');
          $currentOperator = &$operator->getSelectedOption();
          $operatorType = $currentOperator->getAttribute('value');
