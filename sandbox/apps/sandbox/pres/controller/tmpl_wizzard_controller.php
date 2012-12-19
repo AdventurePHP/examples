@@ -1,7 +1,7 @@
 <?php
 import('tools::http', 'HeaderManager');
 
-class tmpl_wizzard_controller extends base_controller {
+class tmpl_wizzard_controller extends BaseDocumentController {
 
    public function transformContent() {
 

@@ -1,7 +1,7 @@
 <?php
 import('tools::http', 'HeaderManager');
 
-class db_wizzard_controller extends base_controller {
+class db_wizzard_controller extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
    private static $CONFIG_SUB_SECTION_NAME = 'DB';

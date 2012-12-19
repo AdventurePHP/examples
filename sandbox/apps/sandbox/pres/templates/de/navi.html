@@ -10,14 +10,14 @@
 
    <core:addtaglib
          namespace="modules::usermanagement::pres::taglib"
-         class="umgt_taglib_template"
+         class="UmgtTemplateTag"
          prefix="umgt"
          name="template"
          />
    <umgt:template condition="logged-in" transform-on-place="true">
       <template:addtaglib
             namespace="modules::usermanagement::pres::taglib"
-            class="umgt_taglib_logoutlink"
+            class="UmgtLogoutLinkTag"
             prefix="umgt"
             name="logoutlink"
             />

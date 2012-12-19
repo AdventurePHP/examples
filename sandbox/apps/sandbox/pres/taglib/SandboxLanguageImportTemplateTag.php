@@ -1,12 +1,12 @@
 <?php
 /**
  * @package sandbox::pres::taglib
- * @class LanguageDependentImportTemplateTag
+ * @class SandboxLanguageImportTemplateTag
  *
  * Implements a special tag lib to import language templates from
  * a prefixed namespace.
  */
-class LanguageDependentImportTemplateTag extends ImportTemplateTag {
+class SandboxLanguageImportTemplateTag extends ImportTemplateTag {
 
    public function onParseTime() {
       // re-maps the namespace to the language dependent sub-path
