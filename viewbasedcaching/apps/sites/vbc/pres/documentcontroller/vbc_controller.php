@@ -23,18 +23,18 @@
  * @package sites::vbc::pres::documentcontroller
  * @class vbc_controller
  *
- *  Implements the document controller for the views 'view_one.html' and 'view_two.html'.
+ * Implements the document controller for the views 'view_one.html' and 'view_two.html'.
  *
  * @author Christian Achatz
  * @version
- *  Version 0.1, 29.11.2008<br />
+ * Version 0.1, 29.11.2008<br />
  */
 class vbc_controller extends BaseDocumentController {
 
    /**
     * @public
     *
-    *  Fills the timestamp place holder.
+    * Fills the timestamp place holder.
     *
     * @author Christian Achatz
     * @version
@@ -45,5 +45,3 @@ class vbc_controller extends BaseDocumentController {
    }
 
 }
-
-?>
