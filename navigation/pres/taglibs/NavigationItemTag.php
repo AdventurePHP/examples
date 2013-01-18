@@ -4,13 +4,13 @@ import('examples::navigation::pres::tags', 'ItemTemplateContentTag');
 class NavigationItemTag extends Document {
 
    public function __construct() {
-      $this->__TagLibs = array(
+      $this->tagLibs = array(
          new TagLib('examples::navigation::pres::tags', 'ItemTemplateContentTag', 'item', 'content')
       );
    }
 
    public function onParseTime() {
-      $this->__extractTagLibTags();
+      $this->extractTagLibTags();
    }
 
    public function getOutput(NavigationNode $node) {

@@ -10,7 +10,7 @@ class NavigationNodeTag extends Document {
    private $node;
 
    public function __construct() {
-      $this->__TagLibs = array(
+      $this->tagLibs = array(
          new TagLib('examples::navigation::pres::tags', 'NavigationItemTag', 'navi', 'item'),
          new TagLib('examples::navigation::pres::tags', 'NavigationContentTag', 'navi', 'content')
       );
@@ -24,7 +24,7 @@ class NavigationNodeTag extends Document {
    }
 
    public function onParseTime() {
-      $this->__extractTagLibTags();
+      $this->extractTagLibTags();
    }
 
    public function transform() {
