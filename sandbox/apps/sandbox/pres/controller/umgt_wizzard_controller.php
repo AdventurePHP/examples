@@ -9,7 +9,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = &$this->getForm('new-db-config');
+      $formNewConfig = & $this->getForm('new-db-config');
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
@@ -50,9 +50,10 @@ class umgt_wizzard_controller extends BaseDocumentController {
       }
 
       $configAvailable = false;
+      $subSection = null;
       try {
          $config = $this->getConfiguration('core::database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $tmpl = & $this->getTemplate('db-config-exists');
 
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
@@ -81,7 +82,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
       $databaseLayoutInitialized = false;
       if ($configAvailable) {
 
-         $formInitDb = &$this->getForm('init-db');
+         $formInitDb = & $this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('core::database', 'ConnectionManager')
                   ->getConnection(self::$CONFIG_SECTION_NAME);
@@ -104,11 +105,15 @@ class umgt_wizzard_controller extends BaseDocumentController {
                if ($formInitDb->isSent()) {
 
                   // setup database layout
-                  $setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
-                  $setup->setupDatabase('modules::usermanagement::data', 'umgt', self::$CONFIG_SECTION_NAME);
+                  /* @var $setup GenericORMapperManagementTool */
+                  $setup = & $this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+                  $setup->addMappingConfiguration('modules::usermanagement::data', 'umgt');
+                  $setup->addRelationConfiguration('modules::usermanagement::data', 'umgt');
+                  $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+                  $setup->run();
 
                   // initialize application
-                  $umgt = &$this->getUmgtManager();
+                  $umgt = & $this->getUmgtManager();
                   $app = new UmgtApplication();
                   $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
@@ -119,7 +124,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
                }
             }
          } catch (Exception $e) {
-            $tmplDbConnErr = &$this->getTemplate('db-conn-error');
+            $tmplDbConnErr = & $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
          }
@@ -127,14 +132,13 @@ class umgt_wizzard_controller extends BaseDocumentController {
          $this->getTemplate('step-1-req')->transformOnPlace();
       }
 
-
       // step 3: initialize "root" user
       $initialUserCreated = false;
       if ($databaseLayoutInitialized) {
 
-         $formCreateUser = &$this->getForm('create-user');
+         $formCreateUser = & $this->getForm('create-user');
 
-         $umgt = &$this->getUmgtManager();
+         $umgt = & $this->getUmgtManager();
 
          if ($formCreateUser->isSent() && $formCreateUser->isValid()) {
 
@@ -156,7 +160,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
          } else {
 
             // display user list to note the user
-            $userListTmpl = &$this->getTemplate('user-list');
+            $userListTmpl = & $this->getTemplate('user-list');
 
             $users = $umgt->getPagedUserList();
 

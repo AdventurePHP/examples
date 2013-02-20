@@ -50,6 +50,7 @@ class news_wizzard_controller extends BaseDocumentController {
       }
 
       $configAvailable = false;
+      $subSection = null;
       try {
          $config = $this->getConfiguration('core::database', 'connections.ini');
          $tmpl = &$this->getTemplate('db-config-exists');
@@ -110,8 +111,12 @@ class news_wizzard_controller extends BaseDocumentController {
                if ($formInitDb->isSent()) {
 
                   // setup database layout
-                  $setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
-                  $setup->setupDatabase('extensions::news', 'news', self::$CONFIG_SECTION_NAME);
+                  /* @var $setup GenericORMapperManagementTool */
+                  $setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+                  $setup->addMappingConfiguration('extensions::news', 'news');
+                  $setup->addRelationConfiguration('extensions::news', 'news');
+                  $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+                  $setup->run();
 
                   HeaderManager::forward('?page=news-wizzard#step-3');
                } else {

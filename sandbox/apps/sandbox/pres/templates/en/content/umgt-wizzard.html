@@ -39,12 +39,15 @@
 <html:form name="init-db" id="init-db" method="post" action="#step-3">
    <p>
       Submitting this form the database tables are created automaticalls. This is done using the
-      <em>GenericORMapperSetup</em> tool from the <em>modules::genericormapper::data::tools</em>
+      <em>GenericORMapperManagementTool</em> tool from the <em>modules::genericormapper::data::tools</em>
       namespace:
    </p>
    <pre>
-$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
-$setup->setupDatabase('modules::usermanagement::data', 'umgt', self::$CONFIG_SECTION_NAME);
+$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+$setup->addMappingConfiguration('modules::usermanagement::data', 'umgt');
+$setup->addRelationConfiguration('modules::usermanagement::data', 'umgt');
+$setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+$setup->run();
    </pre>
    <p>
       Please click the button to create the database layout:

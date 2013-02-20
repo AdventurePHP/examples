@@ -42,12 +42,15 @@
 <html:form name="init-db" id="init-db" method="post" action="#step-3">
    <p>
       Mit dem Abschicken des Formulars werden die Datenbank-Tabellen automatisiert angelegt. Hierzu
-      wird das <em>GenericORMapperSetup</em>-Tool aus dem Namespace
+      wird das <em>GenericORMapperManagementTool</em>-Tool aus dem Namespace
       <em>modules::genericormapper::data::tools</em> wie folgt genutzt:
    </p>
    <pre>
-$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperSetup');
-$setup->setupDatabase('extensions::news', 'news', self::$CONFIG_SECTION_NAME);
+$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+$setup->addMappingConfiguration('extensions::news', 'news');
+$setup->addRelationConfiguration('extensions::news', 'news');
+$setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+$setup->run();
    </pre>
    <p>
       Bitte bestätigen sie mit dem Button, das Anlegen der Tabelle:
