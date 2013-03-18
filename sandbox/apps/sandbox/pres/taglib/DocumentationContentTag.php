@@ -1,5 +1,8 @@
 <?php
-import('tools::request', 'RequestHandler');
+namespace APF\sandbox\pres\taglib;
+
+use APF\core\pagecontroller\Document;
+use APF\tools\request\RequestHandler;
 
 class DocumentationContentTag extends Document {
 

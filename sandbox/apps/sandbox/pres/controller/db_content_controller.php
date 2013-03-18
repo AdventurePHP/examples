@@ -1,5 +1,8 @@
 <?php
-import('tools::request', 'RequestHandler');
+namespace APF\sandbox\pres\controller;
+
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\tools\request\RequestHandler;
 
 class db_content_controller extends BaseDocumentController {
 

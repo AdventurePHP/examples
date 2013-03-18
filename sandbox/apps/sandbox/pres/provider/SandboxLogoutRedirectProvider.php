@@ -1,5 +1,7 @@
 <?php
-import('modules::usermanagement::biz::login', 'UmgtRedirectUrlProvider');
+namespace APF\sandbox\pres\provider;
+
+use APF\modules\usermanagement\biz\login\UmgtRedirectUrlProvider;
 
 class SandboxLogoutRedirectProvider extends APFObject implements UmgtRedirectUrlProvider {
 

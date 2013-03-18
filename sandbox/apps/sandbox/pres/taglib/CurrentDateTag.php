@@ -1,4 +1,8 @@
 <?php
+namespace APF\sandbox\pres\taglib;
+
+use APF\core\pagecontroller\Document;
+
 /**
  * @package sites::apfexample::pres::taglib
  * @class CurrentDateTag

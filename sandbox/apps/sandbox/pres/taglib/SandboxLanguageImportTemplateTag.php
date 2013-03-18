@@ -1,4 +1,8 @@
 <?php
+namespace APF\sandbox\pres\taglib;
+
+use APF\core\pagecontroller\ImportTemplateTag;
+
 /**
  * @package sandbox::pres::taglib
  * @class SandboxLanguageImportTemplateTag

@@ -1,5 +1,8 @@
 <?php
-import('tools::http', 'HeaderManager');
+namespace APF\sandbox\pres\controller;
+
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\tools\http\HeaderManager;
 
 class news_wizzard_controller extends BaseDocumentController {
 

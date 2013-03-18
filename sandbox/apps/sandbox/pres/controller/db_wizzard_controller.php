@@ -1,5 +1,13 @@
 <?php
-import('tools::http', 'HeaderManager');
+namespace APF\sandbox\pres\controller;
+
+use APF\core\configuration\ConfigurationException;
+use APF\core\configuration\provider\ini\IniConfiguration;
+use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\DatabaseHandlerException;
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\core\registry\Registry;
+use APF\tools\http\HeaderManager;
 
 class db_wizzard_controller extends BaseDocumentController {
 

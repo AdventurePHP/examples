@@ -1,5 +1,15 @@
 <?php
-import('tools::http', 'HeaderManager');
+namespace APF\sandbox\pres\controller;
+
+use APF\core\configuration\ConfigurationException;
+use APF\core\configuration\provider\ini\IniConfiguration;
+use APF\core\database\AbstractDatabaseHandler;
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
+use APF\modules\usermanagement\biz\UmgtManager;
+use APF\modules\usermanagement\biz\model\UmgtApplication;
+use APF\modules\usermanagement\biz\model\UmgtUser;
+use APF\tools\http\HeaderManager;
 
 class umgt_wizzard_controller extends BaseDocumentController {
 
@@ -123,7 +133,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
                   $formInitDb->transformOnPlace();
                }
             }
-         } catch (Exception $e) {
+         } catch (\Exception $e) {
             $tmplDbConnErr = & $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
