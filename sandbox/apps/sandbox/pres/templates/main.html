@@ -20,19 +20,38 @@
          <div id="navi">
             <core:addtaglib namespace="sandbox::pres::taglib" class="SandboxLanguageImportTemplateTag" prefix="lang" name="umgtimport" />
             <lang:umgtimport
-               namespace="sandbox::pres::templates"
+               namespace="APF\sandbox\pres\templates"
                template="navi"
+            />
+
+            <!--
+               Vorschlag für zukünftige Adressierung identisch zu Klassen:
+            -->
+            <lang::umgtimport
+               template="APF\sandbox\pres\templates\navi.html"
+            />
+            <core::addtaglib
+               class="APF\sandbox\pres\taglib\SandboxLanguageImportTemplateTag"
+               prefix="lang"
+               name="umgtimport"
+            />
+            <@ controller
+               class="APF\sandbox\pres\controller\db_wizzard_controller"
+            @>
+            <html::getstring
+               config="APF\extensions\arraypager\language.ini"
+               entry="DisplayPage"
             />
          </div>
          <div id="content">
             <lang:umgtimport
-               namespace="sandbox::pres::templates"
+               namespace="APF\sandbox\pres\templates"
                template="content"
             />
          </div>
          <div id="footer">
             <lang:umgtimport
-               namespace="sandbox::pres::templates"
+               namespace="APF\sandbox\pres\templates"
                template="footer"
             />
          </div>

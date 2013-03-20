@@ -18,7 +18,7 @@ class SandboxLanguageImportTemplateTag extends ImportTemplateTag {
       // templates under the "normal" namespace.
       $this->setAttribute(
          'namespace',
-            $this->getAttribute('namespace') . '::' . $this->getLanguage()
+            $this->getAttribute('namespace') . '\\' . $this->getLanguage()
       );
       parent::onParseTime();
    }

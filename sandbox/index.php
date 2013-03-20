@@ -1,5 +1,7 @@
 <?php
 // initialize language if is is sent by the browser
+define('APPS__PATH', 'D:\Apache2.2\htdocs\www\sandbox-2.0\apps');
+
 $lang = 'en';
 if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') > 0) {
    $lang = 'de';
@@ -22,6 +24,24 @@ interface ClassLoader {
     * @return string The name of the vendor the class loader is attending to.
     */
    public function getVendorName();
+
+   /**
+    * @public
+    *
+    * Returns the root path this class loader instance uses to load PHP classes.
+    * <p/>
+    * Further, tha root path is used to load templates and configuration files as well.
+    * This is because the APF uses one addressing scheme for all elements. Please note,
+    * that templates and configuration files naturally do not have namespaces but the
+    * APF introduces them with this mechanism for convenience and consistency reasons.
+    *
+    * @return string The root path of the class loader.
+    *
+    * @author Christian Achatz
+    * @version
+    * Version 0.1, 20.03.2013<br />
+    */
+   public function getRootPath();
 
 }
 
@@ -80,6 +100,10 @@ class VendorBasedClassLoader implements ClassLoader {
       return $this->vendorName;
    }
 
+   public function getRootPath() {
+      return $this->rootPath;
+   }
+
    public function setVendorName($name) {
       $this->vendorName = $name;
    }
@@ -101,6 +125,9 @@ class RootClassLoader {
     */
    private static $loaders = array();
 
+   /**
+    * @param ClassLoader $loader A class loader to add to the list.
+    */
    public static function addLoader(ClassLoader $loader) {
       self::$loaders[$loader->getVendorName()] = $loader;
    }
@@ -112,9 +139,29 @@ class RootClassLoader {
       }
    }
 
+   /**
+    * @param string $vendorName The name of the desired class loader to get.
+    * @return ClassLoader The desired class loader.
+    * @throws \Exception In case no class loader is found.
+    */
+   public static function getLoaderByVendor($vendorName) {
+      if (isset(self::$loaders[$vendorName])) {
+         return self::$loaders[$vendorName];
+      }
+      throw new \Exception('No class loader with vendor "' . $vendorName . '" registered!');
+   }
+
+   // ? do we need this?
+   public static function getLoaderByNamespace($namespace) {
+      return self::getLoaderByVendor(substr($namespace, 0, strpos($namespace, '\\')));
+   }
+
 }
 
-RootClassLoader::addLoader(new VendorBasedClassLoader('APF', 'D:/Apache2.2/htdocs/www/ns-poc/apps'));
+// Class loader is just one thing, because it doesn't load templates and configs!
+// Hence, we need a combination of class loader, template loader, and config loader root path.
+// --> Templates must be loaded with full Vendor-based class path, then vendor class loader concept
+RootClassLoader::addLoader(new VendorBasedClassLoader('APF', APPS__PATH));
 spl_autoload_register(array('RootClassLoader', 'load'));
 
 // include the pagecontroller
@@ -133,7 +180,7 @@ $fC->setLanguage($lang);
 
 //$fC->registerAction('modules::usermanagement::biz', 'UmgtAutoLoginAction');
 
-echo $fC->start('sandbox::pres::templates', 'main');
+echo $fC->start('APF\sandbox\pres\templates', 'main');
 
 use APF\core\benchmark\BenchmarkTimer;
 
