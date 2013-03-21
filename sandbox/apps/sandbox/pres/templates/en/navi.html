@@ -9,15 +9,13 @@
    <li><a href="?page=umgt-wizzard">User management wizzard</a></li>
 
    <core:addtaglib
-         namespace="modules::usermanagement::pres::taglib"
-         class="UmgtTemplateTag"
+         class="APF\modules\usermanagement\pres\taglib\UmgtTemplateTag"
          prefix="umgt"
          name="template"
          />
    <umgt:template condition="logged-in" transform-on-place="true">
       <template:addtaglib
-            namespace="modules::usermanagement::pres::taglib"
-            class="UmgtLogoutLinkTag"
+            class="APF\modules\usermanagement\pres\taglib\UmgtLogoutLinkTag"
             prefix="umgt"
             name="logoutlink"
             />

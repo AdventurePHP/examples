@@ -35,7 +35,8 @@
    named
 </p>
 <pre>
-CurrentDateTag.php/pre>
+CurrentDateTag.php
+</pre>
 <p>in the folder</p>
 <pre>
 /apps/sandbox/pres/taglib/
@@ -58,10 +59,10 @@ class CurrentDateTag extends Document {
 </pre>
 <p>
    In order to include the tag into a content page the taglib must be introduced to the tag parser
-   adding the follwing statement:
+   adding the following statement:
 </p>
 <pre>
-&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" /&gt;
+&lt;core:addtaglib class="APF\sandbox\pres\taglib\CurrentDateTag" prefix="curr" name="date" /&gt;
 </pre>
 <p>After that - and immediately after that - the tag can be used by providing the string</p>
 <pre>
@@ -72,6 +73,6 @@ class CurrentDateTag extends Document {
    now:
 </p>
 <div class="date-tag">
-   <core:addtaglib namespace="sandbox::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" />
+   <core:addtaglib class="APF\sandbox\pres\taglib\CurrentDateTag" prefix="curr" name="date" />
    <curr:date />
 </div>

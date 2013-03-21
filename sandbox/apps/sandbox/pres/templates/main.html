@@ -18,7 +18,7 @@
             <h1><img src="images/apf-logo.png" alt="The Adventure PHP Framework" /></h1>
          </div>
          <div id="navi">
-            <core:addtaglib namespace="sandbox::pres::taglib" class="SandboxLanguageImportTemplateTag" prefix="lang" name="umgtimport" />
+            <core:addtaglib class="APF\sandbox\pres\taglib\SandboxLanguageImportTemplateTag" prefix="lang" name="umgtimport" />
             <lang:umgtimport
                namespace="APF\sandbox\pres\templates"
                template="navi"
@@ -30,14 +30,6 @@
             <lang::umgtimport
                template="APF\sandbox\pres\templates\navi.html"
             />
-            <core::addtaglib
-               class="APF\sandbox\pres\taglib\SandboxLanguageImportTemplateTag"
-               prefix="lang"
-               name="umgtimport"
-            />
-            <@ controller
-               class="APF\sandbox\pres\controller\db_wizzard_controller"
-            @>
             <html::getstring
                config="APF\extensions\arraypager\language.ini"
                entry="DisplayPage"

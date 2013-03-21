@@ -37,7 +37,7 @@
    Wir erstellen also eine Datei mit dem Namen
 </p>
 <pre>
-CurrentDateTaghp
+CurrentDateTag.php
 </pre>
 <p>im Ordner</p>
 <pre>
@@ -64,7 +64,7 @@ class CurrentDateTag extends Document {
    gemacht werden. Das passiert mit einem
 </p>
 <pre>
-&lt;core:addtaglib namespace="sites::apfexample::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" /&gt;
+&lt;core:addtaglib class="APF\sandbox\pres\taglib\CurrentDateTag" prefix="curr" name="date" /&gt;
 </pre>
 <p>Anschlie&szlig;end - und unmittelbar danach - kann der Tag per</p>
 <pre>
@@ -75,6 +75,6 @@ class CurrentDateTag extends Document {
    eingebaut. Es ist jetzt:
 </p>
 <div class="date-tag">
-   <core:addtaglib namespace="sandbox::pres::taglib" class="CurrentDateTag" prefix="curr" name="date" />
+   <core:addtaglib class="APF\sandbox\pres\taglib\CurrentDateTag" prefix="curr" name="date" />
    <curr:date />
 </div>

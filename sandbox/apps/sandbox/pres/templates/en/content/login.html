@@ -69,15 +69,13 @@ login.type = "username"
 </p>
 <pre>
 &lt;core:addtaglib
-   namespace="modules::usermanagement::pres::taglib"
-   class="UmgtTemplateTag"
+   class="APF\modules\usermanagement\pres\taglib\UmgtTemplateTag"
    prefix="umgt"
    name="template"
    /&gt;
 &lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
    &lt;template:addtaglib
-         namespace="modules::usermanagement::pres::taglib"
-         class="UmgtLogoutLinkTag"
+         class="APF\modules\usermanagement\pres\taglib\UmgtLogoutLinkTag"
          prefix="umgt"
          name="logoutlink"
          /&gt;
