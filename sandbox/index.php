@@ -1,14 +1,12 @@
 <?php
 // initialize language if is is sent by the browser
-//define('APPS__PATH', 'D:\Apache2.2\htdocs\www\sandbox-2.0\apps');
-
 $lang = 'en';
 if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') > 0) {
    $lang = 'de';
 }
 
 // pre-define the root path of the root class loader (if necessary)
-$rootPath = 'D:\Apache2.2\htdocs\www\sandbox-2.0\apps';
+$apfClassLoaderRootPath = 'D:\Apache2.2\htdocs\www\sandbox-2.0\apps';
 include_once('./apps/core/bootstrap.php');
 
 // optional: define custom class loader to be able to separate the APF from your custom application's src folder

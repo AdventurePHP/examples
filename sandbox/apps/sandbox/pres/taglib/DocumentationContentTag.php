@@ -1,6 +1,7 @@
 <?php
 namespace APF\sandbox\pres\taglib;
 
+use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\Document;
 use APF\tools\request\RequestHandler;
 
@@ -10,11 +11,11 @@ class DocumentationContentTag extends Document {
 
       $id = RequestHandler::getValue('id', '013');
 
-      $files = glob(APPS__PATH . '/sandbox/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');
+      $rootPath = RootClassLoader::getLoaderByVendor('APF')->getRootPath();
+      $files = glob($rootPath . '/sandbox/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');
       if (count($files) > 0) {
          $this->setContent($this->sanitizeContent(file_get_contents($files[0])));
       }
-
    }
 
    private function sanitizeContent($content) {
