@@ -1,0 +1,6 @@
+* Migrate "<@controller" directives
+* Migrate all loadDesign() calls to use PHP namespace style.
+* Migrate all @class and @package doc block tags.
+* Migrate service manager class handling.
+* Migrate config loading with separate namespace and name.
+*
