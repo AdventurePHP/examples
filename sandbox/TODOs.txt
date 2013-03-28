@@ -4,3 +4,5 @@
 * Migrate service manager class handling.
 * Migrate config loading with separate namespace and name.
 * Maybe eliminate Registry::retrieve('apf::core', 'CurrentRequestURL') and replace by Url::fromCurrent()?
+* [OK] Migrate FC actions to explicit action class registration.
+* Migrate form validator/filter addition tag to allow fully qualified addressing
