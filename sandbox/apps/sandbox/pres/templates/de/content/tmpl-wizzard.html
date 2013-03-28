@@ -95,13 +95,12 @@
          </span>
       </form:listener>
       <form:addvalidator
-         class="TextLengthValidator"
+         class="APF\tools\form\validator\TextLengthValidator"
          control="tmpl-name|tmpl-content"
          button="save"
       />
       <form:addvalidator
-         namespace="sandbox::pres::validator"
-         class="TemplateFileNameValidator"
+         class="APF\sandbox\pres\validator\TemplateFileNameValidator"
          control="tmpl-name"
          button="save"
       />

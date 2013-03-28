@@ -85,13 +85,12 @@
       <form:area id="content-text" name="content-text" />
 
       <form:addvalidator
-         class="TextLengthValidator"
+         class="APF\tools\form\validator\TextLengthValidator"
          control="content-urlname|content-text"
          button="create"
       />
       <form:addvalidator
-         namespace="sandbox::pres::validator"
-         class="TemplateFileNameValidator"
+         class="APF\sandbox\pres\validator\TemplateFileNameValidator"
          control="content-urlname"
          button="create"
       />
