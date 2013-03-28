@@ -6,18 +6,14 @@ if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEP
 }
 
 // pre-define the root path of the root class loader (if necessary)
-$apfClassLoaderRootPath = 'D:\Apache2.2\htdocs\www\sandbox-2.0\apps';
-include_once('./apps/core/bootstrap.php');
+$apfClassLoaderRootPath = dirname($_SERVER['SCRIPT_FILENAME']) . '/APF';
+include_once('./APF/core/bootstrap.php');
 
 // optional: define custom class loader to be able to separate the APF from your custom application's src folder
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
-RootClassLoader::addLoader(new StandardClassLoader('SANDBOX', 'D:/Apache2.2/htdocs/www/sandbox-2.0/apps-sandbox'));
 
-// optional: re-configure the standard class loader
-/* @var $apfClassLoader StandardClassLoader */
-$apfClassLoader = RootClassLoader::getLoaderByVendor('APF');
-$apfClassLoader->setRootPath('D:\Apache2.2\htdocs\www\sandbox-2.0\apps');
+RootClassLoader::addLoader(new StandardClassLoader('SANDBOX', dirname($_SERVER['SCRIPT_FILENAME']) . '/SANDBOX'));
 
 // create the sandbox page
 use APF\core\singleton\Singleton;
