@@ -24,7 +24,7 @@ $fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
 $fC->setContext('myapp');
 $fC->setLanguage($lang);
 
-//$fC->registerAction('modules::usermanagement::biz', 'UmgtAutoLoginAction');
+$fC->registerAction('APF\modules\usermanagement\biz', 'UmgtAutoLoginAction');
 
 echo $fC->start('APF\sandbox\pres\templates', 'main');
 

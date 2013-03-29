@@ -1,5 +1,5 @@
-* Migrate "<@controller" directives
-* Migrate all loadDesign() calls to use PHP namespace style.
+* [OK] Migrate "<@controller" directives
+* [OK] Migrate all loadDesign() calls to use PHP namespace style.
 * Migrate all @class and @package doc block tags.
 * Migrate service manager class handling.
 * Migrate config loading with separate namespace and name.
@@ -7,3 +7,4 @@
 * [OK] Migrate FC actions to explicit action class registration.
 * [OK] Migrate form validator/filter addition tag to allow fully qualified addressing.
 * Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
+* Migrate domain object definition/generation.
