@@ -13,7 +13,7 @@ include_once('./APF/core/bootstrap.php');
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
 
-RootClassLoader::addLoader(new StandardClassLoader('SANDBOX', dirname($_SERVER['SCRIPT_FILENAME']) . '/SANDBOX'));
+RootClassLoader::addLoader(new StandardClassLoader('APPLICATION', dirname($_SERVER['SCRIPT_FILENAME']) . '/APPLICATION'));
 
 // create the sandbox page
 use APF\core\singleton\Singleton;
@@ -32,7 +32,7 @@ use APF\core\benchmark\BenchmarkTimer;
 
 /* @var $t APF\core\benchmark\BenchmarkTimer */
 $t = & Singleton::getInstance('APF\core\benchmark\BenchmarkTimer');
+echo '<!--' . $t->getTotalTime() . '-->';
 if (isset($_REQUEST['benchmark']) && $_REQUEST['benchmark'] == 'true') {
    echo $t->createReport();
 }
-echo '<!--' . $t->getTotalTime() . '-->';

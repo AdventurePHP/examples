@@ -121,12 +121,12 @@ $setup->run();
       <form:password name="password2" id="password2" maxlength="50"/>
 
       <form:addvalidator
-          class="TextLengthValidator"
+          class="APF\tools\form\validator\TextLengthValidator"
           button="create-user"
           control="username|password|password2"
       />
       <form:addvalidator
-          class="FieldCompareValidator"
+          class="APF\tools\form\validator\FieldCompareValidator"
           button="create-user"
           control="password"
           type="special"
