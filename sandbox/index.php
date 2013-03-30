@@ -5,10 +5,8 @@ if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEP
    $lang = 'de';
 }
 
-// configure PHP's error message type
-ini_set('html_errors', 'off');
-
-// include the pagecontroller
+// include the page controller
+define('APPS__PATH', dirname($_SERVER['SCRIPT_FILENAME']) . '/apps');
 include_once('./apps/core/pagecontroller/pagecontroller.php');
 
 // prepare logger for different database drivers
@@ -37,8 +35,9 @@ $fC->registerAction('modules::usermanagement::biz', 'UmgtAutoLoginAction');
 
 echo $fC->start('sandbox::pres::templates', 'main');
 
+/* @var $t BenchmarkTimer */
+$t = & Singleton::getInstance('BenchmarkTimer');
+echo '<!--' . $t->getTotalTime() . '-->';
 if (isset($_REQUEST['benchmark']) && $_REQUEST['benchmark'] == 'true') {
-   /* @var $t BenchmarkTimer */
-   $t = & Singleton::getInstance('BenchmarkTimer');
    echo $t->createReport();
 }
