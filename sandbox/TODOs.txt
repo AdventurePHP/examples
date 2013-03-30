@@ -1,10 +1,11 @@
 * [OK] Migrate "<@controller" directives
 * [OK] Migrate all loadDesign() calls to use PHP namespace style.
 * Migrate all @class and @package doc block tags.
+* [PROGRESS] Migrate config loading with separate namespace and name.
 * Migrate service manager class handling.
-* Migrate config loading with separate namespace and name.
 * [OK] Maybe eliminate Registry::retrieve('apf::core', 'CurrentRequestURL') and replace by Url::fromCurrent()?
 * [OK] Migrate FC actions to explicit action class registration.
 * [OK] Migrate form validator/filter addition tag to allow fully qualified addressing.
 * Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
-* Migrate domain object definition/generation.
+* Migrate domain object definition/generation or the GORM.
+* Eliminate "::" signs.

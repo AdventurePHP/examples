@@ -46,13 +46,13 @@ class db_wizzard_controller extends BaseDocumentController {
 
          // load existing configuration or create new one
          try {
-            $config = $this->getConfiguration('core::database', 'connections.ini');
+            $config = $this->getConfiguration('APF\core\database', 'connections.ini');
          } catch (ConfigurationException $e) {
             $config = new IniConfiguration();
          }
 
          $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
-         $this->saveConfiguration('core::database', 'connections.ini', $config);
+         $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
          HeaderManager::forward('./?page=db-wizzard#step-2');
          return;
@@ -60,7 +60,7 @@ class db_wizzard_controller extends BaseDocumentController {
 
       $configAvailable = false;
       try {
-         $config = $this->getConfiguration('core::database', 'connections.ini');
+         $config = $this->getConfiguration('APF\core\database', 'connections.ini');
          $tmpl = &$this->getTemplate('db-config-exists');
 
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);

@@ -1,7 +1,12 @@
 <?php
 namespace APF\sandbox\pres\controller;
 
+use APF\core\configuration\ConfigurationException;
+use APF\core\configuration\provider\ini\IniConfiguration;
+use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\ConnectionManager;
 use APF\core\pagecontroller\BaseDocumentController;
+use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 use APF\tools\http\HeaderManager;
 
 class news_wizzard_controller extends BaseDocumentController {
@@ -12,7 +17,7 @@ class news_wizzard_controller extends BaseDocumentController {
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = &$this->getForm('new-db-config');
+      $formNewConfig = & $this->getForm('new-db-config');
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
@@ -40,13 +45,13 @@ class news_wizzard_controller extends BaseDocumentController {
 
          // load existing configuration or create new one
          try {
-            $config = $this->getConfiguration('core::database', 'connections.ini');
+            $config = $this->getConfiguration('APF\core\database', 'connections.ini');
          } catch (ConfigurationException $e) {
             $config = new IniConfiguration();
          }
 
          $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
-         $this->saveConfiguration('core::database', 'connections.ini', $config);
+         $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
          HeaderManager::forward('./?page=news-wizzard#step-2');
          return;
@@ -55,8 +60,8 @@ class news_wizzard_controller extends BaseDocumentController {
       $configAvailable = false;
       $subSection = null;
       try {
-         $config = $this->getConfiguration('core::database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $config = $this->getConfiguration('APF\core\database', 'connections.ini');
+         $tmpl = & $this->getTemplate('db-config-exists');
 
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
@@ -91,11 +96,12 @@ class news_wizzard_controller extends BaseDocumentController {
       $databaseLayoutInitialized = false;
       if ($configAvailable) {
 
-         $formInitDb = &$this->getForm('init-db');
+         $formInitDb = & $this->getForm('init-db');
          try {
-            $conn = $this->getServiceObject('core::database', 'ConnectionManager')
-                  ->getConnection(self::$CONFIG_SECTION_NAME);
+            /* @var $connMgr ConnectionManager */
+            $connMgr = $this->getServiceObject('core::database', 'ConnectionManager');
             /* @var $conn AbstractDatabaseHandler */
+            $conn = $connMgr->getConnection(self::$CONFIG_SECTION_NAME);
 
             // check for db layout...
             $result = $conn->executeTextStatement('SHOW TABLES');
@@ -115,7 +121,7 @@ class news_wizzard_controller extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+                  $setup = & $this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
                   $setup->addMappingConfiguration('extensions::news', 'news');
                   $setup->addRelationConfiguration('extensions::news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
@@ -126,8 +132,8 @@ class news_wizzard_controller extends BaseDocumentController {
                   $formInitDb->transformOnPlace();
                }
             }
-         } catch (Exception $e) {
-            $tmplDbConnErr = &$this->getTemplate('db-conn-error');
+         } catch (\Exception $e) {
+            $tmplDbConnErr = & $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
          }
