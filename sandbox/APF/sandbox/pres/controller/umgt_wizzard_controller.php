@@ -94,7 +94,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
 
          $formInitDb = & $this->getForm('init-db');
          try {
-            $conn = $this->getServiceObject('core::database', 'ConnectionManager')
+            $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
                   ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
@@ -116,7 +116,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = & $this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+                  $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
                   $setup->addMappingConfiguration('modules::usermanagement::data', 'umgt');
                   $setup->addRelationConfiguration('modules::usermanagement::data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
@@ -206,7 +206,7 @@ class umgt_wizzard_controller extends BaseDocumentController {
     * @return UmgtManager The instance of the current umgt manager.
     */
    private function &getUmgtManager() {
-      return $this->getDIServiceObject('modules::usermanagement::biz', 'UmgtManager');
+      return $this->getDIServiceObject('APF\modules\usermanagement\biz', 'UmgtManager');
    }
 
 }

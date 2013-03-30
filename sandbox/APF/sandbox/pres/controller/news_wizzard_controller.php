@@ -99,7 +99,7 @@ class news_wizzard_controller extends BaseDocumentController {
          $formInitDb = & $this->getForm('init-db');
          try {
             /* @var $connMgr ConnectionManager */
-            $connMgr = $this->getServiceObject('core::database', 'ConnectionManager');
+            $connMgr = $this->getServiceObject('APF\core\database\ConnectionManager');
             /* @var $conn AbstractDatabaseHandler */
             $conn = $connMgr->getConnection(self::$CONFIG_SECTION_NAME);
 
@@ -121,7 +121,7 @@ class news_wizzard_controller extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = & $this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+                  $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
                   $setup->addMappingConfiguration('extensions::news', 'news');
                   $setup->addRelationConfiguration('extensions::news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

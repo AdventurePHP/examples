@@ -47,7 +47,7 @@ class db_content_controller extends BaseDocumentController {
     * @return MySQLxHandler The database connection.
     */
    private function &getConnection() {
-      return $this->getServiceObject('core::database', 'ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+      return $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
    }
 
 }
