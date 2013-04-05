@@ -4,7 +4,7 @@ namespace APF\sandbox\pres\taglib;
 use APF\core\pagecontroller\Document;
 
 /**
- * @package sites::apfexample::pres::taglib
+ * @package APF\sites\apfexample\pres\taglib
  * @class CurrentDateTag
  *
  * TagLib implementation to display the current date and time.<br />

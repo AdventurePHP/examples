@@ -4,7 +4,7 @@ namespace APF\sandbox\pres\taglib;
 use APF\core\pagecontroller\ImportTemplateTag;
 
 /**
- * @package sandbox::pres::taglib
+ * @package APF\sandbox\pres\taglib
  * @class SandboxLanguageImportTemplateTag
  *
  * Implements a special tag lib to import language templates from
