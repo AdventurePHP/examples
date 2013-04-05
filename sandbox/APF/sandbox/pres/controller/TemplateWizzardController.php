@@ -33,7 +33,7 @@ class TemplateWizzardController extends BaseDocumentController {
          $fileName = $form->getFormElementByName('tmpl-name')->getAttribute('value');
          $content = $form->getFormElementByName('tmpl-content')->getContent();
 
-         file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content, ENT_QUOTES, Registry::retrieve('apf::core', 'Charset')));
+         file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content, ENT_QUOTES, Registry::retrieve('APF\core', 'Charset')));
 
          HeaderManager::forward('./?page=tmpl-wizzard');
       }

@@ -155,7 +155,7 @@ UNIQUE (`urlname`)
             $urlName = $formCreateContent->getFormElementByName('content-urlname')->getAttribute('value');
             $content = $formCreateContent->getFormElementByName('content-text')->getContent();
 
-            $content = $conn->escapeValue(html_entity_decode($content, ENT_QUOTES, Registry::retrieve('apf::core', 'Charset')));
+            $content = $conn->escapeValue(html_entity_decode($content, ENT_QUOTES, Registry::retrieve('APF\core', 'Charset')));
 
             $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'' . $urlName . '\', \'' . $content . '\');';
             $conn->executeTextStatement($insert);
