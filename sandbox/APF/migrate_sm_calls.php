@@ -1,12 +1,12 @@
 <?php
-include('./migrate_base.php');
+include(dirname(__FILE__) . '/migrate_base.php');
 
 $files = find('.', '*.php');
 
-$search = '#\$this->getServiceObject\(\'([A-Za-z0-9:]+)\', ?\'([A-Za-z0-9\-]+)\'\)#m';
-$searchWithType = '#\$this->getServiceObject\(\'([A-Za-z0-9:]+)\', ?\'([A-Za-z0-9\-]+)\', ?([A-Za-z0-9:_]+)\)#m';
+$search = '#\$this->getServiceObject\(\'([A-Za-z0-9:\-]+)\', ?\'([A-Za-z0-9\-]+)\'\)#m';
+$searchWithType = '#\$this->getServiceObject\(\'([A-Za-z0-9:\-]+)\', ?\'([A-Za-z0-9\-]+)\', ?([A-Za-z0-9:_]+)\)#m';
 
-$searchDi = '#\$this\->getDIServiceObject\(\'([A-Za-z0-9:]+)\', ?#m';
+$searchDi = '#\$this\->getDIServiceObject\(\'([A-Za-z0-9:\-]+)\', ?#m';
 
 foreach ($files as $file) {
    $content = file_get_contents($file);

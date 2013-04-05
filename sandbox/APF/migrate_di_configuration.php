@@ -1,11 +1,9 @@
 <?php
-include('./migrate_base.php');
+include(dirname(__FILE__) . '/migrate_base.php');
 
 $files = find('config', '*serviceobjects.ini');
 
-$search = '#servicetype ?= ?"([A-Z]+)"
-namespace ?= ?"([A-Za-z0-9:]+)"
-class ?= ?"([A-Za-z0-9\-]+)"#m';
+$search = '#namespace ?= ?"([A-Za-z0-9:\-]+)"([\n|\r\n]+)?class ?= ?"([A-Za-z0-9\-]+)"#';
 
 $searchReference = '#init.([A-Za-z\-_]+).namespace ?= ?"([A-Za-z0-9:]+)"#';
 
@@ -14,8 +12,7 @@ foreach ($files as $file) {
 
    // replace service implementation definitions
    $content = preg_replace_callback($search, function ($matches) {
-      return 'servicetype = "' . $matches[1] . '"
-class = "APF\\' . str_replace('::', '\\', $matches[2]) . '\\' . $matches[3] . '"';
+      return 'class = "APF\\' . str_replace('::', '\\', $matches[1]) . '\\' . $matches[3] . '"';
    }, $content);
 
    // replace DI wiring definitions
