@@ -42,10 +42,10 @@
    <p>
       Mit dem Abschicken des Formulars werden die Datenbank-Tabellen automatisiert angelegt. Hierzu
       wird das <em>GenericORMapperManagementTool</em>-Tool aus dem Namespace
-      <em>modules::genericormapper::data::tools</em> wie folgt genutzt:
+      <em>APF\modules\genericormapper\data\tools</em> wie folgt genutzt:
    </p>
    <pre>
-$setup = &$this->getServiceObject('modules::genericormapper::data::tools', 'GenericORMapperManagementTool');
+$setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
 $setup->addMappingConfiguration('modules::usermanagement::data', 'umgt');
 $setup->addRelationConfiguration('modules::usermanagement::data', 'umgt');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
