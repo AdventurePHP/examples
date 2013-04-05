@@ -1,4 +1,5 @@
 * [OK] Migrate "<@controller" directives
+* Write migration script for document controllers.
 * [OK] Migrate all loadDesign() calls to use PHP namespace style.
 * Migrate all @class and @package doc block tags.
 * [PROGRESS] Migrate config loading with separate namespace and name.
