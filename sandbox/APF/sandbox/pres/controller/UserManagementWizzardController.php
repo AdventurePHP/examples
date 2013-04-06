@@ -117,8 +117,8 @@ class UserManagementWizzardController extends BaseDocumentController {
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
                   $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
-                  $setup->addMappingConfiguration('modules::usermanagement::data', 'umgt');
-                  $setup->addRelationConfiguration('modules::usermanagement::data', 'umgt');
+                  $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
+                  $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run();
 
