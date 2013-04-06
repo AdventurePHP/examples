@@ -9,6 +9,8 @@ $searchSingleNamespace = '#<([A-Za-z0-9\-]+):importdesign([\*| |\n|\r\n]+)namesp
 
 $searchGetStringNamespace = '#<([A-Za-z0-9\-]+):getstring([\*| |\n|\r\n]+)namespace="([A-Za-z0-9:\-]+)"#';
 
+$searchAppendNodeNamespace = '#<([A-Za-z0-9\-]+):appendnode([\*| |\n|\r\n]+)namespace="([A-Za-z0-9:\-]+)"#';
+
 foreach ($files as $file) {
    $content = file_get_contents($file);
 
@@ -25,6 +27,11 @@ foreach ($files as $file) {
    // replace <*:getstring /> calls
    $content = preg_replace_callback($searchGetStringNamespace, function ($matches) {
       return '<' . $matches[1] . ':getstring' . $matches[2] . 'namespace="APF\\' . str_replace('::', '\\', $matches[3]) . '"';
+   }, $content);
+
+   // replace <*:appendnode /> calls
+   $content = preg_replace_callback($searchAppendNodeNamespace, function ($matches) {
+      return '<' . $matches[1] . ':appendnode' . $matches[2] . 'namespace="APF\\' . str_replace('::', '\\', $matches[3]) . '"';
    }, $content);
 
    file_put_contents($file, $content);
