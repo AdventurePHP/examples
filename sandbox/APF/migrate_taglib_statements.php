@@ -11,6 +11,9 @@ $searchGetStringNamespace = '#<([A-Za-z0-9\-]+):getstring([\*| |\n|\r\n]+)namesp
 
 $searchAppendNodeNamespace = '#<([A-Za-z0-9\-]+):appendnode([\*| |\n|\r\n]+)namespace="([A-Za-z0-9:\-]+)"#';
 
+$searchHeaderJs = '#<htmlheader:addjs([\*| |\n|\r\n]+)namespace="([A-Za-z0-9:\-]+)"#';
+$searchHeaderCss = '#<htmlheader:addcss([\*| |\n|\r\n]+)namespace="([A-Za-z0-9:\-]+)"#';
+
 foreach ($files as $file) {
    $content = file_get_contents($file);
 
@@ -32,6 +35,14 @@ foreach ($files as $file) {
    // replace <*:appendnode /> calls
    $content = preg_replace_callback($searchAppendNodeNamespace, function ($matches) {
       return '<' . $matches[1] . ':appendnode' . $matches[2] . 'namespace="APF\\' . str_replace('::', '\\', $matches[3]) . '"';
+   }, $content);
+
+   // replace <htmlheader:add* /> calls
+   $content = preg_replace_callback($searchHeaderJs, function ($matches) {
+      return '<htmlheader:addjs' . $matches[1] . 'namespace="APF\\' . str_replace('::', '\\', $matches[2]) . '"';
+   }, $content);
+   $content = preg_replace_callback($searchHeaderCss, function ($matches) {
+      return '<htmlheader:addcss' . $matches[1] . 'namespace="APF\\' . str_replace('::', '\\', $matches[2]) . '"';
    }, $content);
 
    file_put_contents($file, $content);
