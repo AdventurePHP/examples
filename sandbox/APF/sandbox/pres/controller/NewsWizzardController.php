@@ -122,8 +122,8 @@ class NewsWizzardController extends BaseDocumentController {
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
                   $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
-                  $setup->addMappingConfiguration('extensions::news', 'news');
-                  $setup->addRelationConfiguration('extensions::news', 'news');
+                  $setup->addMappingConfiguration('APF\extensions\news', 'news');
+                  $setup->addRelationConfiguration('APF\extensions\news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run();
 

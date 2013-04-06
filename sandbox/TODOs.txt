@@ -1,15 +1,17 @@
 * [OK] Migrate "<@controller" directives
-* Write migration script for document controllers.
 * [OK] Migrate all loadDesign() calls to use PHP namespace style.
 * [OK] Migrate all @class and @package doc block tags.
-* [PROGRESS] Migrate config loading with separate namespace and name.
+* [OK] Migrate config loading with separate namespace and name.
 * [OK] Migrate service manager class handling.
 * [OK] Maybe eliminate Registry::retrieve('apf::core', 'CurrentRequestURL') and replace by Url::fromCurrent()?
 * [OK] Migrate FC actions to explicit action class registration.
 * [OK] Migrate form validator/filter addition tag to allow fully qualified addressing.
+* [OK] Migrate domain object definition/generation or the GORM.
+* [OK] Write migration script for document controllers.
+* LinkGenerator::generateActionUrl() --> Namespace should be escaped internally, not within the application!
 * Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
-* Migrate domain object definition/generation or the GORM.
 * Eliminate "::" signs.
 * Replace getAndInitServiceObject() by DIServiceManager
 * Introduce document controller generation by DIServiceManager (<@controller service-namespace="" service-name="" @>)
 * Migrate all getAndInitServiceObject() calls (not jet done in total!; maybe regexp not entirely correct)
+* Introduce APPLICATION_SINGLETON based on APC.
