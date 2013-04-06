@@ -9,7 +9,7 @@ use APF\core\pagecontroller\BaseDocumentController;
 use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 use APF\tools\http\HeaderManager;
 
-class news_wizzard_controller extends BaseDocumentController {
+class NewsWizzardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-News';
    private static $CONFIG_SUB_SECTION_NAME = 'DB';

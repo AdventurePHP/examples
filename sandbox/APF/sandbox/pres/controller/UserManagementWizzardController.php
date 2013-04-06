@@ -11,7 +11,7 @@ use APF\modules\usermanagement\biz\model\UmgtApplication;
 use APF\modules\usermanagement\biz\model\UmgtUser;
 use APF\tools\http\HeaderManager;
 
-class umgt_wizzard_controller extends BaseDocumentController {
+class UserManagementWizzardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-UMGT';
    private static $CONFIG_SUB_SECTION_NAME = 'DB';
