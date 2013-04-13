@@ -8,10 +8,13 @@
 * [OK] Migrate form validator/filter addition tag to allow fully qualified addressing.
 * [OK] Migrate domain object definition/generation or the GORM.
 * [OK] Write migration script for document controllers.
-* LinkGenerator::generateActionUrl() --> Namespace should be escaped internally, not within the application!
-* Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
-* Eliminate "::" signs.
-* Replace getAndInitServiceObject() by DIServiceManager
+* [OK] LinkGenerator::generateActionUrl() --> Namespace should be escaped internally, not within the application!
+* [OK] Migrate all getAndInitServiceObject() calls (not jet done in total!; maybe regexp not entirely correct)
+* [OK] Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
+* [OK] Eliminate "::" signs.
+* Introduce separation of 1.X and 2.X documentation plus switch.
+* Repair newspager module because it is broken due to refactoring/removal of "URLRewriting" registry parameter.
+* [PROGRESS] Replace getAndInitServiceObject() by DIServiceManager.
 * Introduce document controller generation by DIServiceManager (<@controller service-namespace="" service-name="" @>)
-* Migrate all getAndInitServiceObject() calls (not jet done in total!; maybe regexp not entirely correct)
 * Introduce APPLICATION_SINGLETON based on APC.
+* Migrate htmllist extension to better taglib naming.
