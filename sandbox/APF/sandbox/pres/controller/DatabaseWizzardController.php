@@ -4,6 +4,7 @@ namespace APF\sandbox\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\ConnectionManager;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
@@ -40,7 +41,7 @@ class DatabaseWizzardController extends BaseDocumentController {
          $section->setValue('Port', $port);
          $section->setValue('Collation', 'utf8_general_ci');
          $section->setValue('Charset', 'utf8');
-         $section->setValue('Type', 'MySQLx');
+         $section->setValue('Type', 'APF\core\database\MySQLxHandler');
 
          $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
 

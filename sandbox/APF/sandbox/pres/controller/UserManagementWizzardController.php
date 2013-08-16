@@ -41,7 +41,7 @@ class UserManagementWizzardController extends BaseDocumentController {
          $section->setValue('Port', $port);
          $section->setValue('Collation', 'utf8_general_ci');
          $section->setValue('Charset', 'utf8');
-         $section->setValue('Type', 'MySQLx');
+         $section->setValue('Type', 'APF\core\database\MySQLxHandler');
 
          $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
 
@@ -95,7 +95,7 @@ class UserManagementWizzardController extends BaseDocumentController {
          $formInitDb = & $this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
-                  ->getConnection(self::$CONFIG_SECTION_NAME);
+                ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
             // check for db layout...

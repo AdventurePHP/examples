@@ -39,7 +39,7 @@ class NewsWizzardController extends BaseDocumentController {
          $section->setValue('Port', $port);
          $section->setValue('Collation', 'utf8_general_ci');
          $section->setValue('Charset', 'utf8');
-         $section->setValue('Type', 'MySQLx');
+         $section->setValue('Type', 'APF\core\database\MySQLxHandler');
 
          $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
 
@@ -72,8 +72,13 @@ class NewsWizzardController extends BaseDocumentController {
 
          $rawHost = $subSection->getValue('Host');
          $colon = strpos($rawHost, ':');
-         $host = substr($rawHost, 0, $colon);
-         $port = substr($rawHost, $colon + 1);
+         if($colon) {
+             $host = substr($rawHost, 0, $colon);
+             $port = substr($rawHost, $colon + 1);
+         } else {
+             $host = $subSection->getValue('Host');
+             $port = $subSection->getValue('Port');
+         }
 
 
          $tmpl->setPlaceHolder('host', $host);
