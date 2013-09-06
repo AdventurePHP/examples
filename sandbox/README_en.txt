@@ -20,6 +20,6 @@ Please note:
 of the sandbox must be assigned the permissions of the user the webserver is operated with.
 
 2. For problems during the installation, please create a thread in the forum under
-http://forum.adventure-php-framework.org/en/viewforum.php?f=3.
+http://forum.adventure-php-framework.org/viewforum.php?f=3.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

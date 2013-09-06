@@ -20,6 +20,6 @@ Hinweise:
 Berechtigungen desjenigen Benutzers ausgestattet werden, mit dem der Webserver betrieben wird.
 
 2. Sollten Probleme bei der Installation auftreten, so verfassen Sie bitte einen Thread im
-Forum unter http://forum.adventure-php-framework.org/de/viewforum.php?f=2.
+Forum unter http://forum.adventure-php-framework.org/viewforum.php?f=2.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
