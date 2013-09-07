@@ -1,6 +1,9 @@
 <?php
-import('examples::navigation::pres::tags', 'NavigationItemTag');
-import('examples::navigation::pres::tags', 'NavigationContentTag');
+namespace APF\examples\navigation\pres\taglibs;
+
+use APF\core\pagecontroller\Document;
+use APF\core\pagecontroller\TagLib;
+use APF\examples\navigation\biz\NavigationNode;
 
 class NavigationNodeTag extends Document {
 
@@ -11,8 +14,8 @@ class NavigationNodeTag extends Document {
 
    public function __construct() {
       $this->tagLibs = array(
-         new TagLib('examples::navigation::pres::tags', 'NavigationItemTag', 'navi', 'item'),
-         new TagLib('examples::navigation::pres::tags', 'NavigationContentTag', 'navi', 'content')
+         new TagLib('APF\examples\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item'),
+         new TagLib('APF\examples\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content')
       );
    }
 
@@ -41,7 +44,7 @@ class NavigationNodeTag extends Document {
       }
 
       $content = $this->getContent();
-      $children = &$this->getChildren();
+      $children = & $this->getChildren();
       foreach ($children as $objectId => $DUMMY) {
          if ($children[$objectId] instanceof NavigationContentTag) {
             // fill the <navi:content /> place holder if we get him

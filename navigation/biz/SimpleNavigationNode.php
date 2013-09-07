@@ -1,5 +1,5 @@
 <?php
-import('examples::navigation::biz', 'NavigationNode');
+namespace APF\examples\navigation\biz;
 
 class SimpleNavigationNode implements NavigationNode {
 

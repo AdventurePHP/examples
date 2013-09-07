@@ -1,5 +1,9 @@
 <?php
-import('examples::navigation::biz', 'SimpleNavigationNode');
+namespace APF\examples\navigation\pres\example\controller;
+
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\examples\navigation\biz\SimpleNavigationNode;
+use APF\examples\navigation\pres\taglibs\NavigationNodeTag;
 
 class NavigationTagExampleController extends BaseDocumentController {
    public function transformContent() {

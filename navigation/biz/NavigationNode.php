@@ -1,4 +1,6 @@
 <?php
+namespace APF\examples\navigation\biz;
+
 interface NavigationNode {
 
    /**

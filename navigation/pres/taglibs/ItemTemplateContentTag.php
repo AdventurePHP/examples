@@ -1,4 +1,9 @@
 <?php
+namespace APF\examples\navigation\pres\taglibs;
+
+use APF\core\pagecontroller\Document;
+use APF\examples\navigation\biz\NavigationNode;
+
 class ItemTemplateContentTag extends Document {
 
    /**
