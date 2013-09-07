@@ -1,5 +1,5 @@
-<@controller namespace="custom-modules::calc::pres::controller" class="calc_controller" @>
-<core:addtaglib namespace="tools::form::taglib" class="HtmlFormTag" prefix="html" name="form" />
+<@controller class="APF\examples\calc\pres\controller\CalculatorController" @>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <style type="text/css">
 .apf-calc-mod {
    border: 1px solid gray;
@@ -75,12 +75,12 @@
             <select:option value="multiply">*</select:option>
          </form:select>
          <form:addfilter
-            class="FloatFilter"
+            class="APF\tools\form\filter\FloatFilter"
             button="docalc"
             control="operand1|operand2"
          />
          <form:addvalidator
-            class="NumberValidator"
+            class="APF\tools\form\validator\NumberValidator"
             button="docalc"
             control="operand1|operand2"
          />
@@ -88,8 +88,7 @@
          <label>Operand2:</label>
          <form:text name="operand2" />
          <form:addvalidator
-            namespace="custom-modules::calc::pres::validator"
-            class="ZeroDivisionValidator"
+            class="APF\examples\calc\pres\validator\ZeroDivisionValidator"
             button="docalc"
             control="operand2"
             type="special"

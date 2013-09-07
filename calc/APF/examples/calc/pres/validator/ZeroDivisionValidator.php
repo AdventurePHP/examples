@@ -1,4 +1,6 @@
 <?php
+namespace APF\examples\calc\pres\validator;
+
 /**
  * <!--
  * This file is part of the adventure php framework (APF) published under
@@ -18,10 +20,12 @@
  * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
  * -->
  */
-import('tools::form::validator', 'TextFieldValidator');
+use APF\tools\form\taglib\HtmlFormTag;
+use APF\tools\form\taglib\SelectBoxTag;
+use APF\tools\form\validator\TextFieldValidator;
 
 /**
- * @package examples::pres::validator
+ * @package APF\examples\pres\validator
  * @class ZeroDivisionValidator
  *
  * Implements a validator that checks for division by zero.
@@ -29,15 +33,18 @@ import('tools::form::validator', 'TextFieldValidator');
  * @author Christian Achatz
  * @version
  * Version 0.1, 04.01.2011<br />
+ * Version 0.2, 07.09.2013 (Migration to APF 2.0)<br />
  */
 class ZeroDivisionValidator extends TextFieldValidator {
 
    public function validate($input) {
 
-      $form = &$this->control->getParentObject();
       /* @var $form HtmlFormTag */
+      $form = & $this->control->getParentObject();
 
-      $operation = $form->getFormElementByName('operation')
+      /* @var $operation SelectBoxTag */
+      $operation = $form->getFormElementByName('operation');
+      $operation = $operation
             ->getSelectedOption()
             ->getAttribute('value');
 

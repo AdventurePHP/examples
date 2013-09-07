@@ -1,4 +1,6 @@
 <?php
+namespace APF\examples\calc\pres\controller;
+
 /**
  * <!--
  * This file is part of the adventure php framework (APF) published under
@@ -18,10 +20,12 @@
  * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
  * -->
  */
+use APF\core\pagecontroller\BaseDocumentController;
+use APF\tools\form\taglib\SelectBoxTag;
 
 /**
- * @package examples::calc::pres::controller
- * @class calc_controller
+ * @package APF\examples\calc\pres\controller
+ * @class CalculatorController
  *
  * Implements the document controller to calculate the result of the module.
  *
@@ -29,22 +33,22 @@
  * @version
  * Version 0.1, 04.01.2011<br />
  */
-class calc_controller extends BaseDocumentController {
+class CalculatorController extends BaseDocumentController {
 
    public function transformContent() {
 
-      $form = &$this->getForm('Calc');
+      $form = & $this->getForm('Calc');
 
       if ($form->isSent() && $form->isValid()) {
 
          // read the input values as well as the operation to execute
-         $operand1 = &$form->getFormElementByName('operand1');
-         $value1 = (float) $operand1->getAttribute('value');
-         $operand2 = &$form->getFormElementByName('operand2');
-         $value2 = (float) $operand2->getAttribute('value');
+         $operand1 = & $form->getFormElementByName('operand1');
+         $value1 = (float)$operand1->getAttribute('value');
+         $operand2 = & $form->getFormElementByName('operand2');
+         $value2 = (float)$operand2->getAttribute('value');
          /* @var $operator SelectBoxTag */
-         $operator = &$form->getFormElementByName('operation');
-         $currentOperator = &$operator->getSelectedOption();
+         $operator = & $form->getFormElementByName('operation');
+         $currentOperator = & $operator->getSelectedOption();
          $operatorType = $currentOperator->getAttribute('value');
 
          // execute operations
