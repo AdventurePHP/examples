@@ -2,11 +2,11 @@
 namespace APF\sandbox\pres\controller;
 
 use APF\core\configuration\ConfigurationException;
-use APF\core\database\MySQLxHandler;
+use APF\core\database\MySQLiHandler;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\tools\request\RequestHandler;
 
-class db_content_controller extends BaseDocumentController {
+class DatabaseContentController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
 
@@ -44,7 +44,7 @@ class db_content_controller extends BaseDocumentController {
    }
 
    /**
-    * @return MySQLxHandler The database connection.
+    * @return MySQLiHandler The database connection.
     */
    private function &getConnection() {
       return $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);

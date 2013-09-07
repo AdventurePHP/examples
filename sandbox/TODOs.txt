@@ -12,9 +12,9 @@
 * [OK] Migrate all getAndInitServiceObject() calls (not jet done in total!; maybe regexp not entirely correct)
 * [OK] Eliminate URLRewriting and replace by LinkScheme and InputFilter/OutputFilter combination.
 * [OK] Eliminate "::" signs.
-* Introduce separation of 1.X and 2.X documentation plus switch.
+* [OK] Introduce separation of 1.X and 2.X documentation plus switch.
+* [OK] Introduce document controller generation by DIServiceManager (<@controller service-namespace="" service-name="" @>)
+* [OK] Introduce APPLICATION_SINGLETON based on APC.
+* [ON HOLD] Replace getAndInitServiceObject() by DIServiceManager.
 * Repair newspager module because it is broken due to refactoring/removal of "URLRewriting" registry parameter.
-* [PROGRESS] Replace getAndInitServiceObject() by DIServiceManager.
-* Introduce document controller generation by DIServiceManager (<@controller service-namespace="" service-name="" @>)
-* Introduce APPLICATION_SINGLETON based on APC.
 * Migrate htmllist extension to better taglib naming.

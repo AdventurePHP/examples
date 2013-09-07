@@ -39,7 +39,7 @@ class NewsWizzardController extends BaseDocumentController {
          $section->setValue('Port', $port);
          $section->setValue('Collation', 'utf8_general_ci');
          $section->setValue('Charset', 'utf8');
-         $section->setValue('Type', 'APF\core\database\MySQLxHandler');
+         $section->setValue('Type', 'APF\core\database\MySQLiHandler');
 
          $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
 

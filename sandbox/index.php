@@ -5,6 +5,7 @@ use APF\core\configuration\ConfigurationManager;
 use APF\core\frontcontroller\Frontcontroller;
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
+use APF\core\logging\Logger;
 use APF\core\registry\Registry;
 use APF\core\singleton\Singleton;
 
@@ -22,6 +23,14 @@ include_once('./APF/core/bootstrap.php');
 
 // optional: define custom class loader to be able to separate the APF from your custom application's src folder
 RootClassLoader::addLoader(new StandardClassLoader('APPLICATION', dirname($_SERVER['SCRIPT_FILENAME']) . '/APPLICATION'));
+
+// configure log writer used within the sandbox
+/* @var $logger Logger */
+$logger = Singleton::getInstance('APF\core\logging\Logger');
+$writer = $logger->getLogWriter(Registry::retrieve('APF\core', 'InternalLogTarget'));
+$logger->addLogWriter('login', clone $writer);
+$logger->addLogWriter('registration', clone $writer);
+$logger->addLogWriter('mysqli', clone $writer);
 
 // create the sandbox page
 $fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
