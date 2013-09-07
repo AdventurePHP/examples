@@ -1,6 +1,6 @@
 <?php
 // include the page controller
-require('./apps/core/pagecontroller/pagecontroller.php');
+require('./APF/core/pagecontroller/pagecontroller.php');
 
 // create the current page
 import('core::frontcontroller', 'Frontcontroller');
