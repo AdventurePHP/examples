@@ -1,5 +1,5 @@
 <?php
-include_once('./apps/core/pagecontroller/pagecontroller.php');
+include_once('./APF/core/pagecontroller/pagecontroller.php');
 import('core::frontcontroller', 'Frontcontroller');
 
 /* @var $fC Frontcontroller */
