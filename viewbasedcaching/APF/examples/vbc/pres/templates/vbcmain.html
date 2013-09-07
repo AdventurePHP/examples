@@ -1,41 +1,50 @@
-<style type="text/css">
-.vbc-view {
-   border: 1px dashed gray;
-   background-color: #efefef;
-   margin-bottom: 1em;
-}
-</style>
-<h1>View based caching</h1>
-<p>
-   This is a sample implementation of the view based caching concept. Please visit the
-   <a href="http://adventure-php-framework.org/Page/086-How-to-implement-view-based-caching" title="APF documentation page">APF documentation page</a>
-   to get the details on the implementation. The following box definedes a view, that is <strong>not</strong>
-   cached, the second box includes the content of a cached view using the
-   <strong>&lt;cache:importdesign /&gt;</strong> taglib's functionality:
-</p>
-<div class="vbc-view">
-  <core:importdesign
-     namespace="sites::vbc::pres::templates::views"
-     template="view_one"
-  />
-</div>
-<div class="vbc-view">
-  <core:addtaglib namespace="sites::vbc::pres::taglib" class="CachedImportTemplateTag" prefix="cache" name="importdesign" />
-  <cache:importdesign
-     namespace="sites::vbc::pres::templates::views"
-     template="view_two"
-     cachekey="sites_vbc_vbcmain_view_two"
-     cacheconfig="view_cache"
-  />
-</div>
-<h3>Usage:</h3>
-<ul>
-  <li>Press F5 to see, that the timestamp in the second view is not refreshed.</li>
-  <li>Add clearcache=true to the url to clear the cache.</li>
-  <li>Add benchmarkreport=true to the url to see the benchmark report.</li>
-</ul>
-<h3>Note:</h3>
-<ul>
-  <li>The caching is done by the filesystem cache provider.</li>
-  <li>The folder, where the index.php resides must be writable for the webserver user.</li>
-</ul>
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>View based caching example</title>
+      <style type="text/css">
+         .vbc-view {
+            border: 1px dashed gray;
+            background-color: #efefef;
+            margin-bottom: 1em;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>View based caching</h1>
+      <p>
+         This is a sample implementation of the view based caching concept. Please visit the
+         <a href="http://adventure-php-framework.org/Page/086-How-to-implement-view-based-caching" title="APF documentation page">APF documentation page</a>
+         to get the details on the implementation. The following box definedes a view, that is <strong>not</strong>
+         cached, the second box includes the content of a cached view using the
+         <strong>&lt;cache:importdesign /&gt;</strong> taglib's functionality:
+      </p>
+      <div class="vbc-view">
+         <core:importdesign
+               namespace="APF\examples\vbc\pres\templates\views"
+               template="view_one"
+               />
+      </div>
+      <div class="vbc-view">
+         <core:addtaglib class="APF\examples\vbc\pres\taglib\CachedImportTemplateTag" prefix="cache" name="importdesign" />
+         <cache:importdesign
+               namespace="APF\examples\vbc\pres\templates\views"
+               template="view_two"
+               cachekey="sites_vbc_vbcmain_view_two"
+               cacheconfig="view_cache"
+               />
+      </div>
+      <h3>Usage:</h3>
+      <ul>
+         <li>Press F5 to see, that the timestamp in the second view is not refreshed.</li>
+         <li>Add clearcache=true to the url to clear the cache.</li>
+         <li>Add benchmarkreport=true to the url to see the benchmark report.</li>
+      </ul>
+      <h3>Note:</h3>
+      <ul>
+         <li>The caching is done by the filesystem cache provider.</li>
+         <li>The folder, where the index.php resides must be writable for the webserver user.</li>
+      </ul>
+   </body>
+</html>

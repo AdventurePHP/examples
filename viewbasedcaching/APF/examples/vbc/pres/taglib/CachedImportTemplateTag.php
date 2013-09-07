@@ -1,4 +1,6 @@
 <?php
+namespace APF\examples\vbc\pres\taglib;
+
 /**
  * <!--
  * This file is part of the adventure php framework (APF) published under
@@ -18,10 +20,12 @@
  * along with the APF. If not, see http://www.gnu.org/licenses/lgpl-3.0.txt.
  * -->
  */
-import('tools::cache::key', 'SimpleCacheKey');
+use APF\core\pagecontroller\ImportTemplateTag;
+use APF\tools\cache\CacheManagerFabric;
+use APF\tools\cache\key\SimpleCacheKey;
 
 /**
- * @package examples::vbc::pres::taglib
+ * @package APF\examples\vbc\pres\taglib
  * @class CachedImportTemplateTag
  *
  * Implements the view based caching taglib, based on the core:importdesign
@@ -48,7 +52,7 @@ class CachedImportTemplateTag extends ImportTemplateTag {
    /**
     * @public
     *
-    * Reimplements the onParseTime() method. Validates the tag attributes and tries
+    * Re-implements the onParseTime() method. Validates the tag attributes and tries
     * to fetch the content from the cache. If ni cache content is applicable, the
     * parent class' functionality is called.
     *
@@ -64,7 +68,7 @@ class CachedImportTemplateTag extends ImportTemplateTag {
 
       // get the cache manager
       /* @var $cMF CacheManagerFabric */
-      $cMF = & $this->getServiceObject('tools::cache', 'CacheManagerFabric');
+      $cMF = & $this->getServiceObject('APF\tools\cache\CacheManagerFabric');
       $cM = & $cMF->getCacheManager($cacheConfig);
 
       // clear the cache if desired
@@ -103,7 +107,7 @@ class CachedImportTemplateTag extends ImportTemplateTag {
 
          // get the cache manager
          /* @var $cMF CacheManagerFabric */
-         $cMF = & $this->getServiceObject('tools::cache', 'CacheManagerFabric');
+         $cMF = & $this->getServiceObject('APF\tools\cache\CacheManagerFabric');
          $cM = & $cMF->getCacheManager($cacheConfig);
 
          // generate output and cache it
