@@ -20,7 +20,7 @@
  */
 
 /**
- * @package sites::vbc::pres::documentcontroller
+ * @package examples::vbc::pres::documentcontroller
  * @class vbc_controller
  *
  * Implements the document controller for the views 'view_one.html' and 'view_two.html'.

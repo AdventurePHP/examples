@@ -21,7 +21,7 @@
 import('tools::cache::key', 'SimpleCacheKey');
 
 /**
- * @package sites::vbc::pres::taglib
+ * @package examples::vbc::pres::taglib
  * @class CachedImportTemplateTag
  *
  * Implements the view based caching taglib, based on the core:importdesign
