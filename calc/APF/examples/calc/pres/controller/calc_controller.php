@@ -20,7 +20,7 @@
  */
 
 /**
- * @package custom-modules::calc::pres::controller
+ * @package examples::calc::pres::controller
  * @class calc_controller
  *
  * Implements the document controller to calculate the result of the module.

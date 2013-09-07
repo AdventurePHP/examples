@@ -4,4 +4,4 @@ import('core::frontcontroller', 'Frontcontroller');
 
 /* @var $fC Frontcontroller */
 $fC = &Singleton::getInstance('Frontcontroller');
-echo $fC->start('custom-modules::calc::pres::templates', 'calc');
+echo $fC->start('examples::calc::pres::templates', 'calc');

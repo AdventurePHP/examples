@@ -21,7 +21,7 @@
 import('tools::form::validator', 'TextFieldValidator');
 
 /**
- * @package custom-modules::pres::validator
+ * @package examples::pres::validator
  * @class ZeroDivisionValidator
  *
  * Implements a validator that checks for division by zero.
