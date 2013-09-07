@@ -4,7 +4,7 @@ namespace APF\examples\dynamicmodules\core\biz;
 class DynamicModulesModel {
 
    private $key = 'default';
-   private $namespace = 'examples::core::pres::templates';
+   private $namespace = 'APF\examples\dynamicmodules\core\pres\templates';
    private $naviView = 'navi';
    private $contentView = 'content';
 

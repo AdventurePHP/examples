@@ -1,5 +1,4 @@
-In order to run this project, please create a new database, execute the setup.sql file and adapt the
+In order to run this project, please create a new database and open the first page. You will be presented a
+configuration dialog to complete the database configuration.
 
-/APF/config/core/database/app-context/DEFAULT_connections.ini
-
-to fit your local setup.
+Thereafter, the database is initialized automatically and you can start exploring the implementation example.

@@ -1,43 +1,93 @@
 <?php
 namespace APF\examples\dynamicmodules\core\biz;
 
-use APF\examples\dynamicmodules\core\biz\DynamicModulesModel;
-use APF\core\singleton\Singleton;
-use APF\core\frontcontroller\AbstractFrontcontrollerAction;
+use APF\core\database\DatabaseHandlerException;
 use APF\core\database\MySQLiHandler;
+use APF\core\frontcontroller\AbstractFrontcontrollerAction;
+use APF\core\singleton\Singleton;
+use APF\examples\dynamicmodules\core\biz\DynamicModulesModel;
+use APF\tools\http\HeaderManager;
+use APF\tools\link\LinkGenerator;
+use APF\tools\link\Url;
 use APF\tools\request\RequestHandler;
 
 class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
 
    public function run() {
 
-      $moduleName = RequestHandler::getValue('mod');
+      /* @var $model DynamicModulesModel */
+      $model = & Singleton::getInstance('APF\examples\dynamicmodules\core\biz\DynamicModulesModel');
 
-      $conn = & $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('MySQL');
-      /* @var $conn MySQLiHandler */
+      $conn = null;
+      try {
 
-      $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
-      $result = $conn->executeTextStatement($select);
-      $data = $conn->fetchData($result);
+         $moduleName = RequestHandler::getValue('mod');
 
-      if ($data !== false) {
+         /* @var $conn MySQLiHandler */
+         $conn = & $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('MySQL');
 
-         $model = & Singleton::getInstance('APF\examples\dynamicmodules\core\biz\DynamicModulesModel');
-         /* @var $model DynamicModulesModel */
+         $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
+         $result = $conn->executeTextStatement($select);
+         $data = $conn->fetchData($result);
+         if ($data !== false) {
 
-         // prepare model
-         $model->setNamespace($data['namespace'] . '::pres::templates');
-         $model->setNaviView($data['menu_template']);
-         $model->setContentView($data['content_template']);
+            // prepare model
+            $model->setNamespace($data['namespace'] . '\pres\templates');
+            $model->setNaviView($data['menu_template']);
+            $model->setContentView($data['content_template']);
 
-         // execute the fc action for the desired module
-         $action = & $this->getServiceObject($data['namespace'] . '::biz', $data['fc_action']);
-         /* @var $action AbstractFrontcontrollerAction */
-         $action->setActionNamespace($data['namespace']);
-         $action->setActionName($data['fc_action']);
-         $action->setContext($this->getContext());
-         $action->setLanguage($this->getLanguage());
-         $action->run();
+            // execute the fc action for the desired module
+            $action = & $this->getServiceObject($data['namespace'] . '\biz\\' . $data['fc_action']);
+            /* @var $action AbstractFrontcontrollerAction */
+            $action->setActionNamespace($data['namespace']);
+            $action->setActionName($data['fc_action']);
+            $action->setContext($this->getContext());
+            $action->setLanguage($this->getLanguage());
+            $action->run();
+
+         }
+
+      } catch (DatabaseHandlerException $e) {
+
+         if (strpos($e->getMessage(), 'doesn\'t exist') !== false) {
+            // do setup the database
+
+            $conn->executeTextStatement('CREATE TABLE IF NOT EXISTS `modules` (
+  `id`               INT(5)       NOT NULL AUTO_INCREMENT,
+  `key`              VARCHAR(100) NOT NULL,
+  `namespace`        VARCHAR(100) NOT NULL,
+  `fc_action`        VARCHAR(100) NOT NULL,
+  `menu_template`    VARCHAR(100) NOT NULL,
+  `content_template` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key` (`key`)
+)
+  ENGINE =MyISAM
+  DEFAULT CHARSET =utf8');
+
+            $conn->executeTextStatement('INSERT INTO `modules` (
+  `id`,
+  `key`,
+  `namespace`,
+  `fc_action`,
+  `menu_template`,
+  `content_template`
+) VALUES (
+  1,
+  \'news\',
+  \'APF\\\\examples\\\\dynamicmodules\\\\modules\\\\news\',
+  \'NewsAction\',
+  \'navi\',
+  \'content\'
+);');
+
+            HeaderManager::forward(LinkGenerator::generateUrl(Url::fromCurrent()));
+         } else {
+            // display database setup wizzard in case of any database-related errors
+            $model->setNamespace('APF\examples\dynamicmodules\modules\wizzard\templates');
+            $model->setNaviView(null);
+            $model->setContentView('database_wizzard');
+         }
 
       }
 
