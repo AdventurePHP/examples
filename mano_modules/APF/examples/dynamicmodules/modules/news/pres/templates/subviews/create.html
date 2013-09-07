@@ -1,9 +1,8 @@
 <@controller
-   namespace="mano::modules::news::pres::controller"
-   class="news_create_controller"
+   class="APF\examples\dynamicmodules\modules\news\pres\controller\CreateNewsController"
 @>
 <h3>Create news entry</h3>
-<core:addtaglib namespace="tools::form::taglib" class="HtmlFormTag" prefix="html" name="form" />
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <html:form name="create-entry">
    <form:success>
       <p class="success">The entry has been created</p>

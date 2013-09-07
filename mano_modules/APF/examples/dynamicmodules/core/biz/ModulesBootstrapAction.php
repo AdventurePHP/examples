@@ -1,6 +1,11 @@
 <?php
-import('mano::core::biz', 'DynamicModulesModel');
-import('tools::request', 'RequestHandler');
+namespace APF\examples\dynamicmodules\core\biz;
+
+use APF\examples\dynamicmodules\core\biz\DynamicModulesModel;
+use APF\core\singleton\Singleton;
+use APF\core\frontcontroller\AbstractFrontcontrollerAction;
+use APF\core\database\MySQLiHandler;
+use APF\tools\request\RequestHandler;
 
 class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
 
@@ -8,7 +13,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
 
       $moduleName = RequestHandler::getValue('mod');
 
-      $conn = & $this->getServiceObject('core::database', 'ConnectionManager')->getConnection('MySQL');
+      $conn = & $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('MySQL');
       /* @var $conn MySQLiHandler */
 
       $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
@@ -17,7 +22,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
 
       if ($data !== false) {
 
-         $model = & Singleton::getInstance('DynamicModulesModel');
+         $model = & Singleton::getInstance('APF\examples\dynamicmodules\core\biz\DynamicModulesModel');
          /* @var $model DynamicModulesModel */
 
          // prepare model

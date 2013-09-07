@@ -1,8 +1,10 @@
 <?php
+namespace APF\examples\dynamicmodules\core\biz;
+
 class DynamicModulesModel {
 
    private $key = 'default';
-   private $namespace = 'mano::core::pres::templates';
+   private $namespace = 'examples::core::pres::templates';
    private $naviView = 'navi';
    private $contentView = 'content';
 
