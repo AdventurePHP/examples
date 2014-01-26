@@ -1,16 +1,15 @@
 <@controller
-   class="APF\sandbox\pres\controller\NewsWizzardController"
+   class="APF\sandbox\pres\controller\GuestbookWizzardController"
 @>
 <core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 
-<h2>News wizzard</h2>
+<h2>Guestbook wizzard</h2>
 <p>
-   The news wizzard is aimed to configure and initialize the <em>News</em> extension.
-   Afterwards you will be able to create and edit news in the backend, which then 
-   will be shown on the news page.
+   The guestbook wizzard is aimed to configure and initialize the <em>Guestbook</em> extension.
+   Afterwards you will be able to create and show guestbook entries in the guestbook! Also you are able to edit and delete guestbook entries in the backend.
 </p>
 <p>
-   Similar to the <a href="?page=db-wizzard">database wizzard</a> the setup is done step by step.
+   Similar to the <a href="?page=db-wizzard">datenbase wizzard</a> the setup is done step by step.
 </p>
 
 <h3 id="step-1">Step 1: Database configuration</h3>
@@ -43,8 +42,8 @@
    </p>
    <pre>
 $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
-$setup->addMappingConfiguration('APF\extensions\news', 'news');
-$setup->addRelationConfiguration('APF\extensions\news', 'news');
+$setup->addMappingConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
+$setup->addRelationConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
 $setup->run();
    </pre>
@@ -77,7 +76,7 @@ $setup->run();
 
 <html:template name="step-2-req">
    <div class="hint">
-      In order to call the news backend or show any news, the database must be initialized. 
+      In order to call the guestbook backend or show any guestbook entries, the database must be initialized.
       Please execute <a href="#step-2">Step 2</a> first.
    </div>
 </html:template>
@@ -85,7 +84,6 @@ $setup->run();
 <html:template name="step-3">
    <div class="ok">
       After the setup has been completed, you are now able to call the
-      <a href="?page=news-backend">news backend</a> or to <a href="?page=news">show existing news</a>, 
-      if you already created them in the backend.
+      <a href="?page=guestbook-backend">guestbook backend</a> or to <a href="?page=guestbook">show existing guestbook entries</a>.
    </div>
 </html:template>

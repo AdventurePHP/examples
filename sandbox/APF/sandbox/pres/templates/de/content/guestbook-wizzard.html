@@ -1,14 +1,13 @@
 <@controller
-   class="APF\sandbox\pres\controller\NewsWizzardController"
+   class="APF\sandbox\pres\controller\GuestbookWizzardController"
 @>
 <core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 
-<h2>News Wizzard</h2>
+<h2>Gästebuch Wizzard</h2>
 <p>
-   Der News-Wizzard ist dazu gedacht, die Extension <em>News</em> zu konfigurieren 
-   und die Datenbank zu initialisieren. Anschließend können im Backend 
-   Neuigkeiten erstellt und bearbeitet werden, welche dann auf der News-Seite angezeigt 
-   werden.   
+   Der Gästebuch-Wizzard ist dazu gedacht, die Extension <em>Gästebuch</em> zu konfigurieren
+   und die Datenbank zu initialisieren. Anschließend können Gästebuch-Einträge verfasst und im
+   Backend verwaltet werden.
 </p>
 <p>
    Wie auch der <a href="?page=db-wizzard">Datenbank-Wizzard</a> ist das Setup in verschiedene
@@ -17,7 +16,7 @@
 
 <h3 id="step-1">Schritt 1: Datenbank-Konfiguration</h3>
 <p>
-   Für die Verbindung zur News-Datanbank wird eine neue Konfiguration erzeugt.
+   Für die Verbindung zur Gästebuch-Datanbank wird eine neue Konfiguration erzeugt.
 </p>
 <p>
    Bitte füllen Sie das folgende Formular aus um eine Datenbank konnektieren zu können:
@@ -33,8 +32,8 @@
 
 <html:template name="step-1-req">
    <div class="hint">
-       Um die Datenbank initialsieren und die Tabelle anlegen zu können wird eine Datenbank-Konfiguration benötigt. Bitte führen Sie
-       zuerst <a href="#step-1">Schritt 1</a> aus.
+      Um die Datenbank initialsieren und die Tabelle anlegen zu können wird eine Datenbank-Konfiguration benötigt. Bitte führen Sie
+      zuerst <a href="#step-1">Schritt 1</a> aus.
    </div>
 </html:template>
 
@@ -46,8 +45,8 @@
    </p>
    <pre>
 $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
-$setup->addMappingConfiguration('APF\extensions\news', 'news');
-$setup->addRelationConfiguration('APF\extensions\news', 'news');
+$setup->addMappingConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
+$setup->addRelationConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
 $setup->run();
    </pre>
@@ -80,7 +79,7 @@ $setup->run();
 
 <html:template name="step-2-req">
    <div class="hint">
-      Um das News-Backend aufrufen oder News anzeigen zu können, muss zunächst die Datenbank 
+      Um das Gästebuch-Backend aufrufen oder Gästebucheinträge anzeigen zu können, muss zunächst die Datenbank
       initialisiert werden. Bitte führen Sie zunächst <a href="#step-2">Schritt 2</a> aus.
    </div>
 </html:template>
@@ -89,7 +88,7 @@ $setup->run();
    <div class="ok">
        <p>
            Nachdem das Setup und die Einrichtung vollständig ausgeführt wurde, können Sie nun das
-           <a href="?page=news-backend">News-Backend</a> aufrufen oder sich vorhandene <a href="?page=news">News ansehen</a>, 
+           <a href="?page=guestbook-backend&gbview=login">Gästebuch-Backend</a> aufrufen oder sich vorhandene <a href="?page=guestbook">Gästebucheinträge ansehen</a>,
            falls sie bereits welche im Backend erstellt haben.
        </p>
        <p>
