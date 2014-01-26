@@ -9,7 +9,7 @@
    Afterwards you will be able to create and show guestbook entries in the guestbook! Also you are able to edit and delete guestbook entries in the backend.
 </p>
 <p>
-   Similar to the <a href="?page=db-wizzard">datenbase wizzard</a> the setup is done step by step.
+   Similar to the <a href="?page=db-wizzard">database wizzard</a> the setup is done step by step.
 </p>
 
 <h3 id="step-1">Step 1: Database configuration</h3>
@@ -58,7 +58,7 @@ $setup->run();
       <p>
          The given database connection data is wrong. Thus, no connection could be established.
          Please check the settings in 
-         <em>/apps/config/core/database/myapp/DEFAULT_connections.ini</em>!
+         <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
       </p>
       <p>
          The error is: <em><template:placeholder name="exception" /></em>
@@ -68,7 +68,7 @@ $setup->run();
 
 <html:template name="tables-exist">
    <div class="ok">
-      The database is now ready installed. Please proceede with <a href="#step-3">step 3</a>.
+      The database is now ready installed. Please proceed with <a href="#step-3">step 3</a>.
    </div>
 </html:template>
 
@@ -84,6 +84,6 @@ $setup->run();
 <html:template name="step-3">
    <div class="ok">
       After the setup has been completed, you are now able to call the
-      <a href="?page=guestbook-backend">guestbook backend</a> or to <a href="?page=guestbook">show existing guestbook entries</a>.
+      <a href="?page=guestbook-backend&gbview=login">guestbook backend</a> or to <a href="?page=guestbook">show existing guestbook entries</a>.
    </div>
 </html:template>

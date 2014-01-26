@@ -9,10 +9,10 @@
    authenticate against this page using the users added with this wizzard.
 </p>
 <p>
-   Similar to the <a href="?page=db-wizzard">datenbase wizzard</a> the setup is done step by step.
+   Similar to the <a href="?page=db-wizzard">database wizzard</a> the setup is done step by step.
 </p>
 
-<h3 id="step-1">Step 1: Datenbase configuration</h3>
+<h3 id="step-1">Step 1: Database configuration</h3>
 <p>
    Connecting to the database, a new configuration must be created. It is recommended to use an
    empty database for this setup.
@@ -23,7 +23,7 @@
 
 <core:appendnode namespace="APF\sandbox\pres\templates\de\content\fragments" template="db_config"/>
 
-<h3 id="step-2">Step 2: Datenbase setup</h3>
+<h3 id="step-2">Step 2: Database setup</h3>
 <p>
    Within this step, the necessary tables will be created to be able to work with the backend.
 </p>
@@ -69,11 +69,11 @@ $setup->run();
 
 <html:template name="tables-exist">
    <div class="ok">
-      The database is now ready installed. Please proceede with <a href="#step-3">step 3</a>.
+      The database is now ready installed. Please proceed with <a href="#step-3">step 3</a>.
    </div>
 </html:template>
 
-<h3 id="step-3">Step 3: Datenbase initialization</h3>
+<h3 id="step-3">Step 3: Database initialization</h3>
 <p>
    After database connection configuration and initial databyse layout creation the user management
    database must be filled with users. This can be done using the subsequent form.

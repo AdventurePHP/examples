@@ -5,9 +5,10 @@ use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
 use APF\core\database\ConnectionManager;
+use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
-use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 use APF\tools\http\HeaderManager;
+use Exception;
 
 class GuestbookWizzardController extends BaseDocumentController {
 
@@ -66,18 +67,18 @@ class GuestbookWizzardController extends BaseDocumentController {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-                  . '" is not contained in the current configuration!', E_USER_ERROR);
+               . '" is not contained in the current configuration!', E_USER_ERROR);
          }
          $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
          $rawHost = $subSection->getValue('Host');
          $colon = strpos($rawHost, ':');
-         if($colon) {
-             $host = substr($rawHost, 0, $colon);
-             $port = substr($rawHost, $colon + 1);
+         if ($colon) {
+            $host = substr($rawHost, 0, $colon);
+            $port = substr($rawHost, $colon + 1);
          } else {
-             $host = $subSection->getValue('Host');
-             $port = $subSection->getValue('Port');
+            $host = $subSection->getValue('Host');
+            $port = $subSection->getValue('Port');
          }
 
          $tmpl->setPlaceHolder('host', $host);
@@ -123,17 +124,23 @@ class GuestbookWizzardController extends BaseDocumentController {
             } else {
                if ($formInitDb->isSent()) {
 
+                  // set variables used in setup.php and init.php
                   $context = 'myapp';
                   $connectionKey = 'Sandbox-Guestbook';
-                  include('./APF/modules/guestbook2009/data/setup/setup.php');
-                  include('./APF/modules/guestbook2009/data/setup/init.php');
+
+                  $loader = RootClassLoader::getLoaderByVendor('APF');
+                  $rootPath = $loader->getRootPath();
+
+                  include($rootPath . '/modules/guestbook2009/data/setup/setup.php');
+                  include($rootPath . '/modules/guestbook2009/data/setup/init.php');
 
                   HeaderManager::forward('?page=guestbook-wizzard#step-3');
+
                } else {
                   $formInitDb->transformOnPlace();
                }
             }
-         } catch (\Exception $e) {
+         } catch (Exception $e) {
             $tmplDbConnErr = & $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
@@ -142,7 +149,7 @@ class GuestbookWizzardController extends BaseDocumentController {
          $this->getTemplate('step-1-req')->transformOnPlace();
       }
 
-      // step 3: call guestbook backend
+      // step 3: call guestbook back-end
       if ($databaseLayoutInitialized) {
          $this->getTemplate('step-3')->transformOnPlace();
       } else {
