@@ -58,7 +58,7 @@
    <html:form name="Calc" method="post">
       <fieldset>
          <form:error>
-            <p class="error">The input fields contain wrong content!</p>
+            <p class="error">You did something wrong!</p>
          </form:error>
          <form:success name="result">
             <p class="result">The result of the calculation is: <success:placeholder name="result" /></p>
@@ -66,6 +66,10 @@
 
          <label>Operand1:</label>
          <form:text name="operand1" />
+         <form:listener control="operand1" validator="APF\tools\form\validator\NumberValidator">
+            <p class="error">Error: This input field contains wrong content!</p>
+         </form:listener>
+
 
          <label>Operation:</label>
          <form:select name="operation">
@@ -74,31 +78,37 @@
             <select:option value="div">/</select:option>
             <select:option value="multiply">*</select:option>
          </form:select>
-         <form:addfilter
-            class="APF\tools\form\filter\FloatFilter"
-            button="docalc"
-            control="operand1|operand2"
-         />
-         <form:addvalidator
-            class="APF\tools\form\validator\NumberValidator"
-            button="docalc"
-            control="operand1|operand2"
-         />
 
          <label>Operand2:</label>
          <form:text name="operand2" />
+         
+         <form:listener control="operand2" validator="APF\tools\form\validator\NumberValidator">
+            <p class="error">Error: This input field contains wrong content!</p>
+         </form:listener>         
+         
+         <form:listener control="operand2" validator="APF\examples\calc\pres\validator\ZeroDivisionValidator">
+            <p class="error">Error: detected division by zero!</p>
+         </form:listener>
+         
          <form:addvalidator
             class="APF\examples\calc\pres\validator\ZeroDivisionValidator"
-            button="docalc"
+            button="calc"
             control="operand2"
             type="special"
          />
+         <form:addvalidator
+            class="APF\tools\form\validator\NumberValidator"
+            button="calc"
+            control="operand1|operand2"
+            type="special"
+         />
+         <form:addfilter
+            class="APF\tools\form\filter\FloatFilter"
+            button="calc"
+            control="operand1|operand2"
+         />
 
-         <form:listener control="operand2" validator="ZeroDivisionValidator">
-            <p class="error">Error: detected division by zero!</p>
-         </form:listener>
-
-         <form:button name="docalc" value="Calculate" />
+         <form:button name="calc" value="Calculate" />
       </fieldset>
    </html:form>
 </div>

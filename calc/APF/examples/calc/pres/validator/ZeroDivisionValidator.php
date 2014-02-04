@@ -48,7 +48,7 @@ class ZeroDivisionValidator extends TextFieldValidator {
             ->getSelectedOption()
             ->getAttribute('value');
 
-      if ($operation === 'div' && (float)$input === 0.0) {
+      if ($operation === 'div' && is_numeric($input) && (float) $input === 0.0) {
          return false;
       }
       return true;
