@@ -4,7 +4,6 @@ namespace APF\sandbox\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
-use APF\core\database\ConnectionManager;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
@@ -13,13 +12,12 @@ use APF\tools\http\HeaderManager;
 class DatabaseWizzardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
-   private static $CONFIG_SUB_SECTION_NAME = 'DB';
    private static $TABLE_NAME = 'sandbox_content';
 
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = &$this->getForm('new-db-config');
+      $formNewConfig = & $this->getForm('new-db-config');
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
@@ -33,17 +31,14 @@ class DatabaseWizzardController extends BaseDocumentController {
          // create configuration and save it!
          $dbSection = new IniConfiguration();
 
-         $section = new IniConfiguration();
-         $section->setValue('Host', $host);
-         $section->setValue('User', $user);
-         $section->setValue('Pass', $pass);
-         $section->setValue('Name', $name);
-         $section->setValue('Port', $port);
-         $section->setValue('Collation', 'utf8_general_ci');
-         $section->setValue('Charset', 'utf8');
-         $section->setValue('Type', 'APF\core\database\MySQLiHandler');
-
-         $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
+         $dbSection->setValue('Host', $host);
+         $dbSection->setValue('User', $user);
+         $dbSection->setValue('Pass', $pass);
+         $dbSection->setValue('Name', $name);
+         $dbSection->setValue('Port', $port);
+         $dbSection->setValue('Collation', 'utf8_general_ci');
+         $dbSection->setValue('Charset', 'utf8');
+         $dbSection->setValue('Type', 'APF\core\database\MySQLiHandler');
 
          // load existing configuration or create new one
          try {
@@ -56,29 +51,30 @@ class DatabaseWizzardController extends BaseDocumentController {
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
          HeaderManager::forward('./?page=db-wizzard#step-2');
+
          return;
       }
 
       $configAvailable = false;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $tmpl = & $this->getTemplate('db-config-exists');
 
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
                   . '" is not contained in the current configuration!', E_USER_ERROR);
          }
-         $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
-         $tmpl->setPlaceHolder('host', $subSection->getValue('Host'));
-         $tmpl->setPlaceHolder('port', $subSection->getValue('Port'));
-         $tmpl->setPlaceHolder('user', $subSection->getValue('User'));
-         $tmpl->setPlaceHolder('pass', $subSection->getValue('Pass'));
-         $tmpl->setPlaceHolder('name', $subSection->getValue('Name'));
-         $tmpl->setPlaceHolder('collation', $subSection->getValue('Collation'));
-         $tmpl->setPlaceHolder('charset', $subSection->getValue('Charset'));
-         $tmpl->setPlaceHolder('type', $subSection->getValue('Type'));
+
+         $tmpl->setPlaceHolder('host', $section->getValue('Host'));
+         $tmpl->setPlaceHolder('port', $section->getValue('Port'));
+         $tmpl->setPlaceHolder('user', $section->getValue('User'));
+         $tmpl->setPlaceHolder('pass', $section->getValue('Pass'));
+         $tmpl->setPlaceHolder('name', $section->getValue('Name'));
+         $tmpl->setPlaceHolder('collation', $section->getValue('Collation'));
+         $tmpl->setPlaceHolder('charset', $section->getValue('Charset'));
+         $tmpl->setPlaceHolder('type', $section->getValue('Type'));
 
          $tmpl->transformOnPlace();
 
@@ -91,7 +87,8 @@ class DatabaseWizzardController extends BaseDocumentController {
       $conn = null;
       $tableExists = false;
       if ($configAvailable) {
-         $conn = &$this->getConnection();
+
+         $conn = & $this->getConnection();
 
          // evaluate, whether the table is already existing
          try {
@@ -116,7 +113,7 @@ PRIMARY KEY (`id`),
 UNIQUE (`urlname`)
 ) ENGINE = MYISAM;';
 
-               $formCreateTable = &$this->getForm('create-table');
+               $formCreateTable = & $this->getForm('create-table');
 
                if ($formCreateTable->isSent()) {
                   $conn->executeTextStatement($create);
@@ -127,7 +124,7 @@ UNIQUE (`urlname`)
 
                   HeaderManager::forward('./?page=db-wizzard#step-3');
                } else {
-                  $tmpl = &$this->getTemplate('step-2');
+                  $tmpl = & $this->getTemplate('step-2');
                   $tmpl->setPlaceHolder('statement', $create);
                   $tmpl->transformOnPlace();
 
@@ -135,7 +132,7 @@ UNIQUE (`urlname`)
                }
             }
          } catch (DatabaseHandlerException $e) {
-            $tmpl = &$this->getTemplate('db-conn-error');
+            $tmpl = & $this->getTemplate('db-conn-error');
             $tmpl->setPlaceHolder('exception', $e->getMessage());
             $tmpl->transformOnPlace();
          }
@@ -150,7 +147,7 @@ UNIQUE (`urlname`)
          $this->getTemplate('step-3')->transformOnPlace();
 
          // handle for behaviour
-         $formCreateContent = &$this->getForm('add-content');
+         $formCreateContent = & $this->getForm('add-content');
          if ($formCreateContent->isSent() && $formCreateContent->isValid()) {
 
             $urlName = $formCreateContent->getFormElementByName('content-urlname')->getAttribute('value');
@@ -172,7 +169,7 @@ UNIQUE (`urlname`)
       // step 4: display content
       if ($configAvailable && $tableExists) {
 
-         $tmpl = &$this->getTemplate('step-4');
+         $tmpl = & $this->getTemplate('step-4');
 
          $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` ORDER BY `urlname` ASC';
          $result = $conn->executeTextStatement($select);

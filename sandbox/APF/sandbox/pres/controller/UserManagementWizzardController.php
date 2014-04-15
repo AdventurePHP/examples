@@ -6,15 +6,14 @@ use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
-use APF\modules\usermanagement\biz\UmgtManager;
 use APF\modules\usermanagement\biz\model\UmgtApplication;
 use APF\modules\usermanagement\biz\model\UmgtUser;
+use APF\modules\usermanagement\biz\UmgtManager;
 use APF\tools\http\HeaderManager;
 
 class UserManagementWizzardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-UMGT';
-   private static $CONFIG_SUB_SECTION_NAME = 'DB';
 
    public function transformContent() {
 
@@ -31,7 +30,6 @@ class UserManagementWizzardController extends BaseDocumentController {
          $name = $formNewConfig->getFormElementByName('db-name')->getAttribute('value');
 
          // create configuration and save it!
-         $dbSection = new IniConfiguration();
 
          $section = new IniConfiguration();
          $section->setValue('Host', $host);
@@ -43,8 +41,6 @@ class UserManagementWizzardController extends BaseDocumentController {
          $section->setValue('Charset', 'utf8');
          $section->setValue('Type', 'APF\core\database\MySQLiHandler');
 
-         $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
-
          // load existing configuration or create new one
          try {
             $config = $this->getConfiguration('APF\core\database', 'connections.ini');
@@ -52,15 +48,15 @@ class UserManagementWizzardController extends BaseDocumentController {
             $config = new IniConfiguration();
          }
 
-         $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
+         $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
          HeaderManager::forward('./?page=umgt-wizzard#step-2');
+
          return;
       }
 
       $configAvailable = false;
-      $subSection = null;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
          $tmpl = & $this->getTemplate('db-config-exists');
@@ -70,16 +66,15 @@ class UserManagementWizzardController extends BaseDocumentController {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
                   . '" is not contained in the current configuration!', E_USER_ERROR);
          }
-         $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
-         $tmpl->setPlaceHolder('host', $subSection->getValue('Host'));
-         $tmpl->setPlaceHolder('port', $subSection->getValue('Port'));
-         $tmpl->setPlaceHolder('user', $subSection->getValue('User'));
-         $tmpl->setPlaceHolder('pass', $subSection->getValue('Pass'));
-         $tmpl->setPlaceHolder('name', $subSection->getValue('Name'));
-         $tmpl->setPlaceHolder('collation', $subSection->getValue('Collation'));
-         $tmpl->setPlaceHolder('charset', $subSection->getValue('Charset'));
-         $tmpl->setPlaceHolder('type', $subSection->getValue('Type'));
+         $tmpl->setPlaceHolder('host', $section->getValue('Host'));
+         $tmpl->setPlaceHolder('port', $section->getValue('Port'));
+         $tmpl->setPlaceHolder('user', $section->getValue('User'));
+         $tmpl->setPlaceHolder('pass', $section->getValue('Pass'));
+         $tmpl->setPlaceHolder('name', $section->getValue('Name'));
+         $tmpl->setPlaceHolder('collation', $section->getValue('Collation'));
+         $tmpl->setPlaceHolder('charset', $section->getValue('Charset'));
+         $tmpl->setPlaceHolder('type', $section->getValue('Type'));
 
          $tmpl->transformOnPlace();
 
@@ -95,13 +90,13 @@ class UserManagementWizzardController extends BaseDocumentController {
          $formInitDb = & $this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
-                ->getConnection(self::$CONFIG_SECTION_NAME);
+                  ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
             // check for db layout...
             $result = $conn->executeTextStatement('SHOW TABLES');
             $setupDone = false;
-            $offsetName = 'Tables_in_' . $subSection->getValue('Name');
+            $offsetName = 'Tables_in_' . $section->getValue('Name');
             while ($data = $conn->fetchData($result)) {
                if ($data[$offsetName] == 'ent_user') {
                   $setupDone = true;

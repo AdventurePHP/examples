@@ -13,7 +13,6 @@ use Exception;
 class GuestbookWizzardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-Guestbook';
-   private static $CONFIG_SUB_SECTION_NAME = 'DB';
 
    public function transformContent() {
 
@@ -30,8 +29,6 @@ class GuestbookWizzardController extends BaseDocumentController {
          $name = $formNewConfig->getFormElementByName('db-name')->getAttribute('value');
 
          // create configuration and save it!
-         $dbSection = new IniConfiguration();
-
          $section = new IniConfiguration();
          $section->setValue('Host', $host);
          $section->setValue('User', $user);
@@ -42,8 +39,6 @@ class GuestbookWizzardController extends BaseDocumentController {
          $section->setValue('Charset', 'utf8');
          $section->setValue('Type', 'APF\core\database\MySQLiHandler');
 
-         $dbSection->setSection(self::$CONFIG_SUB_SECTION_NAME, $section);
-
          // load existing configuration or create new one
          try {
             $config = $this->getConfiguration('APF\core\database', 'connections.ini');
@@ -51,15 +46,15 @@ class GuestbookWizzardController extends BaseDocumentController {
             $config = new IniConfiguration();
          }
 
-         $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
+         $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
          HeaderManager::forward('./?page=guestbook-wizzard#step-2');
+
          return;
       }
 
       $configAvailable = false;
-      $subSection = null;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
          $tmpl = & $this->getTemplate('db-config-exists');
@@ -67,28 +62,27 @@ class GuestbookWizzardController extends BaseDocumentController {
          $section = $config->getSection(self::$CONFIG_SECTION_NAME);
          if ($section == null) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
-               . '" is not contained in the current configuration!', E_USER_ERROR);
+                  . '" is not contained in the current configuration!', E_USER_ERROR);
          }
-         $subSection = $section->getSection(self::$CONFIG_SUB_SECTION_NAME);
 
-         $rawHost = $subSection->getValue('Host');
+         $rawHost = $section->getValue('Host');
          $colon = strpos($rawHost, ':');
          if ($colon) {
             $host = substr($rawHost, 0, $colon);
             $port = substr($rawHost, $colon + 1);
          } else {
-            $host = $subSection->getValue('Host');
-            $port = $subSection->getValue('Port');
+            $host = $section->getValue('Host');
+            $port = $section->getValue('Port');
          }
 
          $tmpl->setPlaceHolder('host', $host);
          $tmpl->setPlaceHolder('port', $port);
-         $tmpl->setPlaceHolder('user', $subSection->getValue('User'));
-         $tmpl->setPlaceHolder('pass', $subSection->getValue('Pass'));
-         $tmpl->setPlaceHolder('name', $subSection->getValue('Name'));
-         $tmpl->setPlaceHolder('collation', $subSection->getValue('Collation'));
-         $tmpl->setPlaceHolder('charset', $subSection->getValue('Charset'));
-         $tmpl->setPlaceHolder('type', $subSection->getValue('Type'));
+         $tmpl->setPlaceHolder('user', $section->getValue('User'));
+         $tmpl->setPlaceHolder('pass', $section->getValue('Pass'));
+         $tmpl->setPlaceHolder('name', $section->getValue('Name'));
+         $tmpl->setPlaceHolder('collation', $section->getValue('Collation'));
+         $tmpl->setPlaceHolder('charset', $section->getValue('Charset'));
+         $tmpl->setPlaceHolder('type', $section->getValue('Type'));
 
          $tmpl->transformOnPlace();
 
@@ -111,7 +105,7 @@ class GuestbookWizzardController extends BaseDocumentController {
             // check for db layout...
             $result = $conn->executeTextStatement('SHOW TABLES');
             $setupDone = false;
-            $offsetName = 'Tables_in_' . $subSection->getValue('Name');
+            $offsetName = 'Tables_in_' . $section->getValue('Name');
             while ($data = $conn->fetchData($result)) {
                if ($data[$offsetName] == 'ent_guestbook') {
                   $setupDone = true;
