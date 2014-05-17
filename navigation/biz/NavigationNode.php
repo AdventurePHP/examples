@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\navigation\biz;
+namespace EXAMPLE\navigation\biz;
 
 interface NavigationNode {
 

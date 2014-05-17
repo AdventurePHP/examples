@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\navigation\biz;
+namespace EXAMPLE\navigation\biz;
 
 class SimpleNavigationNode implements NavigationNode {
 

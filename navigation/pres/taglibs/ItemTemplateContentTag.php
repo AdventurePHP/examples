@@ -1,8 +1,8 @@
 <?php
-namespace APF\examples\navigation\pres\taglibs;
+namespace EXAMPLE\navigation\pres\taglibs;
 
 use APF\core\pagecontroller\Document;
-use APF\examples\navigation\biz\NavigationNode;
+use EXAMPLE\navigation\biz\NavigationNode;
 
 class ItemTemplateContentTag extends Document {
 

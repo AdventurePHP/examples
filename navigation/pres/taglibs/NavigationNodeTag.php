@@ -1,9 +1,9 @@
 <?php
-namespace APF\examples\navigation\pres\taglibs;
+namespace EXAMPLE\navigation\pres\taglibs;
 
 use APF\core\pagecontroller\Document;
 use APF\core\pagecontroller\TagLib;
-use APF\examples\navigation\biz\NavigationNode;
+use EXAMPLE\navigation\biz\NavigationNode;
 
 class NavigationNodeTag extends Document {
 
@@ -14,8 +14,8 @@ class NavigationNodeTag extends Document {
 
    public function __construct() {
       $this->tagLibs = array(
-         new TagLib('APF\examples\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item'),
-         new TagLib('APF\examples\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content')
+         new TagLib('EXAMPLE\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item'),
+         new TagLib('EXAMPLE\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content')
       );
    }
 

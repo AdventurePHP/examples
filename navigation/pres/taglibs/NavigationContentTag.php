@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\navigation\pres\taglibs;
+namespace EXAMPLE\navigation\pres\taglibs;
 
 use APF\core\pagecontroller\Document;
 
