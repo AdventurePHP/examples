@@ -1,0 +1,26 @@
+<@controller class="SB\pres\controller\DatabaseContentController" @>
+<h2>Database content</h2>
+<p>
+   This page shows the content from tha database table created with the
+   <a href="?page=db-wizzard#step-3">database wizzard</a>.
+</p>
+<p>
+   The subsequent area contains the content that is refered to with the url name
+   &quot;<html:placeholder name="urlname" />&quot;:
+</p>
+<html:template name="no-content">
+   <div class="err">
+      The database contains no content for the given url name.
+   </div>
+</html:template>
+<html:template name="content">
+   <div class="db-content">
+      <template:placeholder name="content" />
+   </div>
+</html:template>
+<html:template name="no-config">
+   <div class="err">
+      No database configuration can be found. Please create it using the
+      <a href="?page=db-wizzard">database wizzard</a> first.
+   </div>
+</html:template>

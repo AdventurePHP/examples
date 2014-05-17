@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Adventure PHP Framework sandbox</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <link rel="stylesheet" href="./css/styles.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="./css/umgt.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="./css/register.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="./?APF_extensions_jscssinclusion_biz-action:sGCJ=path:APF_extensions_news_pres_css|type:css|file:news" type="text/css" media="all" />
+      <link rel="stylesheet" href="./css/login.css" type="text/css" media="all" />
+      <script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="./js/login.js"></script>
+   </head>
+   <body>
+      <div id="wrapper">
+         <div id="header">
+            <h1><img src="images/apf-logo.png" alt="The Adventure PHP Framework" /></h1>
+         </div>
+         <div id="navi">
+            <core:addtaglib class="SB\pres\taglib\SandboxLanguageImportTemplateTag" prefix="lang" name="umgtimport" />
+            <lang:umgtimport
+               namespace="SB\pres\templates"
+               template="navi"
+            />
+         </div>
+         <div id="content">
+            <lang:umgtimport
+               namespace="SB\pres\templates"
+               template="content"
+            />
+         </div>
+         <div id="footer">
+            <lang:umgtimport
+               namespace="SB\pres\templates"
+               template="footer"
+            />
+         </div>
+      </div>
+   </body>
+</html>

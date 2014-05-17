@@ -1,0 +1,78 @@
+<h2>Taglib example</h2>
+<p>
+   Taglibs and modules are an elegant way of enhancing functionality step by step without changing the
+   basics. This chapter would like to show you a simple taglib example to print a date and time string
+   to the content area.
+</p>
+<p>
+   Every xml tag is composed of the <em>prefix</em> and the <em>class name</em>. These
+   two parts should be self-documenting to guarantee good recognition within template files. To keep
+   things simple our new tag should be named <em>curr:date</em>.
+</p>
+<p>
+   Before we are going to implement the tags functionality - the functionality is defined in a class
+   that inherits from <em>Document</em> - we have to decide where the taglib class must be
+   stored. Due to the fact, that the date output should only be included in a website project, the
+   taglib belongs to a project. Hence, it is wise to store the class file in a subfolder of the project
+   directory. As described in the <a href="./?page=tmpl-wizzard">template wizzard</a>
+   chapter all files of the current project are stored in the
+</p>
+<pre>
+/APF/sandbox/
+</pre>
+<p>
+   folder. Typically, tags belong to the presenation layer and thus have to be stored in the
+   <em>pres</em> folder. In order to mark the class files as a taglib another subfolder with
+   the name <em>taglib</em> is created to store the taglibs.
+</p>
+<p>
+   An adventure php framework xml tag is always represented by a php class. The name of the class
+   consists of the <em>prefix</em> of the tag, the string <em>_taglib_</em> and the
+   <em>class name</em>. For the present example the name of the class is
+   <em>CurrentDateTag</em>. Further, another convention says, that the class names should be
+   identical to the classes file name. This simplifies not only the structurization but also the
+   inclusion of tags and components. In order to implement our example tag we are going to create a file
+   named
+</p>
+<pre>
+CurrentDateTag.php
+</pre>
+<p>in the folder</p>
+<pre>
+/APF/sandbox/pres/taglib/
+</pre>
+<p>
+   The structure of the file is quite simple: it contains the class definition and the implementation of
+   the <em>transform()</em> method. The latter is called when the DOM tree of the page is
+   transformed. The page controller expects that the function returns the content of the transformed
+   node. In case of the date and time output taglib the current date must be returned. The taglib class
+   therefor looks as follows:
+</p>
+<pre>
+class CurrentDateTag extends Document {
+
+   public function transform(){
+      return date('l, d.m.Y, H:i:s');
+   }
+
+}
+</pre>
+<p>
+   In order to include the tag into a content page the taglib must be introduced to the tag parser
+   adding the following statement:
+</p>
+<pre>
+&lt;core:addtaglib class="SB\pres\taglib\CurrentDateTag" prefix="curr" name="date" /&gt;
+</pre>
+<p>After that - and immediately after that - the tag can be used by providing the string</p>
+<pre>
+&lt;curr:date /&gt;
+</pre>
+<p>
+   in any content page. To demonstrate the functionality the tag has been included in this page. It is
+   now:
+</p>
+<div class="date-tag">
+   <core:addtaglib class="SB\pres\taglib\CurrentDateTag" prefix="curr" name="date" />
+   <curr:date />
+</div>

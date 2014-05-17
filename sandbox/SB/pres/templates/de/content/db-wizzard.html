@@ -1,0 +1,123 @@
+<@controller class="SB\pres\controller\DatabaseWizzardController" @>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<h2>Datenbank-Konfigurations-Wizzard</h2>
+<p>
+   Mit diesem Wizzard kann eine Datenbank-Konfiguration angelegt und anschließend eine Tabelle
+   erzeugt werden, die mit dynamischen Inhalten gefüllt wird. Hierzu steht ein Formular bereit, das
+   einen Url-Namen und Inhalt entgegen nimmt. Der letzte Abschnitt listet dann die vorhandenen
+   Inhalte auf, die auf einer eigenen Seite angezeigt werdden können.
+</p>
+
+<h3 id="step-1">Schritt 1: Datenbank-Konfiguration</h3>
+<p>
+   Bitte füllen Sie das folgende Formular aus um eine Datenbank konnektieren zu können:
+</p>
+<core:appendnode namespace="SB\pres\templates\de\content\fragments" template="db_config"/>
+
+<h3 id="step-2">Schritt 2: Anlegen der Inhalte-Tabelle</h3>
+<html:template name="db-conn-error">
+   <div class="err">
+      <p>
+         Die angegebenen Datenbank-Verbindungsdaten sind wahrscheinlich falsch. Es konnte leider
+         keine Verbindung hergestellt werden. Bitte überprüfen Sie die Einstellungen in der Datei
+         <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
+      </p>
+      <p>
+         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+      </p>
+   </div>
+</html:template>
+<html:template name="step-1-req">
+   <div class="hint">
+      Um die Tabelle anlegen zu können wird eine Datenbank-Konfiguration benötigt. Bitte führen Sie
+      zuerst <a href="#step-1">Schritt 1</a> aus.
+   </div>
+</html:template>
+<html:template name="step-2">
+   <p>
+      Zur Speicherung der Inhalte legen wir nun eine neue Tabelle an. Diese beinhaltet eine Spalte für
+      die fortlaufende Nummer des Inhalts, eine Spalte für den Url-Namen und eine für den Inhalt:
+   </p>
+<pre>
+<template:placeholder name="statement" />
+</pre>
+   <div class="warn">
+      Um die Tabelle korrekt anlegen zu können, benötigt der zuvor eingetragene Benutzer
+      <em>CREATE TABLE</em>-Rechte.
+   </div>
+   <p>
+      Bitte bestätigen sie mit dem Button, das Anlegen der Tabelle:
+   </p>
+</html:template>
+<html:form id="create-table" name="create-table" method="post" action="#step-3">
+   <form:button name="create" value="Anlegen" />
+</html:form>
+<html:template name="table-exists">
+   <div class="ok">
+      Die Datenbank-Tabelle existiert. Sie können nun mit <a href="#step-3">Schritt 3</a> fortfahren.
+   </div>
+</html:template>
+
+<h3 id="step-3">Schritt 3: Anlegen der Inhalte</h3>
+<html:template name="step-1-2-req">
+   <div class="hint">
+      Um Inhalte anlegen zu können, müssen zunächst <a href="#step-1">Schritt 1</a> und
+      <a href="#step-2">Schritt 2</a> ausgeführt werden.
+   </div>
+</html:template>
+<html:template name="step-3">
+   <p>
+      Mit dem folgenden Formular können Sie dynamische Inhalte anlegen. Zur Anzeige wird dann in
+      <a href="#step4">Schritt 4</a> eine URL angezeigt, unter der der Inhalt erreichbar ist.
+   </p>
+</html:template>
+<html:form id="add-content" name="add-content" method="post" action="#step-3">
+   <fieldset>
+      <label for="content-urlname">Url-Parameter:</label>
+      <form:text id="content-urlname" name="content-urlname" minlength="5" maxlength="30"/>
+      <form:listener control="content-urlname">
+         <span class="apf-form-val-msg">
+            Bitte geben Sie einen gültigen Url-Namen ein (Zeichen: [A-Za-z0-9-_])!
+         </span>
+      </form:listener>
+
+      <label for="content-text">Inhalt:</label>
+      <form:area id="content-text" name="content-text" />
+
+      <form:addvalidator
+         class="APF\tools\form\validator\TextLengthValidator"
+         control="content-urlname|content-text"
+         button="create"
+      />
+      <form:addvalidator
+         class="SB\pres\validator\TemplateFileNameValidator"
+         control="content-urlname"
+         button="create"
+      />
+      
+      <form:button name="create" value="Speichern" />
+   </fieldset>
+</html:form>
+
+<h3 id="step-4">Schritt 4: Anzeigen der Inhalte</h3>
+<html:template name="step-1-2-3-req">
+   <div class="hint">
+      Um Inhalte anzeigen zu können, müssen zunächst <a href="#step-1">Schritt 1</a> und
+      <a href="#step-2">Schritt 2</a> ausgeführt werden. Anschließend müssen mit
+      <a href="#step-3">Schritt 3</a> Inhalte zur Anzeige angelegt werden.
+   </div>
+</html:template>
+<html:template name="step-4">
+   <p>
+      Es wurden bereits folgende Inhalte angelegt. Bitte klicken Sie auf die Url-Namen um die
+      Inhalte der Seiten anzuzeigen:
+   </p>
+   <ul>
+      <template:placeholder name="pages" />
+   </ul>
+   <p>
+      Wie die Inhalte aus der Datenbank geladen werden können Sie in der Template-Datei
+      <em>/APF/sandbox/pres/templates/de/db-content.html</em> und dem zugehörigen Controller
+      nachvollziehen.
+   </p>
+</html:template>

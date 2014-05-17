@@ -1,0 +1,154 @@
+<@controller
+   class="SB\pres\controller\UserManagementWizzardController"
+@>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<h2>Benutzer-Verwaltungs-Wizzard</h2>
+<p>
+   Der Benutzer-Verwaltungs-Wizzard ist dazu gedacht, das Modul <em>usermanagement</em> zu konfigurieren
+   und zu initialisieren um anschließend innerhalb der Sandbox die Administration der Benutzer
+   durchführen zu können. Ebenfalls kann später das Login-Formular eingebunden werden um einen
+   angelegten Benutzer zu authentifizieren.
+</p>
+<p>
+   Wie auch der <a href="?page=db-wizzard">Datenbank-Wizzard</a> ist das Setup in verschiedene
+   Bereiche aufgeteilt, die Schritt für Schritt durchlaufen werden müssen.
+</p>
+
+<h3 id="step-1">Schritt 1: Datenbank-Konfiguration</h3>
+<p>
+   Für die Verbindung zur Benutzer-Datanbank wird eine neue Konfiguration erzeugt. Es wird empfohlen,
+   eine leere Datenbank zu nutzen.
+</p>
+<p>
+   Bitte füllen Sie das folgende Formular aus um eine Datenbank konnektieren zu können:
+</p>
+
+<core:appendnode namespace="SB\pres\templates\de\content\fragments" template="db_config"/>
+
+<h3 id="step-2">Schritt 2: Datenbank-Setup</h3>
+<p>
+   In diesem Schritt werden die notwendigen Tabellen in der Datenbank angelegt, und damit das Arbeiten
+   mit dem Backend ermöglicht.
+</p>
+
+<html:template name="step-1-req">
+   <div class="hint">
+      Um die Datenbank initialsieren zu können Tabelle anlegen zu können wird eine Datenbank-Konfiguration benötigt. Bitte führen Sie
+      zuerst <a href="#step-1">Schritt 1</a> aus.
+   </div>
+</html:template>
+
+<html:form name="init-db" id="init-db" method="post" action="#step-3">
+   <p>
+      Mit dem Abschicken des Formulars werden die Datenbank-Tabellen automatisiert angelegt. Hierzu
+      wird das <em>GenericORMapperManagementTool</em>-Tool aus dem Namespace
+      <em>APF\modules\genericormapper\data\tools</em> wie folgt genutzt:
+   </p>
+   <pre>
+$setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
+$setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
+$setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
+$setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+$setup->run();
+   </pre>
+   <p>
+      Bitte bestätigen sie mit dem Button, das Anlegen der Tabelle:
+   </p>
+   <form:button name="init-db" value="Setup ausführen" />
+</html:form>
+
+<html:template name="db-conn-error">
+   <div class="err">
+      <p>
+         Die angegebenen Datenbank-Verbindungsdaten sind wahrscheinlich falsch. Es konnte leider
+         keine Verbindung hergestellt werden. Bitte überprüfen Sie die Einstellungen in der Datei
+         <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
+      </p>
+      <p>
+         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+      </p>
+   </div>
+</html:template>
+
+<html:template name="tables-exist">
+   <div class="ok">
+      Die Datenbank ist bereits installiert. Sie können nun mit <a href="#step-3">Schritt 3</a> fortfahren.
+   </div>
+</html:template>
+
+<h3 id="step-3">Schritt 3: Datenbank-Initialisierung</h3>
+<p>
+   Nach der Konfiguration und dem Setup der Datenbank kann das Modul nun mit einem initialen
+   Benutzer befüllt werden. Sie können das Formular anschließend dazu nutzen, weitere Benutzer
+   anzulegen.
+</p>
+
+<html:template name="step-2-req">
+   <div class="hint">
+      Um einen Benutzer anlegen zu können, wird zunächst <a href="#step-2">Schritt 2</a> benötigt.
+      Bitte führen Sie dazu das Datenbank-Setup aus.
+   </div>
+</html:template>
+
+<html:template name="user-list">
+   <p>
+      Die folgenden Benutzer sind bereits im System vorhanden:
+   </p>
+   <ul class="user-list">
+      <template:placeholder name="user-list-entries" />
+   </ul>
+</html:template>
+
+<html:form name="create-user" id="create-user" action="#step-3" method="post">
+   <p>
+      Um sich an der Sandbox anzumelden (siehe <a href="#step-4">Schritt 4</a>) ist es notwendig, 
+      einen initiale Benutzer anzulegen. Bitte füllen Sie dazu das nachstehende Formular vollständig 
+      aus:
+   </p>
+   <fieldset>
+      <label for="username">Benutzer-Name:</label>
+      <form:text name="username" id="username" maxlength="100"/>
+
+      <form:listener control="password" validator="FieldCompareValidator">
+         <p class="apf-form-val-msg">
+            Die eingegebenen Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut.
+         </p>
+      </form:listener>
+      <label for="password">Passwort:</label>
+      <form:password name="password" id="password" maxlength="50" ref="password2"/>
+
+      <label for="password2">Wiederholung:</label>
+      <form:password name="password2" id="password2" maxlength="50"/>
+
+      <form:addvalidator
+          class="APF\tools\form\validator\TextLengthValidator"
+          button="create-user"
+          control="username|password|password2"
+      />
+      <form:addvalidator
+          class="APF\tools\form\validator\FieldCompareValidator"
+          button="create-user"
+          control="password"
+          type="special"
+      />
+
+      <form:button name="create-user" value="Benutzer anlegen" />
+   </fieldset>
+</html:form>
+
+<h3 id="step-4">Schritt 4: Nutzen des Moduls</h3>
+
+<html:template name="step-3-req">
+   <div class="hint">
+      Um die Benutzer-Verwaltung aufrufen oder sich einloggen zu können, muss zunächst ein
+      Benutzer eingerichtet sein. Bitte führen Sie zunächst <a href="#step-3">Schritt 3</a> aus.
+   </div>
+</html:template>
+
+<html:template name="step-4">
+   <div class="ok">
+      Nachdem das Setup und die Einrichtung vollständig ausgeführt wurde, können Sie nun die
+      <a href="?page=umgt">Benutzer-Verwaltung</a> aufrufen oder sich <a href="?page=login">einloggen</a>.
+      Nach dem Login stehen ihnen dann auf der Seite ein Passwort ändern-Dialog zur Verfügung.
+   </div>
+</html:template>

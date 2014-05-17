@@ -1,0 +1,113 @@
+<@controller class="SB\pres\controller\TemplateWizzardController" @>
+<h2>Template wizzard</h2>
+<p>
+   The template wizzard allows you to directly edit templates within the sandbox. The tool can be
+   used to add new pages and directly display the result.
+</p>
+<p>
+   But the main goal of this wizzard is to get you in touch with the templating mechanism of the APF.
+   So, you can test your implementation directly having a working basis.
+</p>
+
+<h3>Construction of the sandbox</h3>
+<p>
+   The sandbox merely consists of one main template that includes the relevant templates for the
+   navigation, the content area, and the footer. Within the content area, further templates are
+   included to bring the content to you. This is done by the <em>page</em> url parameter. In case
+   of this page, the url parameter is named <em>tmpl-wizzard</em> that is the same as the teplate's
+   file name body. This is done using the <em>&lt;core:importdesign /&gt;</em> tag.
+</p>
+<p>
+   The sandbox is implemented to support multiple languages (English and German at the moment). 
+   Concerning the <em>ACCEPT</em> header the language is set within the <em>index.php</em>. German
+   browsers are presented the german page, other browsers are sent the english version. If you want
+   to switch the language synthetially, please adapt the <em>$lang</em> variable to contain the
+   ISO key of your prefered language (&quot;de&quot; or &quot;en&quot;).
+</p>
+<p>
+   The folder structure of the sandbox package is as follows:
+</p>
+<pre>
+/APF/sandbox/pres/
+                   taglib/
+                   templates/
+                             de/
+                                content/
+                                        chapters.html
+                                        docs.html
+                                        start.html
+                                        tmpl-wizzard.html
+                                        ...
+                                content.html
+                                footer.html
+                                navi.html
+                             en/
+                                content/
+                                        chapters.html
+                                        docs.html
+                                        start.html
+                                        tmpl-wizzard.html
+                                        ...
+                                content.html
+                                footer.html
+                                navi.html
+                             main.html
+</pre>
+<p>
+   The <em>main.html</em> template is the main content template, <em>content.html</em>,
+   <em>footer.html</em> and <em>navi.html</em> are included to display the appropriate content. These
+   templates are located under the <em>de</em> and <em>en</em> folder to get the language dependency
+   working.
+</p>
+<p>
+   The <em>content</em> folder stores the template files that are displayed within the content area
+   (as this text). Depending on the selected language, the files are taken from either the 
+   <em>/de/content/</em> or the <em>/en/content/</em> folder. This is also true for the templates
+   mentioned in the last paragraph..
+</p>
+
+<h3>Adding a page</h3>
+<p>
+   Adding a further content page is quite easy. The only thing you have to do is to add a new template
+   within the <em>/de/content/</em> or <em>/en/content/</em> folder. The templates then can directly
+   be addressed using the url parameter <em>page</em>.
+</p>
+<p>
+   At present, the following templates are included in the sandbox. You can display the content
+   included there by clicking on the template's file name:
+</p>
+<ul>
+   <html:placeholder name="existing-tmpl" />
+</ul>
+<p>
+   This form allows you to create new files adding the source code of the content field:
+</p>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<html:form id="new-page" name="new-page" method="post" action="#new-page">
+   <fieldset>
+      <label for="tmpl-name">Template name:</label>
+      <form:text id="tmpl-name" name="tmpl-name" value="" minlength="5"/>
+      <form:listener control="tmpl-name">
+         <span class="apf-form-val-msg">
+            Please provide a valid url name (allowed characters: [A-Za-z0-9-_])!
+         </span>
+      </form:listener>
+      <form:addvalidator
+         class="APF\tools\form\validator\TextLengthValidator"
+         control="tmpl-name|tmpl-content"
+         button="save"
+      />
+      <form:addvalidator
+         class="SB\pres\validator\TemplateFileNameValidator"
+         control="tmpl-name"
+         button="save"
+      />
+      <label for="tmpl-content">Inhalt:</label>
+      <form:area id="tmpl-content" name="tmpl-content" minlength="5">Dieser Text wird in der neu angelegten Template-Datei erscheinen...</form:area>
+      <form:button name="save" value="Save" />
+   </fieldset>
+</html:form>
+<p>
+   The files that are created using the wizzard can be found within the
+   <em>/APF/sandbox/pres/templates/en/content/</em> folder and can be changed as you like.
+</p>

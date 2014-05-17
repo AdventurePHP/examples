@@ -1,0 +1,30 @@
+<h2>Laden von Klassen</h2>
+<p>
+   Seit der Version 2.0 können Klassen, Templates und Konfigurationsdateien von unterschiedlichen Basis-Pfaden geladen
+   werden. Dies ermöglicht Ihnen die Trennung von Framework- und Applikations-Code sowie die Trennung von produktivem
+   Code und Test-Artefakten.
+</p>
+<p>
+   Hierzu stellt das APF einen <em>ClassLoader</em>-Mechanismus zur Verfügung, der auf Basis des
+   <a class="external" href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> Inhalte
+   aus unterschiedlichen Bereichen laden kann. Die Konfiguration erfolgt in der zentralen Bootstrap-Datei und Sie können
+   beliebig viele <em>ClassLoader</em> registrieren.
+</p>
+<p>
+   Das aktuelle Template befindet sich im Ordner <em>APF/sandbox/pres/templates/de/content/</em> und bindet per
+</p>
+<pre>
+&lt;core:importdesign
+   namespace="APP\sandbox\pres\templates\de\content"
+   template="different-class-loader-template"
+/&gt;
+</pre>
+<p>
+   ein weiteres Template aus einem anderen Basis-Pfad ein (<em>APP</em>). Dieses berichtet folgendes über sich:
+</p>
+<div class="hint">
+   <core:importdesign
+      namespace="APP\sandbox\pres\templates\de\content"
+      template="different-class-loader-template"
+   />
+</div>

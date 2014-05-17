@@ -1,0 +1,37 @@
+<ul>
+   <li><!-- --></li>
+   <li><a href="">Home</a></li>
+   <li><a href="?page=docs">Docs</a></li>
+   <li><a href="?page=class-loader">Class loading</a></li>
+   <li><a href="?page=db-wizzard">Database wizzard</a></li>
+   <li><a href="?page=tmpl-wizzard">Template wizzard</a></li>
+   <li><a href="?page=news-wizzard">News wizzard</a></li>
+   <li><a href="?page=examples">Taglib example</a></li>
+   <li><a href="?page=umgt-wizzard">User management wizzard</a></li>
+   <li><a href="?page=guestbook-wizzard">Guestbook wizzard</a></li>
+
+   <core:addtaglib
+         class="APF\modules\usermanagement\pres\taglib\UmgtTemplateTag"
+         prefix="umgt"
+         name="template"
+         />
+   <umgt:template condition="logged-in" transform-on-place="true">
+      <template:addtaglib
+            class="APF\modules\usermanagement\pres\taglib\UmgtLogoutLinkTag"
+            prefix="umgt"
+            name="logoutlink"
+            />
+      <li><a href="<umgt:logoutlink />">Logout</a></li>
+   </umgt:template>
+   <umgt:template condition="logged-out" transform-on-place="true">
+      <li><a href="?page=login">Login</a></li>
+   </umgt:template>
+
+   <umgt:template condition="logged-out" transform-on-place="true">
+      <li><a href="?page=register">Registration</a></li>
+   </umgt:template>
+
+   <umgt:template condition="group" options="Admins" transform-on-place="true">
+      <li><a href="?page=umgt">Admin</a></li>
+   </umgt:template>
+</ul>

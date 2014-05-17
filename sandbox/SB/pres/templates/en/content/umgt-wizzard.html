@@ -1,0 +1,148 @@
+<@controller
+   class="SB\pres\controller\UserManagementWizzardController"
+@>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<h2>User management wizzard</h2>
+<p>
+   The user manegment wizzard is aimed to configure and initialize the <em>usermanagement</em>
+   module to be able to manage users for the sandbox. Further, the login form can be called to
+   authenticate against this page using the users added with this wizzard.
+</p>
+<p>
+   Similar to the <a href="?page=db-wizzard">database wizzard</a> the setup is done step by step.
+</p>
+
+<h3 id="step-1">Step 1: Database configuration</h3>
+<p>
+   Connecting to the database, a new configuration must be created. It is recommended to use an
+   empty database for this setup.
+</p>
+<p>
+   Please fill in the subsequent fields to be able to connect to your desired database:
+</p>
+
+<core:appendnode namespace="SB\pres\templates\de\content\fragments" template="db_config"/>
+
+<h3 id="step-2">Step 2: Database setup</h3>
+<p>
+   Within this step, the necessary tables will be created to be able to work with the backend.
+</p>
+
+<html:template name="step-1-req">
+   <div class="hint">
+      In order to initialize the database please create the database connection using
+      <a href="#step-1">step 1</a> of this wizzard.
+   </div>
+</html:template>
+
+<html:form name="init-db" id="init-db" method="post" action="#step-3">
+   <p>
+      Submitting this form the database tables are created automaticalls. This is done using the
+      <em>GenericORMapperManagementTool</em> tool from the <em>APF\modules\genericormapper\data\tools</em>
+      namespace:
+   </p>
+   <pre>
+$setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
+$setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
+$setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
+$setup->setConnectionName(self::$CONFIG_SECTION_NAME);
+$setup->run();
+   </pre>
+   <p>
+      Please click the button to create the database layout:
+   </p>
+   <form:button name="init-db" value="Execute setup" />
+</html:form>
+
+<html:template name="db-conn-error">
+   <div class="err">
+      <p>
+         The given database connection data is wrong. Thus, no connection could be established.
+         Please check the settings in
+         <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
+      </p>
+      <p>
+         The error is: <em><template:placeholder name="exception" /></em>
+      </p>
+   </div>
+</html:template>
+
+<html:template name="tables-exist">
+   <div class="ok">
+      The database is now ready installed. Please proceed with <a href="#step-3">step 3</a>.
+   </div>
+</html:template>
+
+<h3 id="step-3">Step 3: Database initialization</h3>
+<p>
+   After database connection configuration and initial databyse layout creation the user management
+   database must be filled with users. This can be done using the subsequent form.
+</p>
+
+<html:template name="step-2-req">
+   <div class="hint">
+      In order to create a user, please execute <a href="#step-2">step 2</a> first.
+   </div>
+</html:template>
+
+<html:template name="user-list">
+   <p>
+      The following users are already created within the database:
+   </p>
+   <ul class="user-list">
+      <template:placeholder name="user-list-entries" />
+   </ul>
+</html:template>
+
+<html:form name="create-user" id="create-user" action="#step-3" method="post">
+   <p>
+      In order to login to the sandbox (see <a href="#step-4">step 4</a>) it is necessary to create
+      one or more initial users. Please provide the necessary information to the below form:
+   </p>
+   <fieldset>
+      <label for="username">User name:</label>
+      <form:text name="username" id="username" maxlength="100"/>
+
+      <form:listener control="password" validator="FieldCompareValidator">
+         <p class="apf-form-val-msg">
+            The provided passwords are not equal. Please try again.
+         </p>
+      </form:listener>
+      <label for="password">Password:</label>
+      <form:password name="password" id="password" maxlength="50" ref="password2"/>
+
+      <label for="password2">Repeat:</label>
+      <form:password name="password2" id="password2" maxlength="50"/>
+
+      <form:addvalidator
+          class="APF\tools\form\validator\TextLengthValidator"
+          button="create-user"
+          control="username|password|password2"
+      />
+      <form:addvalidator
+          class="APF\tools\form\validator\FieldCompareValidator"
+          button="create-user"
+          control="password"
+          type="special"
+      />
+
+      <form:button name="create-user" value="Benutzer anlegen" />
+   </fieldset>
+</html:form>
+
+<h3 id="step-4">Step 4: Usage of the module</h3>
+
+<html:template name="step-3-req">
+   <div class="hint">
+      In order to call the user management backend or to log in to the sandbox, at least one user
+      must be created. Please execute <a href="#step-3">step 3</a> first.
+   </div>
+</html:template>
+
+<html:template name="step-4">
+   <div class="ok">
+      After the setup has been completed, you are now able to call the
+      <a href="?page=umgt">user management backend</a> or to <a href="?page=login">log in</a>.
+      After proceeding with the log-in, you are provided a change-password dialog.
+   </div>
+</html:template>

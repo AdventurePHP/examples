@@ -2,6 +2,8 @@
 
 use APF\core\benchmark\BenchmarkTimer;
 use APF\core\configuration\ConfigurationManager;
+use APF\core\configuration\provider\ini\IniConfigurationProvider;
+use APF\core\database\config\StatementConfigurationProvider;
 use APF\core\frontcontroller\Frontcontroller;
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
@@ -19,10 +21,14 @@ $context = 'myapp';
 
 // pre-define the root path of the root class loader (if necessary)
 $apfClassLoaderRootPath = dirname($_SERVER['SCRIPT_FILENAME']) . '/APF';
+$apfClassLoaderConfigurationRootPath = $dir . '/config/APF';
 include_once('./APF/core/bootstrap.php');
 
+// define class loader for page resources
+RootClassLoader::addLoader(new StandardClassLoader('SB', $dir . '/SB'));
+
 // optional: define custom class loader to be able to separate the APF from your custom application's src folder
-RootClassLoader::addLoader(new StandardClassLoader('APPLICATION', dirname($_SERVER['SCRIPT_FILENAME']) . '/APPLICATION'));
+RootClassLoader::addLoader(new StandardClassLoader('APP', $dir . '/APP'));
 
 // configure log writer used within the sandbox
 /* @var $logger Logger */
@@ -31,6 +37,15 @@ $writer = $logger->getLogWriter(Registry::retrieve('APF\core', 'InternalLogTarge
 $logger->addLogWriter('login', clone $writer);
 $logger->addLogWriter('registration', clone $writer);
 $logger->addLogWriter('mysqli', clone $writer);
+
+/* @var $iniProvider IniConfigurationProvider */
+$iniProvider = ConfigurationManager::retrieveProvider('ini');
+$iniProvider->setOmitConfigSubFolder(true);
+
+// Configure statement configuration provider (required for pager etc.)
+$sqlProvider = new StatementConfigurationProvider();
+$sqlProvider->setOmitConfigSubFolder(true);
+ConfigurationManager::registerProvider('sql', $sqlProvider);
 
 // create the sandbox page
 $fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
@@ -43,11 +58,11 @@ $fC->setLanguage($lang);
 try {
    // first, try to load database configuration
    $config = ConfigurationManager::loadConfiguration(
-      'APF\core\database',
-      $context,
-      $lang,
-      Registry::retrieve('APF\core', 'Environment'),
-      'connections.ini'
+         'APF\core\database',
+         $context,
+         $lang,
+         Registry::retrieve('APF\core', 'Environment'),
+         'connections.ini'
    );
 
    // secondly, try to get the right config section
@@ -61,7 +76,7 @@ try {
    // expected situation when UMGT has not been setup'd
 }
 
-echo $fC->start('APF\sandbox\pres\templates', 'main');
+echo $fC->start('SB\pres\templates', 'main');
 
 /* @var $t APF\core\benchmark\BenchmarkTimer */
 $t = & Singleton::getInstance('APF\core\benchmark\BenchmarkTimer');

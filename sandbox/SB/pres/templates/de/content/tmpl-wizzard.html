@@ -1,0 +1,115 @@
+<@controller class="SB\pres\controller\TemplateWizzardController" @>
+<h2>Template-Wizzard</h2>
+<p>
+   Mit dem Template-Wizzard können die Templates der Sandbox bearbeitet und geändert werden. Das 
+   Tool kann dazu genutzt werden, neue Seiten hinzuzufügen. 
+</p>
+<p>
+   In erster Linie ist der Wizzard jedoch dazu gedacht, den Einstieg in das Templating des APF zu
+   erleichtern. So können Änderungen an einer funktionierenden Umgebung getestet werden und
+   Auswirkungen werden direkt sichtbar.
+</p>
+
+<h3>Aufbau der Sandbox</h3>
+<p>
+   Die Sandbox besteht im wesentlichen aus einem Haupt-Template, das die Bereiche Navigation,
+   Inhalts-Bereich und Footer über eigene Templates einbindet. Im Inhalts-Template werden weitere
+   Template-Dateien inkludiert, die über den URL-Parameter <em>page</em> gesteuert werden. Im Fall
+   dieser Seite lautet der Wert des Parameters <em>tmpl-wizzard</em>, der gleichbedeutend mit dem
+   Namen des zugehörigen Templates ist. Hierzu wird der <em>&lt;core:importdesign /&gt;</em>-Tag
+   genutzt.
+</p>
+<p>
+   Die Sandbox is zudem zweisprachig ausgelegt. Die Entscheidung der Sprache wird an Hand des vom
+   Browser gesendeten <em>ACCEPT</em>-Header bestimmt. Deutsche Browser erhalten die deutsche
+   Sprach-Version alle anderen die englischen Inhalte. Soll die Sprache dauerhaft umgestellt werden,
+   kann die Variable <em>$lang</em> mit dem ISO-Kürzel der gewünschten Sprache (&quot;de&quot; oder
+   &quot;en&quot;) gefüllt werden.
+</p>
+<p>
+   Die Ordner-Struktur sieht folgenden Aufbau vor:
+</p>
+<pre>
+/APF/sandbox/pres/
+                   taglib/
+                   templates/
+                             de/
+                                content/
+                                        chapters.html
+                                        docs.html
+                                        start.html
+                                        tmpl-wizzard.html
+                                        ...
+                                content.html
+                                footer.html
+                                navi.html
+                             en/
+                                content/
+                                        chapters.html
+                                        docs.html
+                                        start.html
+                                        tmpl-wizzard.html
+                                        ...
+                                content.html
+                                footer.html
+                                navi.html
+                             main.html
+</pre>
+<p>
+   Die Datei <em>main.html</em> ist das oben angesprochene Haupt-Template, die Dateien
+   <em>content.html</em>, <em>footer.html</em> und <em>navi.html</em> unter den Ordnern <em>de</em>
+   und <em>en</em> bilden den Sprach-abhängigen Inhalt der Seite ab.
+</p>
+<p>
+   Im Ordner <em>content</em> finden sich die Template-Dateien des Inhalts-Bereiches (wie diese
+   Seite). Je nach gewählter Sprache werden dabei die Dateien aus dem Ordner <em>/de/content/</em>
+   oder <em>/en/content/</em> bezogen. Dieses gilt auch für die im letzten Abschnitt genannten
+   Templates.
+</p>
+
+<h3>Hinzufügen einer neuen Seite</h3>
+<p>
+   Um nun eine weitere Seite hinzuzufügen, müssen einfach weitere Templates in den Ordnern
+   <em>/de/content/</em> und <em>/en/content/</em> hinzugefügt werden. Diese können dann an Hand des
+   Namens über den Url-Parameter <em>page</em> adressiert werden.
+</p>
+<p>
+   Es sind folgende Templates für die aktuelle Sprache angelegt. Sie können durch Klick auf den
+   Datei-Namen jeweils aufgerufen werden:
+</p>
+<ul>
+   <html:placeholder name="existing-tmpl" />
+</ul>
+<p>
+   Das folgende Formular ermöglichst es, eine neue Datei anzulegen und diese mit dem gewünschten
+   HTML-Quelltext zu versehen:
+</p>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<html:form id="new-page" name="new-page" method="post" action="#new-page">
+   <fieldset>
+      <label for="tmpl-name">Template-Name:</label>
+      <form:text id="tmpl-name" name="tmpl-name" value="" minlength="5"/>
+      <form:listener control="tmpl-name">
+         <span class="apf-form-val-msg">
+            Bitte geben Sie einen gültigen Template-Namen ein (Zeichen: [A-Za-z0-9-_])!
+         </span>
+      </form:listener>
+      <form:addvalidator
+         class="APF\tools\form\validator\TextLengthValidator"
+         control="tmpl-name|tmpl-content"
+         button="save"
+      />
+      <form:addvalidator
+         class="SB\pres\validator\TemplateFileNameValidator"
+         control="tmpl-name"
+         button="save"
+      />
+      <label for="tmpl-content">Inhalt:</label>
+      <form:area id="tmpl-content" name="tmpl-content" minlength="5">Dieser Text wird in der neu angelegten Template-Datei erscheinen...</form:area>
+      <form:button name="save" value="Speichern" />
+   </fieldset>
+</html:form>
+<p>
+   Die mit dem Wizzard angelegten Dateien befinden sich im Verzeichnis
+   <em>/APF/sandbox/pres/templates/de/content/</em> und können dort weiter bearbeitet werden.
+</p>

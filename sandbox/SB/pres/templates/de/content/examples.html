@@ -1,0 +1,80 @@
+<h2>Taglib-Beispiel</h2>
+<p>
+   Taglibs und Module sind ein eleganter Weg um Funktionalität Schritt für Schritt zu erweitern ohne
+   die Kern-Bestandteile austauschen zu müssen. Dieses Kapitel zeigt, wie eine einfache Taglib zur
+   Ausgabe von Datum und Uhrzeit implementiert und auf dieser Seite eingebunden werden kann.
+</p>
+<p>
+   Jeder XML-Tag besteht im Wesentlichen aus einem <em>Prefix</em> und einem
+   <em>Klassennamen</em>. Diese sollten sprechend sein um eine Wiedererkennung innerhalb der
+   Templates zu gew&auml;hrleisten. F&uuml;r den Tag zur Ausgabe des Datums w&auml;hlen wir deshalb
+   <em>curr:date</em> als Namen.
+</p>
+<p>
+   Bevor wir die Funktionalit&auml;t des Tags - eine von <em>Document</em> abgeleitete Klasse -
+   implementieren, muss noch gekl&auml;rt werden, wo die Klasse abgelegt werden soll. Die Ausgabe des
+   Datums wertet dabei lediglich die Beispiel-Webseite auf, was bedeutet, dass die TagLib eine starke
+   Zugeh&ouml;rigkeit zum Projekt hat. Auf Grund dieser Tatsache schickt es sich, den Quellcode unterhalb
+   des Projektes abzulegen. Wie im Kapitel <a href="?page=tmpl-wizzard">Template-Wizzard</a>
+   beschrieben wird, liegen alle Dateien der Beispiel-Webseite unter dem Ordner
+</p>
+<pre>
+/APF/sandbox/
+</pre>
+<p>
+   Da Tags &uuml;blicherweise der Pr&auml;sentationsschicht angeh&ouml;ren, wird die Tag-Definition
+   &uuml;blicherweise in einem Ordner unterhalb des Ordners <em>pres</em> abgelegt. Um zu
+   kennzeichnen, dass es sich um TagLibs handelt wird dieser &uuml;blicherweise <em>taglib</em>
+   genannt.
+</p>
+<p>
+   Ein Tag besteht immer aus der Implementierung einer TagLib-Klasse. Der Namen der Klasse setzt sich
+   aus dem <em>Prefix</em> des Tags, der Zeichenfolge <em>_taglib_</em> und dem
+   <em>Klassennamen</em> zusammen. F&uuml;r das hier beschriebene Beispiel ergibt sich somit
+   der Name <em>CurrentDateTag</em>. Das Adventure PHP Framework definiert dar&uuml;ber
+   hinaus die Konvention, dass Dateinamen identisch den Klassenamen gehalten werden m&uuml;ssen. Das
+   vereinfacht nicht nur die Strukturierung, sondern auch die Einbindung von TagLibs und Komponenten.
+   Wir erstellen also eine Datei mit dem Namen
+</p>
+<pre>
+CurrentDateTag.php
+</pre>
+<p>im Ordner</p>
+<pre>
+/APF/sandbox/pres/taglib/
+</pre>
+<p>
+   Der Aufbau der Datei ist denkbar einfach: er enth&auml;lt den Klassenrumpf und die Implementierung
+   der Methode <em>transform()</em>. Letztere wird dann aufgerufen, wenn der DOM Baum der Seite
+   transformiert wird. Der PageController erwartet dabei, dass die Funktion den Inhalt des transformierten
+   Tags zur&uuml;ckgibt. Im Fall der Datumsanzeige soll das aktuelle Datum zur&uuml;ckgeliefert werden.
+   Die TagLib-Klasse sieht damit wie folgt aus:
+</p>
+<pre>
+class CurrentDateTag extends Document {
+
+   public function transform(){
+      return date('l, d.m.Y, H:i:s');
+   }
+
+}
+</pre>
+<p>
+   Um den Tag in eine Seite einbinden zu k&ouml;nnen muss die TagLib dem Parser zun&auml;chst bekannt
+   gemacht werden. Das passiert mit einem
+</p>
+<pre>
+&lt;core:addtaglib class="SB\pres\taglib\CurrentDateTag" prefix="curr" name="date" /&gt;
+</pre>
+<p>Anschlie&szlig;end - und unmittelbar danach - kann der Tag per</p>
+<pre>
+&lt;curr:date /&gt;
+</pre>
+<p>
+   in die Seite eingebaut werden. Um die Funktion zu veranschaulichen wurde der Tag in dieser Seite
+   eingebaut. Es ist jetzt:
+</p>
+<div class="date-tag">
+   <core:addtaglib class="SB\pres\taglib\CurrentDateTag" prefix="curr" name="date" />
+   <curr:date />
+</div>

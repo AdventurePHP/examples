@@ -1,0 +1,122 @@
+<@controller class="SB\pres\controller\DatabaseWizzardController" @>
+<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<h2>Database configuration wizzard</h2>
+<p>
+   Using this wizzard you can create a database configuration and a database table to store dynamic
+   content. The form provided at the third step can be used to fill this table in order to display
+   the content on a separate page. Step 4 lists all content that has been created before.
+</p>
+
+<h3 id="step-1">Step 1: database configuration</h3>
+<p>
+   Please fill the following fields in order to connect to your local database:
+</p>
+<core:appendnode namespace="SB\pres\templates\de\content\fragments" template="db_config"/>
+
+<h3 id="step-2">Step 2: creating the content table</h3>
+<html:template name="db-conn-error">
+   <div class="err">
+      <p>
+         The database connection definition has errors. Thus the database connection could not be
+         established. Please check your settings within the
+         <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em> file!
+      </p>
+      <p>
+         The error message is: <em><template:placeholder name="exception" /></em>
+      </p>
+   </div>
+</html:template>
+<html:template name="step-1-req">
+   <div class="hint">
+      In order to create the content database table the database connection must be configured. 
+      Please refer to <a href="#step-1">step 1</a> first.
+   </div>
+</html:template>
+<html:template name="step-2">
+   <p>
+      The dynamic page content is stored with a database table that has three columns: one for the
+      id of the page, one for the url name used to reference tha page, and last but not least the
+      content of the page:
+   </p>
+<pre>
+<template:placeholder name="statement" />
+</pre>
+   <div class="warn">
+      In order to correctly create the table the user added to the above configuration must have
+      <em>CREATE TABLE</em> permissions.
+   </div>
+   <p>
+      Please hit the button to create the table:
+   </p>
+</html:template>
+<html:form id="create-table" name="create-table" method="post" action="#step-3">
+   <form:button name="create" value="Create" />
+</html:form>
+<html:template name="table-exists">
+   <div class="ok">
+      The database table has been created. Please proceed with <a href="#step-3">step 3</a>.
+   </div>
+</html:template>
+
+<h3 id="step-3">Step 3: creation of the content</h3>
+<html:template name="step-1-2-req">
+   <div class="hint">
+      In order to create the content <a href="#step-1">step 1</a> and <a href="#step-2">step 2</a>
+      must be executed first.
+   </div>
+</html:template>
+<html:template name="step-3">
+   <p>
+      Using the form presented in this section you can create dynamic content that can be displayed
+      clicking on the links listed in <a href="#step4">step 4</a>.
+   </p>
+</html:template>
+<html:form id="add-content" name="add-content" method="post" action="#step-3">
+   <fieldset>
+      <label for="content-urlname">Url name:</label>
+      <form:text id="content-urlname" name="content-urlname" minlength="5" maxlength="30"/>
+      <form:listener control="content-urlname">
+         <span class="apf-form-val-msg">
+            Please provide a valid url name (allowed characters: [A-Za-z0-9-_])!
+         </span>
+      </form:listener>
+
+      <label for="content-text">Content:</label>
+      <form:area id="content-text" name="content-text" />
+
+      <form:addvalidator
+         class="APF\tools\form\validator\TextLengthValidator"
+         control="content-urlname|content-text"
+         button="create"
+      />
+      <form:addvalidator
+         class="SB\pres\validator\TemplateFileNameValidator"
+         control="content-urlname"
+         button="create"
+      />
+
+      <form:button name="create" value="Save" />
+   </fieldset>
+</html:form>
+
+<h3 id="step-4">Step  4: displaying the content</h3>
+<html:template name="step-1-2-3-req">
+   <div class="hint">
+      In order to display dynamic content <a href="#step-1">step 1</a> and <a href="#step-2">step 2</a>
+      must be executed first. Afterwards, you can create your own content in <a href="#step-3">step 3</a>.
+   </div>
+</html:template>
+<html:template name="step-4">
+   <p>
+      The database table contains the content items listed below. Please click on the url name
+      to display it:
+   </p>
+   <ul>
+      <template:placeholder name="pages" />
+   </ul>
+   <p>
+      If you are interested in the mechanism, the content is read from the database, please have a
+      look at the <em>/APF/sandbox/pres/templates/de/db-content.html</em> template file and the
+      appropriate controller.
+   </p>
+</html:template>

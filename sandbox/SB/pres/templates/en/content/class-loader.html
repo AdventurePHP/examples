@@ -1,0 +1,29 @@
+<h2>Class loading</h2>
+<p>
+   As of version 2.0 classes, templates, and configuration files can be loaded from different base paths. This allows to
+   separate framework and application code as well as productive code from test artifacts.
+</p>
+<p>
+   For this reason, the APF provides a <em>ClassLoader</em> mechanism based on
+   <a class="external" href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> to load
+   application content from different base folders. Configuration can be one within one bootstrap file by registering
+   any number of <em>ClassLoader</em>s.
+</p>
+<p>
+   The current template resides in <em>APF/sandbox/pres/templates/en/content/</em> and includes another template by
+</p>
+<pre>
+&lt;core:importdesign
+   namespace="APP\sandbox\pres\templates\en\content"
+   template="different-class-loader-template"
+/&gt;
+</pre>
+<p>
+   from another root path (<em>APP</em>). The templates reports the following:
+</p>
+<div class="hint">
+   <core:importdesign
+      namespace="APP\sandbox\pres\templates\en\content"
+      template="different-class-loader-template"
+   />
+</div>
