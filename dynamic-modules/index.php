@@ -1,9 +1,24 @@
 <?php
+use APF\core\configuration\ConfigurationManager;
+use APF\core\configuration\provider\ini\IniConfigurationProvider;
 use APF\core\frontcontroller\Frontcontroller;
+use APF\core\loader\RootClassLoader;
+use APF\core\loader\StandardClassLoader;
 use APF\core\logging\Logger;
 use APF\core\singleton\Singleton;
 
-include('./APF/core/bootstrap.php');
+// pre-define the root path of the root class loader (if necessary)
+$dir = dirname($_SERVER['SCRIPT_FILENAME']);
+$apfClassLoaderRootPath = $dir . '/APF';
+$apfClassLoaderConfigurationRootPath = $dir . '/config/APF';
+require('./APF/core/bootstrap.php');
+
+// Define class loader for documentation page resources
+RootClassLoader::addLoader(new StandardClassLoader('EXAMPLE', $dir . '/EXAMPLE', $dir . '/config/EXAMPLE'));
+
+/* @var $iniProvider IniConfigurationProvider */
+$iniProvider = ConfigurationManager::retrieveProvider('ini');
+$iniProvider->setOmitConfigSubFolder(true);
 
 /* @var $logger Logger */
 $logger = Singleton::getInstance('APF\core\logging\Logger');
@@ -13,5 +28,5 @@ $logger->addLogWriter('mysqli', clone $writer);
 /* @var $fc Frontcontroller */
 $fc = &Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
 $fc->setContext('app-context');
-$fc->registerAction('APF\examples\dynamicmodules\core\biz', 'modules-init');
-echo $fc->start('APF\examples\dynamicmodules\site\pres\templates', 'main');
+$fc->registerAction('EXAMPLE\dynamicmodules\core\biz', 'modules-init');
+echo $fc->start('EXAMPLE\dynamicmodules\site\pres\templates', 'main');

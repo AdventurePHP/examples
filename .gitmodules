@@ -6,3 +6,7 @@
 	path = calc/APF
 	url = https://github.com/AdventurePHP/code
 	branch = master
+[submodule "dyn-mod-code"]
+	path = dynamic-modules/APF
+	url = https://github.com/AdventurePHP/code
+	branch = master

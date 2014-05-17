@@ -1,0 +1,22 @@
+<style type="text/css">
+   .news-mod-content form label,
+   .news-mod-content form input {
+      display: block;
+   }
+   .success {
+      font-weight: bold;
+      color: green;
+      border: 1px solid green;
+      background: greenyellow;
+      margin: 5px;
+      padding: 5px;
+   }
+</style>
+<p>This is the content of the <strong>news</strong> module:</p>
+<div class="news-mod-content">
+   <core:importdesign
+       namespace="EXAMPLE\dynamicmodules\modules\news\pres\templates\subviews"
+       template="[newsview=start]"
+       incparam="newsview"
+   />
+</div>
