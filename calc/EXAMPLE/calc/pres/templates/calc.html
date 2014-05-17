@@ -1,4 +1,4 @@
-<@controller class="APF\examples\calc\pres\controller\CalculatorController" @>
+<@controller class="EXAMPLE\calc\pres\controller\CalculatorController" @>
 <core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <style type="text/css">
 .apf-calc-mod {
@@ -86,12 +86,12 @@
             <p class="error">Error: This input field contains wrong content!</p>
          </form:listener>         
          
-         <form:listener control="operand2" validator="APF\examples\calc\pres\validator\ZeroDivisionValidator">
+         <form:listener control="operand2" validator="EXAMPLE\calc\pres\validator\ZeroDivisionValidator">
             <p class="error">Error: detected division by zero!</p>
          </form:listener>
          
          <form:addvalidator
-            class="APF\examples\calc\pres\validator\ZeroDivisionValidator"
+            class="EXAMPLE\calc\pres\validator\ZeroDivisionValidator"
             button="calc"
             control="operand2"
             type="special"

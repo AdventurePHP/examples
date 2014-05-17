@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\calc\pres\validator;
+namespace EXAMPLE\calc\pres\validator;
 
 /**
  * <!--

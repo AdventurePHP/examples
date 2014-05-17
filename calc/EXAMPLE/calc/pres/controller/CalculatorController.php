@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\calc\pres\controller;
+namespace EXAMPLE\calc\pres\controller;
 
 /**
  * <!--
@@ -24,7 +24,7 @@ use APF\core\pagecontroller\BaseDocumentController;
 use APF\tools\form\taglib\SelectBoxTag;
 
 /**
- * @package APF\examples\calc\pres\controller
+ * @package EXAMPLE\calc\pres\controller
  * @class CalculatorController
  *
  * Implements the document controller to calculate the result of the module.
