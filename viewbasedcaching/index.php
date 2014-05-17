@@ -22,7 +22,6 @@ $iniProvider->setOmitContext(true);
 
 /* @var $fC Frontcontroller */
 $fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
-$fC->setContext('vbc');
 echo $fC->start('EXAMPLE\vbc\pres\templates', 'main');
 
 // display benchmark report if desired
