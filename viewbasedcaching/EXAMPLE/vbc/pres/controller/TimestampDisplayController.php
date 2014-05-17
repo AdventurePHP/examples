@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\vbc\pres\controller;
+namespace EXAMPLE\vbc\pres\controller;
 
 /**
  * <!--
@@ -23,10 +23,10 @@ namespace APF\examples\vbc\pres\controller;
 use APF\core\pagecontroller\BaseDocumentController;
 
 /**
- * @package APF\examples\vbc\pres\controller
+ * @package EXAMPLE\vbc\pres\controller
  * @class TimestampDisplayController
  *
- * Implements the document controller for the views 'view_one.html' and 'view_two.html'.
+ * Implements the document controller for the views 'one.html' and 'two.html'.
  *
  * @author Christian Achatz
  * @version

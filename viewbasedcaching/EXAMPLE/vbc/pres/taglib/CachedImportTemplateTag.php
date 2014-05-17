@@ -1,5 +1,5 @@
 <?php
-namespace APF\examples\vbc\pres\taglib;
+namespace EXAMPLE\vbc\pres\taglib;
 
 /**
  * <!--
@@ -25,7 +25,7 @@ use APF\tools\cache\CacheManagerFabric;
 use APF\tools\cache\key\SimpleCacheKey;
 
 /**
- * @package APF\examples\vbc\pres\taglib
+ * @package EXAMPLE\vbc\pres\taglib
  * @class CachedImportTemplateTag
  *
  * Implements the view based caching taglib, based on the core:importdesign

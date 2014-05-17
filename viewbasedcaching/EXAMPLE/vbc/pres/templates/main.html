@@ -16,21 +16,21 @@
       <p>
          This is a sample implementation of the view based caching concept. Please visit the
          <a href="http://adventure-php-framework.org/Page/086-How-to-implement-view-based-caching" title="APF documentation page">APF documentation page</a>
-         to get the details on the implementation. The following box definedes a view, that is <strong>not</strong>
+         to get the details on the implementation. The following box defines a view, that is <strong>not</strong>
          cached, the second box includes the content of a cached view using the
-         <strong>&lt;cache:importdesign /&gt;</strong> taglib's functionality:
+         <strong>&lt;cache:importdesign /&gt;</strong> tag's functionality:
       </p>
       <div class="vbc-view">
          <core:importdesign
-               namespace="APF\examples\vbc\pres\templates\views"
-               template="view_one"
+               namespace="EXAMPLE\vbc\pres\templates\views"
+               template="one"
                />
       </div>
       <div class="vbc-view">
-         <core:addtaglib class="APF\examples\vbc\pres\taglib\CachedImportTemplateTag" prefix="cache" name="importdesign" />
+         <core:addtaglib class="EXAMPLE\vbc\pres\taglib\CachedImportTemplateTag" prefix="cache" name="importdesign" />
          <cache:importdesign
-               namespace="APF\examples\vbc\pres\templates\views"
-               template="view_two"
+               namespace="EXAMPLE\vbc\pres\templates\views"
+               template="two"
                cachekey="sites_vbc_vbcmain_view_two"
                cacheconfig="view_cache"
                />
