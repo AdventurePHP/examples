@@ -20,7 +20,8 @@ if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEP
 $context = 'myapp';
 
 // pre-define the root path of the root class loader (if necessary)
-$apfClassLoaderRootPath = dirname($_SERVER['SCRIPT_FILENAME']) . '/APF';
+$dir = dirname($_SERVER['SCRIPT_FILENAME']);
+$apfClassLoaderRootPath = $dir . '/APF';
 $apfClassLoaderConfigurationRootPath = $dir . '/config/APF';
 include_once('./APF/core/bootstrap.php');
 
