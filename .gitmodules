@@ -2,3 +2,7 @@
 	path = viewbasedcaching/APF
 	url = https://github.com/AdventurePHP/code
 	branch = master
+[submodule "calc-code"]
+	path = calc/APF
+	url = https://github.com/AdventurePHP/code
+	branch = master
