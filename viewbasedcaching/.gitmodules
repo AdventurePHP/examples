@@ -1,4 +1,0 @@
-[submodule "vbc-code"]
-	path = APF
-	url = https://github.com/AdventurePHP/code.git
-	branch = master
