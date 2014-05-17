@@ -10,3 +10,7 @@
 	path = dynamic-modules/APF
 	url = https://github.com/AdventurePHP/code
 	branch = master
+[submodule "sb-code"]
+	path = sandbox/APF
+	url = https://github.com/AdventurePHP/code
+	branch = master
