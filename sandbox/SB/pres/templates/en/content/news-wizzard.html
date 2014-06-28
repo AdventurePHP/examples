@@ -1,8 +1,6 @@
 <@controller
    class="SB\pres\controller\NewsWizzardController"
 @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
-
 <h2>News wizzard</h2>
 <p>
    The news wizzard is aimed to configure and initialize the <em>News</em> extension.
@@ -62,7 +60,7 @@ $setup->run();
          <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
       </p>
       <p>
-         The error is: <em><template:placeholder name="exception" /></em>
+         The error is: <em>${exception}</em>
       </p>
    </div>
 </html:template>

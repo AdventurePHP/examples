@@ -1,4 +1,6 @@
-<@controller class="SB\pres\controller\DatabaseContentController" @>
+<@controller
+   class="SB\pres\controller\DatabaseContentController"
+@>
 <h2>Datenbank-Inhalte</h2>
 <p>
    Diese Seite zeigt Inhalte aus der Datenbank an, die mit dem
@@ -6,7 +8,7 @@
 </p>
 <p>
    Der folgende Bereich zeigt die Seite mit den Url-Namen
-   &quot;<html:placeholder name="urlname" />&quot;:
+   &quot;${urlname}&quot;:
 </p>
 <html:template name="no-content">
    <div class="err">
@@ -15,7 +17,7 @@
 </html:template>
 <html:template name="content">
    <div class="db-content">
-      <template:placeholder name="content" />
+      ${content}
    </div>
 </html:template>
 <html:template name="no-config">

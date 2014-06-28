@@ -77,12 +77,11 @@
    included there by clicking on the template's file name:
 </p>
 <ul>
-   <html:placeholder name="existing-tmpl" />
+   ${existing-tmpl}
 </ul>
 <p>
    This form allows you to create new files adding the source code of the content field:
 </p>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <html:form id="new-page" name="new-page" method="post" action="#new-page">
    <fieldset>
       <label for="tmpl-name">Template name:</label>

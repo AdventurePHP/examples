@@ -1,5 +1,6 @@
-<@controller class="SB\pres\controller\DatabaseWizzardController" @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<@controller
+   class="SB\pres\controller\DatabaseWizzardController"
+@>
 <h2>Database configuration wizzard</h2>
 <p>
    Using this wizzard you can create a database configuration and a database table to store dynamic
@@ -22,7 +23,7 @@
          <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em> file!
       </p>
       <p>
-         The error message is: <em><template:placeholder name="exception" /></em>
+         The error message is: <em>${exception}</em>
       </p>
    </div>
 </html:template>
@@ -39,7 +40,7 @@
       content of the page:
    </p>
 <pre>
-<template:placeholder name="statement" />
+${statement}
 </pre>
    <div class="warn">
       In order to correctly create the table the user added to the above configuration must have
@@ -112,7 +113,7 @@
       to display it:
    </p>
    <ul>
-      <template:placeholder name="pages" />
+      ${pages}
    </ul>
    <p>
       If you are interested in the mechanism, the content is read from the database, please have a

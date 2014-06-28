@@ -6,7 +6,7 @@
 </p>
 <p>
    The subsequent area contains the content that is refered to with the url name
-   &quot;<html:placeholder name="urlname" />&quot;:
+   &quot;${urlname}&quot;:
 </p>
 <html:template name="no-content">
    <div class="err">
@@ -15,7 +15,7 @@
 </html:template>
 <html:template name="content">
    <div class="db-content">
-      <template:placeholder name="content" />
+      ${content}
    </div>
 </html:template>
 <html:template name="no-config">

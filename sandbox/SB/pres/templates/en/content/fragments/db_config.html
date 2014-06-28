@@ -1,4 +1,3 @@
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <html:form id="new-db-config" name="new-db-config" method="post" action="#new-db-config">
    <fieldset>
       <label for="db-host">Database server:</label>
@@ -31,28 +30,28 @@
       The database configuration has already been created and contains the listed parmeters:
       <dl class="db-config">
          <dt>Database server:</dt>
-         <dd><template:placeholder name="host" /></dd>
+         <dd>${host}</dd>
 
          <dt>Database port:</dt>
-         <dd><template:placeholder name="port" /></dd>
+         <dd>${port}</dd>
 
          <dt>Database user:</dt>
-         <dd><template:placeholder name="user" /></dd>
+         <dd>${user}</dd>
 
          <dt>Database password:</dt>
-         <dd><template:placeholder name="pass" /></dd>
+         <dd>${pass}</dd>
 
          <dt>Database name:</dt>
-         <dd><template:placeholder name="name" /></dd>
+         <dd>${name}</dd>
 
          <dt>Collation of the connection:</dt>
-         <dd><template:placeholder name="collation" /></dd>
+         <dd>${collation}</dd>
 
          <dt>Charset of the connection:</dt>
-         <dd><template:placeholder name="charset" /></dd>
+         <dd>${charset}</dd>
 
          <dt>Connection type:</dt>
-         <dd><template:placeholder name="type" /></dd>
+         <dd>${type}</dd>
       </dl>
       In case these are not the values that you'd expect, please change them within the
       <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em> file.

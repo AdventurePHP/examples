@@ -1,7 +1,6 @@
 <@controller
    class="SB\pres\controller\UserManagementWizzardController"
 @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <h2>Benutzer-Verwaltungs-Wizzard</h2>
 <p>
    Der Benutzer-Verwaltungs-Wizzard ist dazu gedacht, das Modul <em>usermanagement</em> zu konfigurieren
@@ -65,7 +64,7 @@ $setup->run();
          <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
       </p>
       <p>
-         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+         Der Fehler lautet: <em>${exception}</em>
       </p>
    </div>
 </html:template>
@@ -95,7 +94,7 @@ $setup->run();
       Die folgenden Benutzer sind bereits im System vorhanden:
    </p>
    <ul class="user-list">
-      <template:placeholder name="user-list-entries" />
+      ${user-list-entries}
    </ul>
 </html:template>
 

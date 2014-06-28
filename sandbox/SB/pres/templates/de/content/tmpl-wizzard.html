@@ -1,4 +1,6 @@
-<@controller class="SB\pres\controller\TemplateWizzardController" @>
+<@controller
+   class="SB\pres\controller\TemplateWizzardController"
+@>
 <h2>Template-Wizzard</h2>
 <p>
    Mit dem Template-Wizzard können die Templates der Sandbox bearbeitet und geändert werden. Das 
@@ -78,13 +80,12 @@
    Datei-Namen jeweils aufgerufen werden:
 </p>
 <ul>
-   <html:placeholder name="existing-tmpl" />
+   ${existing-tmpl}
 </ul>
 <p>
    Das folgende Formular ermöglichst es, eine neue Datei anzulegen und diese mit dem gewünschten
    HTML-Quelltext zu versehen:
 </p>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
 <html:form id="new-page" name="new-page" method="post" action="#new-page">
    <fieldset>
       <label for="tmpl-name">Template-Name:</label>

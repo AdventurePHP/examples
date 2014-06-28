@@ -1,8 +1,6 @@
 <@controller
    class="SB\pres\controller\GuestbookWizzardController"
 @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
-
 <h2>Gästebuch Wizzard</h2>
 <p>
    Der Gästebuch-Wizzard ist dazu gedacht, die Extension <em>Gästebuch</em> zu konfigurieren
@@ -64,7 +62,7 @@ $setup->run();
          <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
       </p>
       <p>
-         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+         Der Fehler lautet: <em>${exception}</em>
       </p>
    </div>
 </html:template>

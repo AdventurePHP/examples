@@ -1,5 +1,6 @@
-<@controller class="SB\pres\controller\DatabaseWizzardController" @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<@controller
+   class="SB\pres\controller\DatabaseWizzardController"
+@>
 <h2>Datenbank-Konfigurations-Wizzard</h2>
 <p>
    Mit diesem Wizzard kann eine Datenbank-Konfiguration angelegt und anschließend eine Tabelle
@@ -23,7 +24,7 @@
          <em>/APF/config/core/database/myapp/DEFAULT_connections.ini</em>!
       </p>
       <p>
-         Der Fehler lautet: <em><template:placeholder name="exception" /></em>
+         Der Fehler lautet: <em>${exception}</em>
       </p>
    </div>
 </html:template>
@@ -39,7 +40,7 @@
       die fortlaufende Nummer des Inhalts, eine Spalte für den Url-Namen und eine für den Inhalt:
    </p>
 <pre>
-<template:placeholder name="statement" />
+${statement}
 </pre>
    <div class="warn">
       Um die Tabelle korrekt anlegen zu können, benötigt der zuvor eingetragene Benutzer
@@ -113,7 +114,7 @@
       Inhalte der Seiten anzuzeigen:
    </p>
    <ul>
-      <template:placeholder name="pages" />
+      ${pages}
    </ul>
    <p>
       Wie die Inhalte aus der Datenbank geladen werden können Sie in der Template-Datei
