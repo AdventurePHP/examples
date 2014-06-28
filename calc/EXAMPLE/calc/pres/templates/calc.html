@@ -1,5 +1,6 @@
-<@controller class="EXAMPLE\calc\pres\controller\CalculatorController" @>
-<core:addtaglib class="APF\tools\form\taglib\HtmlFormTag" prefix="html" name="form" />
+<@controller
+   class="EXAMPLE\calc\pres\controller\CalculatorController"
+@>
 <style type="text/css">
 .apf-calc-mod {
    border: 1px solid gray;
@@ -61,7 +62,7 @@
             <p class="error">You did something wrong!</p>
          </form:error>
          <form:success name="result">
-            <p class="result">The result of the calculation is: <success:placeholder name="result" /></p>
+            <p class="result">The result of the calculation is: ${result}</p>
          </form:success>
 
          <label>Operand1:</label>
