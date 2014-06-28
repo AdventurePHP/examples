@@ -13,9 +13,9 @@ class TemplateWizzardController extends BaseDocumentController {
       // display pages for th current language
       $buffer = '';
 
-      $rootPath = RootClassLoader::getLoaderByVendor('APF')->getRootPath();
+      $rootPath = RootClassLoader::getLoaderByVendor('SB')->getRootPath();
 
-      $files = glob($rootPath . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/*.html');
+      $files = glob($rootPath . '/pres/templates/' . $this->getLanguage() . '/content/*.html');
       foreach ($files as $file) {
          $fileName = basename($file);
          $urlName = str_replace('.html', '', $fileName);
@@ -28,7 +28,7 @@ class TemplateWizzardController extends BaseDocumentController {
 
       if ($form->isSent() && $form->isValid()) {
 
-         $filePath = $rootPath . '/sandbox/pres/templates/' . $this->getLanguage() . '/content/';
+         $filePath = $rootPath . '/pres/templates/' . $this->getLanguage() . '/content';
 
          $fileName = $form->getFormElementByName('tmpl-name')->getAttribute('value');
          $content = $form->getFormElementByName('tmpl-content')->getContent();
