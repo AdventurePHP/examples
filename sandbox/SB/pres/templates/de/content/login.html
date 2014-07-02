@@ -73,13 +73,13 @@ login.type = "username"
    class="APF\modules\usermanagement\pres\taglib\UmgtTemplateTag"
    prefix="umgt"
    name="template"
-   /&gt;
+/&gt;
+&lt;core:addtaglib
+   class="APF\modules\usermanagement\pres\taglib\UmgtLogoutLinkTag"
+   prefix="umgt"
+   name="logoutlink"
+/&gt;
 &lt;umgt:template condition="logged-in" transform-on-place="true"&gt;
-   &lt;template:addtaglib
-         class="APF\modules\usermanagement\pres\taglib\UmgtLogoutLinkTag"
-         prefix="umgt"
-         name="logoutlink"
-         /&gt;
    &lt;li&gt;&lt;a href="&lt;umgt:logoutlink /&gt;"&gt;Logout&lt;/a&gt;&lt;/li&gt;
 &lt;/umgt:template&gt;
 &lt;umgt:template condition="logged-out" transform-on-place="true"&gt;
