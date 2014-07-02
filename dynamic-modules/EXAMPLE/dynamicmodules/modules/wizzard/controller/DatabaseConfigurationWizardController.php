@@ -7,7 +7,7 @@ use APF\tools\http\HeaderManager;
 use APF\tools\link\LinkGenerator;
 use APF\tools\link\Url;
 
-class DatabaseConfigurationWizzardController extends BaseDocumentController {
+class DatabaseConfigurationWizardController extends BaseDocumentController {
 
    public function transformContent() {
 
@@ -42,11 +42,13 @@ class DatabaseConfigurationWizzardController extends BaseDocumentController {
       } else {
 
          // pre-fill
-         $host->setValue($section->getValue('Host'));
-         $port->setValue($section->getValue('Port'));
-         $name->setValue($section->getValue('Name'));
-         $user->setValue($section->getValue('User'));
-         $pass->setValue($section->getValue('Pass'));
+         if($section !== null){
+            $host->setValue($section->getValue('Host'));
+            $port->setValue($section->getValue('Port'));
+            $name->setValue($section->getValue('Name'));
+            $user->setValue($section->getValue('User'));
+            $pass->setValue($section->getValue('Pass'));
+         }
 
          $form->transformOnPlace();
       }
