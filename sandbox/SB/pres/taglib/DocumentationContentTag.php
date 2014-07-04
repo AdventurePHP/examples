@@ -16,6 +16,9 @@ class DocumentationContentTag extends Document {
       if (count($files) > 0) {
          $this->setContent($this->sanitizeContent(file_get_contents($files[0])));
       }
+
+      // allow expression tags also in this node
+      $this->extractExpressionTags();
    }
 
    private function sanitizeContent($content) {
@@ -30,6 +33,7 @@ class DocumentationContentTag extends Document {
       $content = preg_replace('/<doku:link>(.+)<\/doku:link>/isU', '<a href="$1">$1</a>', $content);
       $content = preg_replace('/<core:importdesign namespace="APF\\\\modules\\\\comments\\\\pres\\\\templates" template="comment" categorykey="(.+)" \/>/isU', '', $content);
       $content = preg_replace('/<gen:highlight type="([a-z\-]+)">(.+)<\/gen:highlight>/isU', '<pre>$2</pre>', $content);
+
       return preg_replace('/<doku:title (.+) title="(.+)" (.+)>(.+)<\/doku:title>/isU', '<h2>$2</h2>', $content);
    }
 
