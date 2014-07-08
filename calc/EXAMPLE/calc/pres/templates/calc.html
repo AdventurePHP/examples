@@ -90,7 +90,13 @@
          <form:listener control="operand2" validator="EXAMPLE\calc\pres\validator\ZeroDivisionValidator">
             <p class="error">Error: detected division by zero!</p>
          </form:listener>
-         
+
+         <form:addfilter
+               class="APF\tools\form\filter\FloatFilter"
+               button="calc"
+               control="operand1|operand2"
+               />
+
          <form:addvalidator
             class="EXAMPLE\calc\pres\validator\ZeroDivisionValidator"
             button="calc"
@@ -102,11 +108,6 @@
             button="calc"
             control="operand1|operand2"
             type="special"
-         />
-         <form:addfilter
-            class="APF\tools\form\filter\FloatFilter"
-            button="calc"
-            control="operand1|operand2"
          />
 
          <form:button name="calc" value="Calculate" />
