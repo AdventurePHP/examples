@@ -123,7 +123,7 @@ class NewsWizzardController extends BaseDocumentController {
                   $setup->addMappingConfiguration('APF\extensions\news', 'news');
                   $setup->addRelationConfiguration('APF\extensions\news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-                  $setup->run();
+                  $setup->run(true);
 
                   HeaderManager::forward('?page=news-wizzard#step-3');
                } else {

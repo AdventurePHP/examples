@@ -46,7 +46,7 @@ $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\Generi
 $setup->addMappingConfiguration('APF\extensions\news', 'news');
 $setup->addRelationConfiguration('APF\extensions\news', 'news');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-$setup->run();
+$setup->run(true);
    </pre>
    <p>
       Please click the button to create the database layout:
