@@ -115,7 +115,7 @@ class UserManagementWizzardController extends BaseDocumentController {
                   $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-                  $setup->run();
+                  $setup->run(true);
 
                   // initialize application
                   $umgt = & $this->getUmgtManager();
