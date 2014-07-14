@@ -2,15 +2,12 @@
 namespace EXAMPLE\navigation\pres\taglibs;
 
 use APF\core\pagecontroller\Document;
-use APF\core\pagecontroller\TagLib;
 use EXAMPLE\navigation\biz\NavigationNode;
 
 class NavigationItemTag extends Document {
 
    public function __construct() {
-      $this->tagLibs = array(
-         new TagLib('EXAMPLE\navigation\pres\taglibs\ItemTemplateContentTag', 'item', 'content')
-      );
+      self::addTagLib('EXAMPLE\navigation\pres\taglibs\ItemTemplateContentTag', 'item', 'content');
    }
 
    public function onParseTime() {

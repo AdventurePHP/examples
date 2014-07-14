@@ -14,6 +14,11 @@ interface NavigationNode {
    public function getUrl();
 
    /**
+    * @return bool
+    */
+   public function isActive();
+
+   /**
     * @return NavigationNode
     */
    public function getParent();
