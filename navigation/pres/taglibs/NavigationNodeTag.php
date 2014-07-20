@@ -2,6 +2,7 @@
 namespace EXAMPLE\navigation\pres\taglibs;
 
 use APF\core\pagecontroller\Document;
+use APF\core\pagecontroller\TagLib;
 use EXAMPLE\navigation\biz\NavigationNode;
 
 class NavigationNodeTag extends Document {
@@ -12,8 +13,10 @@ class NavigationNodeTag extends Document {
    private $node;
 
    public function __construct() {
-      self::addTagLib('EXAMPLE\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item');
-      self::addTagLib('EXAMPLE\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content');
+      $this->tagLibs = array(
+         new TagLib('EXAMPLE\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item'),
+         new TagLib('EXAMPLE\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content')
+      );
    }
 
    /**
@@ -31,9 +34,7 @@ class NavigationNodeTag extends Document {
 
       $buffer = '';
 
-      /* @var $navigationNodes NavigationNode[] */
       $navigationNodes = $this->node->getChildren();
-
       if (count($navigationNodes) > 0) {
          foreach ($navigationNodes as $node) {
             $buffer .= $this
@@ -59,7 +60,6 @@ class NavigationNodeTag extends Document {
 
    /**
     * @param int $status
-    *
     * @return NavigationItemTag
     */
    private function getTemplate($status) {
