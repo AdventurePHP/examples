@@ -4,7 +4,6 @@ namespace SB\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\database\MySQLiHandler;
 use APF\core\pagecontroller\BaseDocumentController;
-use APF\tools\request\RequestHandler;
 
 class DatabaseContentController extends BaseDocumentController {
 
@@ -14,7 +13,7 @@ class DatabaseContentController extends BaseDocumentController {
 
    public function transformContent() {
 
-      $urlName = RequestHandler::getValue('name');
+      $urlName = self::getRequest()->getParameter('name');
       $this->setPlaceHolder('urlname', $urlName);
 
       // in case the page is called from the template wizzard and no configuration is

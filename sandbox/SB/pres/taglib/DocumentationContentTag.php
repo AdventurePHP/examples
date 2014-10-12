@@ -3,13 +3,12 @@ namespace SB\pres\taglib;
 
 use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\Document;
-use APF\tools\request\RequestHandler;
 
 class DocumentationContentTag extends Document {
 
    public function onAfterAppend() {
 
-      $id = RequestHandler::getValue('id', '013');
+      $id = self::getRequest()->getParameter('id', '013');
 
       $rootPath = RootClassLoader::getLoaderByVendor('APF')->getRootPath();
       $files = glob($rootPath . '/sandbox/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');

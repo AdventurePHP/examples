@@ -5,26 +5,24 @@ use APF\core\database\DatabaseHandlerException;
 use APF\core\database\MySQLiHandler;
 use APF\core\frontcontroller\AbstractFrontcontrollerAction;
 use APF\core\singleton\Singleton;
-use EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel;
 use APF\tools\http\HeaderManager;
 use APF\tools\link\LinkGenerator;
 use APF\tools\link\Url;
-use APF\tools\request\RequestHandler;
 
 class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
 
    public function run() {
 
       /* @var $model DynamicModulesModel */
-      $model = & Singleton::getInstance('EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel');
+      $model = &Singleton::getInstance('EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel');
 
       $conn = null;
       try {
 
-         $moduleName = RequestHandler::getValue('mod');
+         $moduleName = self::getRequest()->getParameter('mod');
 
          /* @var $conn MySQLiHandler */
-         $conn = & $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('modules');
+         $conn = &$this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('modules');
 
          $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
          $result = $conn->executeTextStatement($select);
@@ -37,7 +35,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
             $model->setContentView($data['content_template']);
 
             // execute the fc action for the desired module
-            $action = & $this->getServiceObject($data['namespace'] . '\biz\\' . $data['fc_action']);
+            $action = &$this->getServiceObject($data['namespace'] . '\biz\\' . $data['fc_action']);
             /* @var $action AbstractFrontcontrollerAction */
             $action->setActionNamespace($data['namespace']);
             $action->setActionName($data['fc_action']);
