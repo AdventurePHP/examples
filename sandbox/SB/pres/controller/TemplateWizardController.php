@@ -5,7 +5,7 @@ use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
 
-class TemplateWizzardController extends BaseDocumentController {
+class TemplateWizardController extends BaseDocumentController {
 
    public function transformContent() {
 

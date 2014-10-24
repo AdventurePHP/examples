@@ -4,15 +4,14 @@ namespace SB\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\ConnectionManager;
+use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
-use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
-use APF\modules\usermanagement\biz\model\UmgtApplication;
-use APF\modules\usermanagement\biz\model\UmgtUser;
-use APF\modules\usermanagement\biz\UmgtManager;
+use Exception;
 
-class UserManagementWizzardController extends BaseDocumentController {
+class GuestBookWizardController extends BaseDocumentController {
 
-   private static $CONFIG_SECTION_NAME = 'Sandbox-UMGT';
+   private static $CONFIG_SECTION_NAME = 'Sandbox-Guestbook';
 
    public function transformContent() {
 
@@ -29,7 +28,6 @@ class UserManagementWizzardController extends BaseDocumentController {
          $name = $formNewConfig->getFormElementByName('db-name')->getAttribute('value');
 
          // create configuration and save it!
-
          $section = new IniConfiguration();
          $section->setValue('Host', $host);
          $section->setValue('User', $user);
@@ -50,7 +48,7 @@ class UserManagementWizzardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=umgt-wizzard#step-2');
+         self::getResponse()->forward('./?page=guestbook-wizzard#step-2');
 
          return;
       }
@@ -66,8 +64,18 @@ class UserManagementWizzardController extends BaseDocumentController {
                   . '" is not contained in the current configuration!', E_USER_ERROR);
          }
 
-         $tmpl->setPlaceHolder('host', $section->getValue('Host'));
-         $tmpl->setPlaceHolder('port', $section->getValue('Port'));
+         $rawHost = $section->getValue('Host');
+         $colon = strpos($rawHost, ':');
+         if ($colon) {
+            $host = substr($rawHost, 0, $colon);
+            $port = substr($rawHost, $colon + 1);
+         } else {
+            $host = $section->getValue('Host');
+            $port = $section->getValue('Port');
+         }
+
+         $tmpl->setPlaceHolder('host', $host);
+         $tmpl->setPlaceHolder('port', $port);
          $tmpl->setPlaceHolder('user', $section->getValue('User'));
          $tmpl->setPlaceHolder('pass', $section->getValue('Pass'));
          $tmpl->setPlaceHolder('name', $section->getValue('Name'));
@@ -88,16 +96,17 @@ class UserManagementWizzardController extends BaseDocumentController {
 
          $formInitDb = & $this->getForm('init-db');
          try {
-            $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
-                  ->getConnection(self::$CONFIG_SECTION_NAME);
+            /* @var $connMgr ConnectionManager */
+            $connMgr = $this->getServiceObject('APF\core\database\ConnectionManager');
             /* @var $conn AbstractDatabaseHandler */
+            $conn = $connMgr->getConnection(self::$CONFIG_SECTION_NAME);
 
             // check for db layout...
             $result = $conn->executeTextStatement('SHOW TABLES');
             $setupDone = false;
             $offsetName = 'Tables_in_' . $section->getValue('Name');
             while ($data = $conn->fetchData($result)) {
-               if ($data[$offsetName] == 'ent_user') {
+               if ($data[$offsetName] == 'ent_guestbook') {
                   $setupDone = true;
                }
             }
@@ -108,26 +117,23 @@ class UserManagementWizzardController extends BaseDocumentController {
             } else {
                if ($formInitDb->isSent()) {
 
-                  // setup database layout
-                  /* @var $setup GenericORMapperManagementTool */
-                  $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
-                  $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
-                  $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
-                  $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-                  $setup->run();
+                  // set variables used in setup.php and init.php
+                  $context = 'myapp';
+                  $connectionKey = 'Sandbox-Guestbook';
 
-                  // initialize application
-                  $umgt = & $this->getUmgtManager();
-                  $app = new UmgtApplication();
-                  $app->setDisplayName('Sandbox');
-                  $umgt->saveApplication($app);
+                  $loader = RootClassLoader::getLoaderByVendor('APF');
+                  $rootPath = $loader->getRootPath();
 
-                  self::getResponse()->forward('?page=umgt-wizzard#step-3');
+                  include($rootPath . '/modules/guestbook2009/data/setup/setup.php');
+                  include($rootPath . '/modules/guestbook2009/data/setup/init.php');
+
+                  self::getResponse()->forward('?page=guestbook-wizzard#step-3');
+
                } else {
                   $formInitDb->transformOnPlace();
                }
             }
-         } catch (\Exception $e) {
+         } catch (Exception $e) {
             $tmplDbConnErr = & $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
@@ -136,71 +142,12 @@ class UserManagementWizzardController extends BaseDocumentController {
          $this->getTemplate('step-1-req')->transformOnPlace();
       }
 
-      // step 3: initialize "root" user
-      $initialUserCreated = false;
+      // step 3: call guestbook back-end
       if ($databaseLayoutInitialized) {
-
-         $formCreateUser = & $this->getForm('create-user');
-
-         $umgt = & $this->getUmgtManager();
-
-         if ($formCreateUser->isSent() && $formCreateUser->isValid()) {
-
-            $username = $formCreateUser->getFormElementByName('username')->getAttribute('value');
-            $password = $formCreateUser->getFormElementByName('password')->getAttribute('value');
-
-            $user = new UmgtUser();
-            $user->setUsername($username);
-            $user->setPassword($password);
-
-            // assume typical user attributes to have valid display in mgmt backend!
-            $user->setFirstName($username);
-            $user->setLastName($username);
-            $user->setDisplayName($username);
-
-            $umgt->saveUser($user);
-
-            self::getResponse()->forward('?page=umgt-wizzard#step-3');
-         } else {
-
-            // display user list to note the user
-            $userListTmpl = & $this->getTemplate('user-list');
-
-            $users = $umgt->getPagedUserList();
-
-            if (count($users) > 0) {
-
-               // indicate that step 4 may be activated
-               $initialUserCreated = true;
-
-               $buffer = '';
-               foreach ($users as $user) {
-                  $buffer .= '<li>' . $user->getUsername() . '</li>' . PHP_EOL;
-               }
-
-               $userListTmpl->setPlaceHolder('user-list-entries', $buffer);
-               $userListTmpl->transformOnPlace();
-            }
-
-            $formCreateUser->transformOnPlace();
-         }
+         $this->getTemplate('step-3')->transformOnPlace();
       } else {
          $this->getTemplate('step-2-req')->transformOnPlace();
       }
-
-      // step 4: call umgt backend
-      if ($initialUserCreated) {
-         $this->getTemplate('step-4')->transformOnPlace();
-      } else {
-         $this->getTemplate('step-3-req')->transformOnPlace();
-      }
-   }
-
-   /**
-    * @return UmgtManager The instance of the current umgt manager.
-    */
-   private function &getUmgtManager() {
-      return $this->getDIServiceObject('APF\modules\usermanagement\biz', 'UmgtManager');
    }
 
 }

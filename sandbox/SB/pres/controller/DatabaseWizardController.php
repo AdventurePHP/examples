@@ -8,7 +8,7 @@ use APF\core\database\DatabaseHandlerException;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
 
-class DatabaseWizzardController extends BaseDocumentController {
+class DatabaseWizardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-MySQL';
    private static $TABLE_NAME = 'sandbox_content';

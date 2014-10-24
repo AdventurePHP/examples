@@ -8,7 +8,7 @@ use APF\core\database\ConnectionManager;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 
-class NewsWizzardController extends BaseDocumentController {
+class NewsWizardController extends BaseDocumentController {
 
    private static $CONFIG_SECTION_NAME = 'Sandbox-News';
 
