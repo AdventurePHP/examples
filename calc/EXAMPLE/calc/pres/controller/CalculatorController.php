@@ -24,9 +24,6 @@ use APF\core\pagecontroller\BaseDocumentController;
 use APF\tools\form\taglib\SelectBoxTag;
 
 /**
- * @package EXAMPLE\calc\pres\controller
- * @class CalculatorController
- *
  * Implements the document controller to calculate the result of the module.
  *
  * @author Christian Achatz

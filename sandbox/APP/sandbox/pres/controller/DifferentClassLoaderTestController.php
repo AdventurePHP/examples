@@ -5,9 +5,6 @@ use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
 
 /**
- * @package APP\sandbox\pres\controller
- * @class DifferentClassLoaderTestController
- *
  * Demonstrates the class loading capabilities of the APF 2.0.
  *
  * @author Christian Achatz

@@ -25,9 +25,6 @@ use APF\tools\form\taglib\SelectBoxTag;
 use APF\tools\form\validator\TextFieldValidator;
 
 /**
- * @package APF\examples\pres\validator
- * @class ZeroDivisionValidator
- *
  * Implements a validator that checks for division by zero.
  *
  * @author Christian Achatz

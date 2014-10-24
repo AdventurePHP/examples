@@ -4,9 +4,6 @@ namespace SB\pres\taglib;
 use APF\core\pagecontroller\ImportTemplateTag;
 
 /**
- * @package SB\pres\taglib
- * @class SandboxLanguageImportTemplateTag
- *
  * Implements a special tag lib to import language templates from
  * a prefixed namespace.
  */

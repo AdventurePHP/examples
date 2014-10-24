@@ -23,9 +23,6 @@ namespace EXAMPLE\vbc\pres\controller;
 use APF\core\pagecontroller\BaseDocumentController;
 
 /**
- * @package EXAMPLE\vbc\pres\controller
- * @class TimestampDisplayController
- *
  * Implements the document controller for the views 'one.html' and 'two.html'.
  *
  * @author Christian Achatz
