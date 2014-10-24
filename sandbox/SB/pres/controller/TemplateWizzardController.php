@@ -4,7 +4,6 @@ namespace SB\pres\controller;
 use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
-use APF\tools\http\HeaderManager;
 
 class TemplateWizzardController extends BaseDocumentController {
 
@@ -35,7 +34,7 @@ class TemplateWizzardController extends BaseDocumentController {
 
          file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content, ENT_QUOTES, Registry::retrieve('APF\core', 'Charset')));
 
-         HeaderManager::forward('./?page=tmpl-wizzard');
+         self::getResponse()->forward('./?page=tmpl-wizzard');
       }
 
       $form->transformOnPlace();

@@ -7,7 +7,6 @@ use APF\core\database\AbstractDatabaseHandler;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
-use APF\tools\http\HeaderManager;
 
 class DatabaseWizzardController extends BaseDocumentController {
 
@@ -50,7 +49,7 @@ class DatabaseWizzardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         HeaderManager::forward('./?page=db-wizzard#step-2');
+         self::getResponse()->forward('./?page=db-wizzard#step-2');
 
          return;
       }
@@ -122,7 +121,7 @@ UNIQUE (`urlname`)
                   $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'hello-world\', \'This is displayed on the hello-world page. / Dieser Text wird auf der Hallo-Welt!-Seite angezeigt.\');';
                   $conn->executeTextStatement($insert);
 
-                  HeaderManager::forward('./?page=db-wizzard#step-3');
+                  self::getResponse()->forward('./?page=db-wizzard#step-3');
                } else {
                   $tmpl = & $this->getTemplate('step-2');
                   $tmpl->setPlaceHolder('statement', $create);
@@ -158,7 +157,7 @@ UNIQUE (`urlname`)
             $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'' . $urlName . '\', \'' . $content . '\');';
             $conn->executeTextStatement($insert);
 
-            HeaderManager::forward('./?page=db-wizzard#step-4');
+            self::getResponse()->forward('./?page=db-wizzard#step-4');
          }
 
          $formCreateContent->transformOnPlace();

@@ -7,7 +7,6 @@ use APF\core\database\AbstractDatabaseHandler;
 use APF\core\database\ConnectionManager;
 use APF\core\loader\RootClassLoader;
 use APF\core\pagecontroller\BaseDocumentController;
-use APF\tools\http\HeaderManager;
 use Exception;
 
 class GuestbookWizzardController extends BaseDocumentController {
@@ -49,7 +48,7 @@ class GuestbookWizzardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         HeaderManager::forward('./?page=guestbook-wizzard#step-2');
+         self::getResponse()->forward('./?page=guestbook-wizzard#step-2');
 
          return;
       }
@@ -128,7 +127,7 @@ class GuestbookWizzardController extends BaseDocumentController {
                   include($rootPath . '/modules/guestbook2009/data/setup/setup.php');
                   include($rootPath . '/modules/guestbook2009/data/setup/init.php');
 
-                  HeaderManager::forward('?page=guestbook-wizzard#step-3');
+                  self::getResponse()->forward('?page=guestbook-wizzard#step-3');
 
                } else {
                   $formInitDb->transformOnPlace();

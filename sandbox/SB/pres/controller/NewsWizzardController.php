@@ -7,7 +7,6 @@ use APF\core\database\AbstractDatabaseHandler;
 use APF\core\database\ConnectionManager;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
-use APF\tools\http\HeaderManager;
 
 class NewsWizzardController extends BaseDocumentController {
 
@@ -47,7 +46,7 @@ class NewsWizzardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         HeaderManager::forward('./?page=news-wizzard#step-2');
+         self::getResponse()->forward('./?page=news-wizzard#step-2');
 
          return;
       }
@@ -125,7 +124,7 @@ class NewsWizzardController extends BaseDocumentController {
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run();
 
-                  HeaderManager::forward('?page=news-wizzard#step-3');
+                  self::getResponse()->forward('?page=news-wizzard#step-3');
                } else {
                   $formInitDb->transformOnPlace();
                }

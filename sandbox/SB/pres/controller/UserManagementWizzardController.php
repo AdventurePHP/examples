@@ -9,7 +9,6 @@ use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 use APF\modules\usermanagement\biz\model\UmgtApplication;
 use APF\modules\usermanagement\biz\model\UmgtUser;
 use APF\modules\usermanagement\biz\UmgtManager;
-use APF\tools\http\HeaderManager;
 
 class UserManagementWizzardController extends BaseDocumentController {
 
@@ -51,7 +50,7 @@ class UserManagementWizzardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         HeaderManager::forward('./?page=umgt-wizzard#step-2');
+         self::getResponse()->forward('./?page=umgt-wizzard#step-2');
 
          return;
       }
@@ -123,7 +122,7 @@ class UserManagementWizzardController extends BaseDocumentController {
                   $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
 
-                  HeaderManager::forward('?page=umgt-wizzard#step-3');
+                  self::getResponse()->forward('?page=umgt-wizzard#step-3');
                } else {
                   $formInitDb->transformOnPlace();
                }
@@ -161,7 +160,7 @@ class UserManagementWizzardController extends BaseDocumentController {
 
             $umgt->saveUser($user);
 
-            HeaderManager::forward('?page=umgt-wizzard#step-3');
+            self::getResponse()->forward('?page=umgt-wizzard#step-3');
          } else {
 
             // display user list to note the user
