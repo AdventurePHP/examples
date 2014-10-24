@@ -5,7 +5,6 @@ use APF\core\database\DatabaseHandlerException;
 use APF\core\database\MySQLiHandler;
 use APF\core\frontcontroller\AbstractFrontcontrollerAction;
 use APF\core\singleton\Singleton;
-use APF\tools\http\HeaderManager;
 use APF\tools\link\LinkGenerator;
 use APF\tools\link\Url;
 
@@ -79,7 +78,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
   \'content\'
 );');
 
-            HeaderManager::forward(LinkGenerator::generateUrl(Url::fromCurrent()));
+            self::getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
          } else {
             // display database setup wizzard in case of any database-related errors
             $model->setNamespace('EXAMPLE\dynamicmodules\modules\wizzard\templates');

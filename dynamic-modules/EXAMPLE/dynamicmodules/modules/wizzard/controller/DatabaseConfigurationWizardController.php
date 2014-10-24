@@ -3,7 +3,6 @@ namespace EXAMPLE\dynamicmodules\modules\wizzard\controller;
 
 use APF\core\database\ConnectionManager;
 use APF\core\pagecontroller\BaseDocumentController;
-use APF\tools\http\HeaderManager;
 use APF\tools\link\LinkGenerator;
 use APF\tools\link\Url;
 
@@ -35,7 +34,7 @@ class DatabaseConfigurationWizardController extends BaseDocumentController {
             $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
             // reload page to let the change take effect
-            HeaderManager::forward(LinkGenerator::generateUrl(Url::fromCurrent()));
+            self::getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
          } else {
             $form->transformOnPlace();
          }
