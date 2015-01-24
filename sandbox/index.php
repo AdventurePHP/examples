@@ -17,6 +17,12 @@ if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && substr_count($_SERVER['HTTP_ACCEP
    $lang = 'de';
 }
 
+// ID#241: initialize date/time environment
+$timezone = ini_get('date.timezone');
+if (empty($timezone)) {
+   ini_set('date.timezone', 'UTC');
+}
+
 $context = 'myapp';
 
 // pre-define the root path of the root class loader (if necessary)
@@ -49,7 +55,7 @@ $sqlProvider->setOmitConfigSubFolder(true);
 ConfigurationManager::registerProvider('sql', $sqlProvider);
 
 // create the sandbox page
-$fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
+$fC = &Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
 /* @var $fC Frontcontroller */
 $fC->setContext($context);
 $fC->setLanguage($lang);
@@ -80,7 +86,7 @@ try {
 echo $fC->start('SB\pres\templates', 'main');
 
 /* @var $t APF\core\benchmark\BenchmarkTimer */
-$t = & Singleton::getInstance('APF\core\benchmark\BenchmarkTimer');
+$t = &Singleton::getInstance('APF\core\benchmark\BenchmarkTimer');
 echo '<!--' . $t->getTotalTime() . '-->';
 if (isset($_REQUEST['benchmark']) && $_REQUEST['benchmark'] == 'true') {
    echo $t->createReport();
