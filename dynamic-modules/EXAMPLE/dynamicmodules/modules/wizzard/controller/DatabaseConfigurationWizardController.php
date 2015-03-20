@@ -13,13 +13,13 @@ class DatabaseConfigurationWizardController extends BaseDocumentController {
       $form = $this->getForm('database-credentials');
 
       $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-      $section = $config->getSection('modules')->getSection('DB');
+      $section = $config->getSection('modules');
 
-      $host = $form->getFormElementByName('host');
-      $port = $form->getFormElementByName('port');
-      $name = $form->getFormElementByName('name');
-      $user = $form->getFormElementByName('user');
-      $pass = $form->getFormElementByName('pass');
+      $host = $form->getFormElementByName('Host');
+      $port = $form->getFormElementByName('Port');
+      $name = $form->getFormElementByName('Name');
+      $user = $form->getFormElementByName('User');
+      $pass = $form->getFormElementByName('Pass');
 
       if ($form->isSent()) {
          if ($form->isValid()) {
