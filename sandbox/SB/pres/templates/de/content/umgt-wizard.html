@@ -48,7 +48,7 @@ $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\Generi
 $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-$setup->run();
+$setup->run(true);
    </pre>
    <p>
       Bitte bestätigen sie mit dem Button, das Anlegen der Tabelle:

@@ -47,7 +47,7 @@ class NewsWizardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=news-wizzard#step-2');
+         self::getResponse()->forward('./?page=news-wizard#step-2');
 
          return;
       }
@@ -73,7 +73,6 @@ class NewsWizardController extends BaseDocumentController {
             $host = $section->getValue('Host');
             $port = $section->getValue('Port');
          }
-
 
          $tmpl->setPlaceHolder('host', $host);
          $tmpl->setPlaceHolder('port', $port);
@@ -124,9 +123,9 @@ class NewsWizardController extends BaseDocumentController {
                   $setup->addMappingConfiguration('APF\extensions\news', 'news');
                   $setup->addRelationConfiguration('APF\extensions\news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
-                  $setup->run();
+                  $setup->run(true);
 
-                  self::getResponse()->forward('?page=news-wizzard#step-3');
+                  self::getResponse()->forward('?page=news-wizard#step-3');
                } else {
                   $formInitDb->transformOnPlace();
                }

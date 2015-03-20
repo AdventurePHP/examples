@@ -16,7 +16,7 @@ class DatabaseContentController extends BaseDocumentController {
       $urlName = self::getRequest()->getParameter('name');
       $this->setPlaceHolder('urlname', $urlName);
 
-      // in case the page is called from the template wizzard and no configuration is
+      // in case the page is called from the template wizard and no configuration is
       // created, display a note instead of an exception
       try {
 
