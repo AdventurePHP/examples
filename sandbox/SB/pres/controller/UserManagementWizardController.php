@@ -17,7 +17,7 @@ class UserManagementWizardController extends BaseDocumentController {
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = & $this->getForm('new-db-config');
+      $formNewConfig = &$this->getForm('new-db-config');
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
@@ -58,13 +58,14 @@ class UserManagementWizardController extends BaseDocumentController {
       $configAvailable = false;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-         $tmpl = & $this->getTemplate('db-config-exists');
+         $tmpl = &$this->getTemplate('db-config-exists');
 
-         $section = $config->getSection(self::$CONFIG_SECTION_NAME);
-         if ($section == null) {
+         if (!$config->hasSection(self::$CONFIG_SECTION_NAME)) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
                   . '" is not contained in the current configuration!', E_USER_ERROR);
          }
+
+         $section = $config->getSection(self::$CONFIG_SECTION_NAME);
 
          $tmpl->setPlaceHolder('host', $section->getValue('Host'));
          $tmpl->setPlaceHolder('port', $section->getValue('Port'));
@@ -86,7 +87,7 @@ class UserManagementWizardController extends BaseDocumentController {
       $databaseLayoutInitialized = false;
       if ($configAvailable) {
 
-         $formInitDb = & $this->getForm('init-db');
+         $formInitDb = &$this->getForm('init-db');
          try {
             $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
                   ->getConnection(self::$CONFIG_SECTION_NAME);
@@ -110,14 +111,14 @@ class UserManagementWizardController extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = & $this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
+                  $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
                   $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run();
 
                   // initialize application
-                  $umgt = & $this->getUmgtManager();
+                  $umgt = &$this->getUmgtManager();
                   $app = new UmgtApplication();
                   $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
@@ -128,7 +129,7 @@ class UserManagementWizardController extends BaseDocumentController {
                }
             }
          } catch (\Exception $e) {
-            $tmplDbConnErr = & $this->getTemplate('db-conn-error');
+            $tmplDbConnErr = &$this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
          }
@@ -140,9 +141,9 @@ class UserManagementWizardController extends BaseDocumentController {
       $initialUserCreated = false;
       if ($databaseLayoutInitialized) {
 
-         $formCreateUser = & $this->getForm('create-user');
+         $formCreateUser = &$this->getForm('create-user');
 
-         $umgt = & $this->getUmgtManager();
+         $umgt = &$this->getUmgtManager();
 
          if ($formCreateUser->isSent() && $formCreateUser->isValid()) {
 
@@ -164,7 +165,7 @@ class UserManagementWizardController extends BaseDocumentController {
          } else {
 
             // display user list to note the user
-            $userListTmpl = & $this->getTemplate('user-list');
+            $userListTmpl = &$this->getTemplate('user-list');
 
             $users = $umgt->getPagedUserList();
 

@@ -73,8 +73,7 @@ try {
    );
 
    // secondly, try to get the right config section
-   $section = $config->getSection('Sandbox-UMGT');
-   if ($section === null) {
+   if (!$config->hasSection('Sandbox-UMGT')) {
       throw new Exception('Sandbox config not present!');
    }
 
