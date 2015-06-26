@@ -10,8 +10,8 @@ class DocumentationContentTag extends Document {
 
       $id = self::getRequest()->getParameter('id', '013');
 
-      $rootPath = RootClassLoader::getLoaderByVendor('APF')->getRootPath();
-      $files = glob($rootPath . '/sandbox/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');
+      $rootPath = RootClassLoader::getLoaderByVendor('SB')->getRootPath();
+      $files = glob($rootPath . '/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');
       if (count($files) > 0) {
          $this->setContent($this->sanitizeContent(file_get_contents($files[0])));
       }
