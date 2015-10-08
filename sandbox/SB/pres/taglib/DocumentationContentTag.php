@@ -8,7 +8,7 @@ class DocumentationContentTag extends Document {
 
    public function onAfterAppend() {
 
-      $id = self::getRequest()->getParameter('id', '013');
+      $id = $this->getRequest()->getParameter('id', '013');
 
       $rootPath = RootClassLoader::getLoaderByVendor('SB')->getRootPath();
       $files = glob($rootPath . '/pres/content/c_' . $this->getLanguage() . '_' . $id . '_*');

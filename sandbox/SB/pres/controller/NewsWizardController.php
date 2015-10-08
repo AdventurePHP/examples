@@ -47,7 +47,7 @@ class NewsWizardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=news-wizard#step-2');
+         $this->getResponse()->forward('./?page=news-wizard#step-2');
 
          return;
       }
@@ -125,7 +125,7 @@ class NewsWizardController extends BaseDocumentController {
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run(true);
 
-                  self::getResponse()->forward('?page=news-wizard#step-3');
+                  $this->getResponse()->forward('?page=news-wizard#step-3');
                } else {
                   $formInitDb->transformOnPlace();
                }

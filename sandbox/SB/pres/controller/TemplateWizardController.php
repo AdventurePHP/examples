@@ -34,7 +34,7 @@ class TemplateWizardController extends BaseDocumentController {
 
          file_put_contents($filePath . '/' . $fileName . '.html', html_entity_decode($content, ENT_QUOTES, Registry::retrieve('APF\core', 'Charset')));
 
-         self::getResponse()->forward('./?page=tmpl-wizard');
+         $this->getResponse()->forward('./?page=tmpl-wizard');
       }
 
       $form->transformOnPlace();

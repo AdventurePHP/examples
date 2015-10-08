@@ -50,7 +50,7 @@ class UserManagementWizardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=umgt-wizard#step-2');
+         $this->getResponse()->forward('./?page=umgt-wizard#step-2');
 
          return;
       }
@@ -123,7 +123,7 @@ class UserManagementWizardController extends BaseDocumentController {
                   $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
 
-                  self::getResponse()->forward('?page=umgt-wizard#step-3');
+                  $this->getResponse()->forward('?page=umgt-wizard#step-3');
                } else {
                   $formInitDb->transformOnPlace();
                }
@@ -161,7 +161,7 @@ class UserManagementWizardController extends BaseDocumentController {
 
             $umgt->saveUser($user);
 
-            self::getResponse()->forward('?page=umgt-wizard#step-3');
+            $this->getResponse()->forward('?page=umgt-wizard#step-3');
          } else {
 
             // display user list to note the user

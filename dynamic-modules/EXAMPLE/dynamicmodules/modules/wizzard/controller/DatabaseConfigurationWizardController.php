@@ -34,7 +34,7 @@ class DatabaseConfigurationWizardController extends BaseDocumentController {
             $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
             // reload page to let the change take effect
-            self::getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
+            $this->getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
          } else {
             $form->transformOnPlace();
          }

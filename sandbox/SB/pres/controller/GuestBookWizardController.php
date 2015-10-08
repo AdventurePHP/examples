@@ -48,7 +48,7 @@ class GuestBookWizardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $section);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=guestbook-wizard#step-2');
+         $this->getResponse()->forward('./?page=guestbook-wizard#step-2');
 
          return;
       }
@@ -128,7 +128,7 @@ class GuestBookWizardController extends BaseDocumentController {
                   include($rootPath . '/modules/guestbook2009/data/setup/setup.php');
                   include($rootPath . '/modules/guestbook2009/data/setup/init.php');
 
-                  self::getResponse()->forward('?page=guestbook-wizard#step-3');
+                  $this->getResponse()->forward('?page=guestbook-wizard#step-3');
 
                } else {
                   $formInitDb->transformOnPlace();

@@ -18,7 +18,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
       $conn = null;
       try {
 
-         $moduleName = self::getRequest()->getParameter('mod');
+         $moduleName = $this->getRequest()->getParameter('mod');
 
          /* @var $conn MySQLiHandler */
          $conn = &$this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('modules');
@@ -78,7 +78,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
   \'content\'
 );');
 
-            self::getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
+            $this->getResponse()->forward(LinkGenerator::generateUrl(Url::fromCurrent()));
          } else {
             // display database setup wizzard in case of any database-related errors
             $model->setNamespace('EXAMPLE\dynamicmodules\modules\wizzard\templates');

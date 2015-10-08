@@ -49,7 +49,7 @@ class DatabaseWizardController extends BaseDocumentController {
          $config->setSection(self::$CONFIG_SECTION_NAME, $dbSection);
          $this->saveConfiguration('APF\core\database', 'connections.ini', $config);
 
-         self::getResponse()->forward('./?page=db-wizard#step-2');
+         $this->getResponse()->forward('./?page=db-wizard#step-2');
 
          return;
       }
@@ -121,7 +121,7 @@ UNIQUE (`urlname`)
                   $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'hello-world\', \'This is displayed on the hello-world page. / Dieser Text wird auf der Hallo-Welt!-Seite angezeigt.\');';
                   $conn->executeTextStatement($insert);
 
-                  self::getResponse()->forward('./?page=db-wizard#step-3');
+                  $this->getResponse()->forward('./?page=db-wizard#step-3');
                } else {
                   $tmpl = &$this->getTemplate('step-2');
                   $tmpl->setPlaceHolder('statement', $create);
@@ -157,7 +157,7 @@ UNIQUE (`urlname`)
             $insert = 'INSERT INTO `' . self::$TABLE_NAME . '` (`urlname`, `content`) VALUES (\'' . $urlName . '\', \'' . $content . '\');';
             $conn->executeTextStatement($insert);
 
-            self::getResponse()->forward('./?page=db-wizard#step-4');
+            $this->getResponse()->forward('./?page=db-wizard#step-4');
          }
 
          $formCreateContent->transformOnPlace();

@@ -13,7 +13,7 @@ class DatabaseContentController extends BaseDocumentController {
 
    public function transformContent() {
 
-      $urlName = self::getRequest()->getParameter('name');
+      $urlName = $this->getRequest()->getParameter('name');
       $this->setPlaceHolder('urlname', $urlName);
 
       // in case the page is called from the template wizard and no configuration is
