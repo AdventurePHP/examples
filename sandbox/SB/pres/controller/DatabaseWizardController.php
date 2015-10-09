@@ -4,6 +4,7 @@ namespace SB\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\ConnectionManager;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\core\registry\Registry;
@@ -190,7 +191,7 @@ UNIQUE (`urlname`)
     * @return AbstractDatabaseHandler The database connection.
     */
    private function &getConnection() {
-      return $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+      return $this->getServiceObject(ConnectionManager::class)->getConnection(self::$CONFIG_SECTION_NAME);
    }
 
 }

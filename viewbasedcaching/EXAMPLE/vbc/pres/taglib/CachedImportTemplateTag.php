@@ -21,6 +21,7 @@ namespace EXAMPLE\vbc\pres\taglib;
  * -->
  */
 use APF\core\pagecontroller\ImportTemplateTag;
+use APF\tools\cache\CacheManager;
 use APF\tools\cache\CacheManagerFabric;
 use APF\tools\cache\key\SimpleCacheKey;
 
@@ -59,16 +60,10 @@ class CachedImportTemplateTag extends ImportTemplateTag {
     */
    public function onParseTime() {
 
-      // gather tag configuration
-      $cacheConfig = $this->getAttribute('cacheconfig');
-      $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
-
-      // get the cache manager
-      /* @var $cMF CacheManagerFabric */
-      $cMF = & $this->getServiceObject('APF\tools\cache\CacheManagerFabric');
-      $cM = & $cMF->getCacheManager($cacheConfig);
+      $cM = $this->getCache();
 
       // clear the cache if desired
+      $cacheKey = $this->getCacheKey();
       if (isset($_REQUEST['clearcache']) && $_REQUEST['clearcache'] == 'true') {
          $cM->clearCache($cacheKey);
       }
@@ -81,6 +76,23 @@ class CachedImportTemplateTag extends ImportTemplateTag {
       if ($this->cacheContent === null) {
          parent::onParseTime();
       }
+   }
+
+   /**
+    * @return CacheManager
+    */
+   protected function getCache() {
+      /* @var $fabric CacheManagerFabric */
+      $fabric = $this->getServiceObject(CacheManagerFabric::class);
+
+      return $fabric->getCacheManager($this->getAttribute('cacheconfig'));
+   }
+
+   /**
+    * @return SimpleCacheKey
+    */
+   protected function getCacheKey() {
+      return new SimpleCacheKey($this->getAttribute('cachekey'));
    }
 
    /**
@@ -98,18 +110,9 @@ class CachedImportTemplateTag extends ImportTemplateTag {
       // generate the node's output or return the cached content
       if ($this->cacheContent === null) {
 
-         // gather tag configuration
-         $cacheConfig = $this->getAttribute('cacheconfig');
-         $cacheKey = new SimpleCacheKey($this->getAttribute('cachekey'));
-
-         // get the cache manager
-         /* @var $cMF CacheManagerFabric */
-         $cMF = & $this->getServiceObject('APF\tools\cache\CacheManagerFabric');
-         $cM = & $cMF->getCacheManager($cacheConfig);
-
          // generate output and cache it
          $output = parent::transform();
-         $cM->writeToCache($cacheKey, $output);
+         $this->getCache()->writeToCache($this->getCacheKey(), $output);
 
          // return the tag's output
          return $output;

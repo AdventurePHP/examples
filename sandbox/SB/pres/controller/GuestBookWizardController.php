@@ -18,6 +18,7 @@ class GuestBookWizardController extends BaseDocumentController {
       // step 1: create database config file
       $formNewConfig = &$this->getForm('new-db-config');
 
+      $section = null;
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
          // retrieve the form values
@@ -98,7 +99,7 @@ class GuestBookWizardController extends BaseDocumentController {
          $formInitDb = &$this->getForm('init-db');
          try {
             /* @var $connMgr ConnectionManager */
-            $connMgr = $this->getServiceObject('APF\core\database\ConnectionManager');
+            $connMgr = $this->getServiceObject(ConnectionManager::class);
             /* @var $conn AbstractDatabaseHandler */
             $conn = $connMgr->getConnection(self::$CONFIG_SECTION_NAME);
 

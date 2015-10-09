@@ -17,6 +17,8 @@ class NewsWizardController extends BaseDocumentController {
 
       // step 1: create database config file
       $formNewConfig = &$this->getForm('new-db-config');
+
+      $section = null;
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
          // retrieve the form values
@@ -97,7 +99,7 @@ class NewsWizardController extends BaseDocumentController {
          $formInitDb = &$this->getForm('init-db');
          try {
             /* @var $connMgr ConnectionManager */
-            $connMgr = $this->getServiceObject('APF\core\database\ConnectionManager');
+            $connMgr = $this->getServiceObject(ConnectionManager::class);
             /* @var $conn AbstractDatabaseHandler */
             $conn = $connMgr->getConnection(self::$CONFIG_SECTION_NAME);
 
@@ -119,7 +121,7 @@ class NewsWizardController extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
+                  $setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
                   $setup->addMappingConfiguration('APF\extensions\news', 'news');
                   $setup->addRelationConfiguration('APF\extensions\news', 'news');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

@@ -4,6 +4,7 @@ namespace SB\pres\controller;
 use APF\core\configuration\ConfigurationException;
 use APF\core\configuration\provider\ini\IniConfiguration;
 use APF\core\database\AbstractDatabaseHandler;
+use APF\core\database\ConnectionManager;
 use APF\core\pagecontroller\BaseDocumentController;
 use APF\modules\genericormapper\data\tools\GenericORMapperManagementTool;
 use APF\modules\usermanagement\biz\model\UmgtApplication;
@@ -17,8 +18,9 @@ class UserManagementWizardController extends BaseDocumentController {
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = &$this->getForm('new-db-config');
+      $formNewConfig = $this->getForm('new-db-config');
 
+      $section = null;
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 
          // retrieve the form values
@@ -89,7 +91,7 @@ class UserManagementWizardController extends BaseDocumentController {
 
          $formInitDb = &$this->getForm('init-db');
          try {
-            $conn = $this->getServiceObject('APF\core\database\ConnectionManager')
+            $conn = $this->getServiceObject(ConnectionManager::class)
                   ->getConnection(self::$CONFIG_SECTION_NAME);
             /* @var $conn AbstractDatabaseHandler */
 
@@ -111,7 +113,7 @@ class UserManagementWizardController extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = &$this->getServiceObject('APF\modules\genericormapper\data\tools\GenericORMapperManagementTool');
+                  $setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
                   $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

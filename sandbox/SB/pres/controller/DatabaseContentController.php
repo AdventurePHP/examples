@@ -2,6 +2,7 @@
 namespace SB\pres\controller;
 
 use APF\core\configuration\ConfigurationException;
+use APF\core\database\ConnectionManager;
 use APF\core\database\MySQLiHandler;
 use APF\core\pagecontroller\BaseDocumentController;
 
@@ -20,19 +21,20 @@ class DatabaseContentController extends BaseDocumentController {
       // created, display a note instead of an exception
       try {
 
-         $conn = & $this->getConnection();
+         $conn = &$this->getConnection();
 
          $urlName = $conn->escapeValue($urlName);
          $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` WHERE `urlname` = \'' . $urlName . '\'';
          $data = $conn->fetchData($conn->executeTextStatement($select));
 
          if ($data === false) {
-            $tmpl = & $this->getTemplate('no-content');
+            $tmpl = &$this->getTemplate('no-content');
             $tmpl->transformOnPlace();
+
             return;
          }
 
-         $tmpl = & $this->getTemplate('content');
+         $tmpl = &$this->getTemplate('content');
          $tmpl->setPlaceHolder('content', $data['content']);
          $tmpl->transformOnPlace();
 
@@ -46,7 +48,7 @@ class DatabaseContentController extends BaseDocumentController {
     * @return MySQLiHandler The database connection.
     */
    private function &getConnection() {
-      return $this->getServiceObject('APF\core\database\ConnectionManager')->getConnection(self::$CONFIG_SECTION_NAME);
+      return $this->getServiceObject(ConnectionManager::class)->getConnection(self::$CONFIG_SECTION_NAME);
    }
 
 }

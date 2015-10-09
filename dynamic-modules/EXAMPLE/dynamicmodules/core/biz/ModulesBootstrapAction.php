@@ -1,6 +1,7 @@
 <?php
 namespace EXAMPLE\dynamicmodules\core\biz;
 
+use APF\core\database\ConnectionManager;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\database\MySQLiHandler;
 use APF\core\frontcontroller\AbstractFrontcontrollerAction;
@@ -21,7 +22,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
          $moduleName = $this->getRequest()->getParameter('mod');
 
          /* @var $conn MySQLiHandler */
-         $conn = &$this->getServiceObject('APF\core\database\ConnectionManager')->getConnection('modules');
+         $conn = &$this->getServiceObject(ConnectionManager::class)->getConnection('modules');
 
          $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
          $result = $conn->executeTextStatement($select);
