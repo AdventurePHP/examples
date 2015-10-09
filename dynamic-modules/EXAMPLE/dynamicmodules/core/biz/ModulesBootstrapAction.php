@@ -14,7 +14,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
    public function run() {
 
       /* @var $model DynamicModulesModel */
-      $model = &Singleton::getInstance('EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel');
+      $model = &Singleton::getInstance(DynamicModulesModel::class);
 
       $conn = null;
       try {

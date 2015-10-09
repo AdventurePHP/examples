@@ -15,7 +15,7 @@ class MenuImportTag extends ImportTemplateTag {
 
    public function onParseTime() {
       /* @var $model DynamicModulesModel */
-      $model = & Singleton::getInstance('EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel');
+      $model = & Singleton::getInstance(DynamicModulesModel::class);
 
       $namespace = $model->getNamespace();
       $view = $model->getNaviView();

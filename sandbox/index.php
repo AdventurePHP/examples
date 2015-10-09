@@ -39,7 +39,7 @@ RootClassLoader::addLoader(new StandardClassLoader('APP', $dir . '/APP'));
 
 // configure log writer used within the sandbox
 /* @var $logger Logger */
-$logger = Singleton::getInstance('APF\core\logging\Logger');
+$logger = Singleton::getInstance(Logger::class);
 $writer = $logger->getLogWriter(Registry::retrieve('APF\core', 'InternalLogTarget'));
 $logger->addLogWriter('login', clone $writer);
 $logger->addLogWriter('registration', clone $writer);
@@ -55,7 +55,7 @@ $sqlProvider->setOmitConfigSubFolder(true);
 ConfigurationManager::registerProvider('sql', $sqlProvider);
 
 // create the sandbox page
-$fC = &Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
+$fC = &Singleton::getInstance(Frontcontroller::class);
 /* @var $fC Frontcontroller */
 $fC->setContext($context);
 $fC->setLanguage($lang);
@@ -85,7 +85,7 @@ try {
 echo $fC->start('SB\pres\templates', 'main');
 
 /* @var $t APF\core\benchmark\BenchmarkTimer */
-$t = &Singleton::getInstance('APF\core\benchmark\BenchmarkTimer');
+$t = &Singleton::getInstance(BenchmarkTimer::class);
 echo '<!--' . $t->getTotalTime() . '-->';
 if (isset($_REQUEST['benchmark']) && $_REQUEST['benchmark'] == 'true') {
    echo $t->createReport();

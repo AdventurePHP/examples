@@ -1,10 +1,11 @@
 <?php
-use APF\core\frontcontroller\Frontcontroller;
-use APF\core\singleton\Singleton;
+use APF\core\benchmark\BenchmarkTimer;
 use APF\core\configuration\ConfigurationManager;
 use APF\core\configuration\provider\ini\IniConfigurationProvider;
+use APF\core\frontcontroller\Frontcontroller;
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
+use APF\core\singleton\Singleton;
 
 // pre-define the root path of the root class loader (if necessary)
 $dir = dirname($_SERVER['SCRIPT_FILENAME']);
@@ -21,10 +22,10 @@ $iniProvider->setOmitConfigSubFolder(true);
 $iniProvider->setOmitContext(true);
 
 /* @var $fC Frontcontroller */
-$fC = & Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
+$fC = &Singleton::getInstance(Frontcontroller::class);
 echo $fC->start('EXAMPLE\vbc\pres\templates', 'main');
 
 // display benchmark report if desired
 if (isset($_REQUEST['benchmarkreport']) && $_REQUEST['benchmarkreport'] == 'true') {
-   echo Singleton::getInstance('APF\core\benchmark\BenchmarkTimer')->createReport();
+   echo Singleton::getInstance(BenchmarkTimer::class)->createReport();
 }

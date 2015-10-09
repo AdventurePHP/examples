@@ -8,7 +8,7 @@ use APF\core\pagecontroller\ImportTemplateTag;
 class ContentImportTag extends ImportTemplateTag {
 
    public function onParseTime() {
-      $model = &Singleton::getInstance('EXAMPLE\dynamicmodules\core\biz\DynamicModulesModel');
+      $model = &Singleton::getInstance(DynamicModulesModel::class);
       /* @var $model DynamicModulesModel */
       $this->setAttribute('namespace', $model->getNamespace());
       $this->setAttribute('template', $model->getContentView());

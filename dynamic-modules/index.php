@@ -21,12 +21,12 @@ $iniProvider = ConfigurationManager::retrieveProvider('ini');
 $iniProvider->setOmitConfigSubFolder(true);
 
 /* @var $logger Logger */
-$logger = Singleton::getInstance('APF\core\logging\Logger');
+$logger = Singleton::getInstance(Logger::class);
 $writer = $logger->getLogWriter(\APF\core\registry\Registry::retrieve('APF\core', 'InternalLogTarget'));
 $logger->addLogWriter('mysqli', clone $writer);
 
 /* @var $fc Frontcontroller */
-$fc = &Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
+$fc = &Singleton::getInstance(Frontcontroller::class);
 $fc->setContext('app-context');
 $fc->registerAction('EXAMPLE\dynamicmodules\core\biz', 'modules-init');
 echo $fc->start('EXAMPLE\dynamicmodules\site\pres\templates', 'main');

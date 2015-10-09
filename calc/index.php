@@ -13,5 +13,5 @@ require('./APF/core/bootstrap.php');
 RootClassLoader::addLoader(new StandardClassLoader('EXAMPLE', $dir . '/EXAMPLE'));
 
 /* @var $fC Frontcontroller */
-$fC = &Singleton::getInstance('APF\core\frontcontroller\Frontcontroller');
+$fC = &Singleton::getInstance(Frontcontroller::class);
 echo $fC->start('EXAMPLE\calc\pres\templates', 'calc');
