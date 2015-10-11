@@ -15,7 +15,7 @@ class SimpleNavigationNode implements NavigationNode {
    /**
     * @var NavigationNode[]
     */
-   private $children = array();
+   private $children = [];
 
    public function __construct($label, $url) {
       $this->label = $label;
