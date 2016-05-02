@@ -31,7 +31,15 @@ class DocumentationContentTag extends Document {
       $content = preg_replace('/<int:link pageid="([0-9]+)"(.+)?\/>/iU', '<a href="http://adventure-php-framework.org/Seite/119-Komponenten-Dokumentation">[' . $onlineDocAnchorName . ']</a>', $content);
       $content = preg_replace('/<doku:link>(.+)<\/doku:link>/isU', '<a href="$1">$1</a>', $content);
       $content = preg_replace('/<core:importdesign namespace="APF\\\\modules\\\\comments\\\\pres\\\\templates" template="comment" categorykey="(.+)" \/>/isU', '', $content);
-      $content = preg_replace('/<gen:highlight type="([a-z\-]+)">(.+)<\/gen:highlight>/isU', '<pre>$2</pre>', $content);
+      $content = preg_replace_callback(
+            '/<gen:highlight type="([a-z\-]+)">(.+)<\/gen:highlight>/isU',
+            function ($hits) {
+               // replace ${..} to avoid issues w/ expression tag parser as well as opening and closing
+               // brackets to avoid issues with displaying code samples in plaint/text.
+               return '<pre>' . str_replace('>', '&gt;', str_replace('<', '&lt;', str_replace('${', '&#36;{', $hits[2]))) . '</pre>';
+            },
+            $content
+      );
 
       return preg_replace('/<doku:title (.+) title="(.+)" (.+)>(.+)<\/doku:title>/isU', '<h2>$2</h2>', $content);
    }
