@@ -15,11 +15,11 @@ class DatabaseConfigurationWizardController extends BaseDocumentController {
       $config = $this->getConfiguration('APF\core\database', 'connections.ini');
       $section = $config->getSection('modules');
 
-      $host = $form->getFormElementByName('Host');
-      $port = $form->getFormElementByName('Port');
-      $name = $form->getFormElementByName('Name');
-      $user = $form->getFormElementByName('User');
-      $pass = $form->getFormElementByName('Pass');
+      $host = $form->getFormElementByName('host');
+      $port = $form->getFormElementByName('port');
+      $name = $form->getFormElementByName('name');
+      $user = $form->getFormElementByName('user');
+      $pass = $form->getFormElementByName('pass');
 
       if ($form->isSent()) {
          if ($form->isValid()) {
