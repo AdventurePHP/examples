@@ -17,7 +17,7 @@ class DatabaseWizardController extends BaseDocumentController {
    public function transformContent() {
 
       // step 1: create database config file
-      $formNewConfig = &$this->getForm('new-db-config');
+      $formNewConfig = $this->getForm('new-db-config');
 
       if ($formNewConfig->isSent() && $formNewConfig->isValid()) {
 

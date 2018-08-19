@@ -23,7 +23,7 @@ class TemplateWizardController extends BaseDocumentController {
       $this->setPlaceHolder('existing-tmpl', $buffer);
 
       // handle and display form
-      $form = & $this->getForm('new-page');
+      $form = $this->getForm('new-page');
 
       if ($form->isSent() && $form->isValid()) {
 
