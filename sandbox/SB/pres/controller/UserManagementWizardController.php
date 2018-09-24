@@ -60,7 +60,7 @@ class UserManagementWizardController extends BaseDocumentController {
       $configAvailable = false;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $tmpl = $this->getTemplate('db-config-exists');
 
          if (!$config->hasSection(self::$CONFIG_SECTION_NAME)) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
@@ -89,7 +89,7 @@ class UserManagementWizardController extends BaseDocumentController {
       $databaseLayoutInitialized = false;
       if ($configAvailable) {
 
-         $formInitDb = &$this->getForm('init-db');
+         $formInitDb = $this->getForm('init-db');
          try {
             $conn = $this->getServiceObject(ConnectionManager::class)
                   ->getConnection(self::$CONFIG_SECTION_NAME);
@@ -113,14 +113,14 @@ class UserManagementWizardController extends BaseDocumentController {
 
                   // setup database layout
                   /* @var $setup GenericORMapperManagementTool */
-                  $setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
+                  $setup = $this->getServiceObject(GenericORMapperManagementTool::class);
                   $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
                   $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
                   $setup->run(true);
 
                   // initialize application
-                  $umgt = &$this->getUmgtManager();
+                  $umgt = $this->getUmgtManager();
                   $app = new UmgtApplication();
                   $app->setDisplayName('Sandbox');
                   $umgt->saveApplication($app);
@@ -131,7 +131,7 @@ class UserManagementWizardController extends BaseDocumentController {
                }
             }
          } catch (\Exception $e) {
-            $tmplDbConnErr = &$this->getTemplate('db-conn-error');
+            $tmplDbConnErr = $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
          }
@@ -143,9 +143,9 @@ class UserManagementWizardController extends BaseDocumentController {
       $initialUserCreated = false;
       if ($databaseLayoutInitialized) {
 
-         $formCreateUser = &$this->getForm('create-user');
+         $formCreateUser = $this->getForm('create-user');
 
-         $umgt = &$this->getUmgtManager();
+         $umgt = $this->getUmgtManager();
 
          if ($formCreateUser->isSent() && $formCreateUser->isValid()) {
 
@@ -167,7 +167,7 @@ class UserManagementWizardController extends BaseDocumentController {
          } else {
 
             // display user list to note the user
-            $userListTmpl = &$this->getTemplate('user-list');
+            $userListTmpl = $this->getTemplate('user-list');
 
             $users = $umgt->getPagedUserList();
 

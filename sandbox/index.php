@@ -56,7 +56,7 @@ ConfigurationManager::registerProvider('sql', $sqlProvider);
 
 // create the sandbox page
 $fC = Singleton::getInstance(FrontController::class);
-/* @var $fC Frontcontroller */
+/* @var $fC FrontController */
 $fC->setContext($context);
 $fC->setLanguage($lang);
 

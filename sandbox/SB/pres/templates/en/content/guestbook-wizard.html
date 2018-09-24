@@ -39,7 +39,7 @@
       namespace:
    </p>
    <pre>
-$setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
+$setup = new GenericORMapperManagementTool();
 $setup->addMappingConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
 $setup->addRelationConfiguration('APF\modules\guestbook2009\data', 'guestbook2009');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

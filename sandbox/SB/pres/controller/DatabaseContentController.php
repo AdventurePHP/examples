@@ -21,20 +21,20 @@ class DatabaseContentController extends BaseDocumentController {
       // created, display a note instead of an exception
       try {
 
-         $conn = &$this->getConnection();
+         $conn = $this->getConnection();
 
          $urlName = $conn->escapeValue($urlName);
          $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` WHERE `urlname` = \'' . $urlName . '\'';
          $data = $conn->fetchData($conn->executeTextStatement($select));
 
          if ($data === false) {
-            $tmpl = &$this->getTemplate('no-content');
+            $tmpl = $this->getTemplate('no-content');
             $tmpl->transformOnPlace();
 
             return;
          }
 
-         $tmpl = &$this->getTemplate('content');
+         $tmpl = $this->getTemplate('content');
          $tmpl->setPlaceHolder('content', $data['content']);
          $tmpl->transformOnPlace();
 

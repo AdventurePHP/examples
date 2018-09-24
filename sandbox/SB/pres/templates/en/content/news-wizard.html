@@ -40,7 +40,7 @@
       namespace:
    </p>
    <pre>
-$setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
+$setup = new GenericORMapperManagementTool();
 $setup->addMappingConfiguration('APF\extensions\news', 'news');
 $setup->addRelationConfiguration('APF\extensions\news', 'news');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

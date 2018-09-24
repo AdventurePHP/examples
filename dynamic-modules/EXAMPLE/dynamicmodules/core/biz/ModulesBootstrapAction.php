@@ -4,17 +4,17 @@ namespace EXAMPLE\dynamicmodules\core\biz;
 use APF\core\database\ConnectionManager;
 use APF\core\database\DatabaseHandlerException;
 use APF\core\database\MySQLiHandler;
-use APF\core\frontcontroller\AbstractFrontcontrollerAction;
+use APF\core\frontcontroller\AbstractFrontControllerAction;
 use APF\core\singleton\Singleton;
 use APF\tools\link\LinkGenerator;
 use APF\tools\link\Url;
 
-class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
+class ModulesBootstrapAction extends AbstractFrontControllerAction {
 
    public function run() {
 
       /* @var $model DynamicModulesModel */
-      $model = &Singleton::getInstance(DynamicModulesModel::class);
+      $model = Singleton::getInstance(DynamicModulesModel::class);
 
       $conn = null;
       try {
@@ -22,7 +22,7 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
          $moduleName = $this->getRequest()->getParameter('mod');
 
          /* @var $conn MySQLiHandler */
-         $conn = &$this->getServiceObject(ConnectionManager::class)->getConnection('modules');
+         $conn = $this->getServiceObject(ConnectionManager::class)->getConnection('modules');
 
          $select = 'SELECT * FROM modules WHERE `key` = \'' . $conn->escapeValue($moduleName) . '\'';
          $result = $conn->executeTextStatement($select);
@@ -35,8 +35,8 @@ class ModulesBootstrapAction extends AbstractFrontcontrollerAction {
             $model->setContentView($data['content_template']);
 
             // execute the fc action for the desired module
-            $action = &$this->getServiceObject($data['namespace'] . '\biz\\' . $data['fc_action']);
-            /* @var $action AbstractFrontcontrollerAction */
+            $action = $this->getServiceObject($data['namespace'] . '\biz\\' . $data['fc_action']);
+            /* @var $action AbstractFrontControllerAction */
             $action->setActionNamespace($data['namespace']);
             $action->setActionName($data['fc_action']);
             $action->setContext($this->getContext());

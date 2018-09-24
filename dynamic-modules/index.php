@@ -1,7 +1,7 @@
 <?php
 use APF\core\configuration\ConfigurationManager;
 use APF\core\configuration\provider\ini\IniConfigurationProvider;
-use APF\core\frontcontroller\Frontcontroller;
+use APF\core\frontcontroller\FrontController;
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
 use APF\core\logging\Logger;
@@ -25,8 +25,8 @@ $logger = Singleton::getInstance(Logger::class);
 $writer = $logger->getLogWriter(\APF\core\registry\Registry::retrieve('APF\core', 'InternalLogTarget'));
 $logger->addLogWriter('mysqli', clone $writer);
 
-/* @var $fc Frontcontroller */
-$fc = &Singleton::getInstance(Frontcontroller::class);
+/* @var $fc FrontController */
+$fc = Singleton::getInstance(FrontController::class);
 $fc->setContext('app-context');
 $fc->registerAction('EXAMPLE\dynamicmodules\core\biz', 'modules-init');
 echo $fc->start('EXAMPLE\dynamicmodules\site\pres\templates', 'main');

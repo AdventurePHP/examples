@@ -34,18 +34,18 @@ class CalculatorController extends BaseDocumentController {
 
    public function transformContent() {
 
-      $form = & $this->getForm('Calc');
+      $form = $this->getForm('Calc');
 
       if ($form->isSent() && $form->isValid()) {
 
          // read the input values as well as the operation to execute
-         $operand1 = & $form->getFormElementByName('operand1');
+         $operand1 = $form->getFormElementByName('operand1');
          $value1 = (float)$operand1->getAttribute('value');
-         $operand2 = & $form->getFormElementByName('operand2');
+         $operand2 = $form->getFormElementByName('operand2');
          $value2 = (float)$operand2->getAttribute('value');
          /* @var $operator SelectBoxTag */
-         $operator = & $form->getFormElementByName('operation');
-         $currentOperator = & $operator->getSelectedOption();
+         $operator = $form->getFormElementByName('operation');
+         $currentOperator = $operator->getSelectedOption();
          $operatorType = $currentOperator->getAttribute('value');
 
          // execute operations

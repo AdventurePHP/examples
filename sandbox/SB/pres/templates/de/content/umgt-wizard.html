@@ -44,7 +44,7 @@
       <em>APF\modules\genericormapper\data\tools</em> wie folgt genutzt:
    </p>
    <pre>
-$setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
+$setup = $this->getServiceObject(GenericORMapperManagementTool::class);
 $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

@@ -2,7 +2,7 @@
 use APF\core\benchmark\BenchmarkTimer;
 use APF\core\configuration\ConfigurationManager;
 use APF\core\configuration\provider\ini\IniConfigurationProvider;
-use APF\core\frontcontroller\Frontcontroller;
+use APF\core\frontcontroller\FrontController;
 use APF\core\loader\RootClassLoader;
 use APF\core\loader\StandardClassLoader;
 use APF\core\singleton\Singleton;
@@ -21,8 +21,8 @@ $iniProvider = ConfigurationManager::retrieveProvider('ini');
 $iniProvider->setOmitConfigSubFolder(true);
 $iniProvider->setOmitContext(true);
 
-/* @var $fC Frontcontroller */
-$fC = &Singleton::getInstance(Frontcontroller::class);
+/* @var $fC FrontController */
+$fC = Singleton::getInstance(FrontController::class);
 echo $fC->start('EXAMPLE\vbc\pres\templates', 'main');
 
 // display benchmark report if desired

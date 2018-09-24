@@ -12,8 +12,8 @@ class NavigationNodeTag extends Document {
    private $node;
 
    public function __construct() {
-      self::addTagLib('EXAMPLE\navigation\pres\taglibs\NavigationItemTag', 'navi', 'item');
-      self::addTagLib('EXAMPLE\navigation\pres\taglibs\NavigationContentTag', 'navi', 'content');
+      self::addTagLib(NavigationItemTag::class, 'navi', 'item');
+      self::addTagLib(NavigationContentTag::class, 'navi', 'content');
    }
 
    /**
@@ -43,15 +43,15 @@ class NavigationNodeTag extends Document {
       }
 
       $content = $this->getContent();
-      $children = & $this->getChildren();
-      foreach ($children as $objectId => $DUMMY) {
-         if ($children[$objectId] instanceof NavigationContentTag) {
-            // fill the <navi:content /> place holder if we get him
-            $content = str_replace('<' . $objectId . ' />', $buffer, $content);
-         } else {
-            // replace parser marker to avoid direct tag output
-            $content = str_replace('<' . $objectId . ' />', '', $content);
-         }
+
+      foreach ($this->getChildren() as &$child) {
+          if ($child instanceof NavigationContentTag) {
+              // fill the <navi:content /> place holder if we get him
+              $content = str_replace('<' . $child->getObjectId() . ' />', $buffer, $content);
+          } else {
+              // replace parser marker to avoid direct tag output
+              $content = str_replace('<' . $child->getObjectId() . ' />', '', $content);
+          }
       }
 
       return $content;

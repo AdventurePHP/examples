@@ -43,7 +43,7 @@
       <em>APF\modules\genericormapper\data\tools</em> wie folgt genutzt:
    </p>
    <pre>
-$setup = &$this->getServiceObject(GenericORMapperManagementTool::class);
+$setup = $this->getServiceObject(GenericORMapperManagementTool::class);
 $setup->addMappingConfiguration('APF\extensions\news', 'news');
 $setup->addRelationConfiguration('APF\extensions\news', 'news');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);

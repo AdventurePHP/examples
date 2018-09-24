@@ -57,7 +57,7 @@ class GuestBookWizardController extends BaseDocumentController {
       $configAvailable = false;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $tmpl = $this->getTemplate('db-config-exists');
 
          if (!$config->hasSection(self::$CONFIG_SECTION_NAME)) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
@@ -96,7 +96,7 @@ class GuestBookWizardController extends BaseDocumentController {
       $databaseLayoutInitialized = false;
       if ($configAvailable) {
 
-         $formInitDb = &$this->getForm('init-db');
+         $formInitDb = $this->getForm('init-db');
          try {
             /* @var $connMgr ConnectionManager */
             $connMgr = $this->getServiceObject(ConnectionManager::class);
@@ -136,7 +136,7 @@ class GuestBookWizardController extends BaseDocumentController {
                }
             }
          } catch (Exception $e) {
-            $tmplDbConnErr = &$this->getTemplate('db-conn-error');
+            $tmplDbConnErr = $this->getTemplate('db-conn-error');
             $tmplDbConnErr->setPlaceHolder('exception', $e->getMessage());
             $tmplDbConnErr->transformOnPlace();
          }

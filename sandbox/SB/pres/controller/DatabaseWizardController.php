@@ -58,7 +58,7 @@ class DatabaseWizardController extends BaseDocumentController {
       $configAvailable = false;
       try {
          $config = $this->getConfiguration('APF\core\database', 'connections.ini');
-         $tmpl = &$this->getTemplate('db-config-exists');
+         $tmpl = $this->getTemplate('db-config-exists');
 
          if (!$config->hasSection(self::$CONFIG_SECTION_NAME)) {
             throw new ConfigurationException('Section "' . self::$CONFIG_SECTION_NAME
@@ -88,7 +88,7 @@ class DatabaseWizardController extends BaseDocumentController {
       $tableExists = false;
       if ($configAvailable) {
 
-         $conn = &$this->getConnection();
+         $conn = $this->getConnection();
 
          // evaluate, whether the table is already existing
          try {
@@ -113,7 +113,7 @@ PRIMARY KEY (`id`),
 UNIQUE (`urlname`)
 ) ENGINE = MYISAM;';
 
-               $formCreateTable = &$this->getForm('create-table');
+               $formCreateTable = $this->getForm('create-table');
 
                if ($formCreateTable->isSent()) {
                   $conn->executeTextStatement($create);
@@ -124,7 +124,7 @@ UNIQUE (`urlname`)
 
                   $this->getResponse()->forward('./?page=db-wizard#step-3');
                } else {
-                  $tmpl = &$this->getTemplate('step-2');
+                  $tmpl = $this->getTemplate('step-2');
                   $tmpl->setPlaceHolder('statement', $create);
                   $tmpl->transformOnPlace();
 
@@ -132,7 +132,7 @@ UNIQUE (`urlname`)
                }
             }
          } catch (DatabaseHandlerException $e) {
-            $tmpl = &$this->getTemplate('db-conn-error');
+            $tmpl = $this->getTemplate('db-conn-error');
             $tmpl->setPlaceHolder('exception', $e->getMessage());
             $tmpl->transformOnPlace();
          }
@@ -147,7 +147,7 @@ UNIQUE (`urlname`)
          $this->getTemplate('step-3')->transformOnPlace();
 
          // handle for behaviour
-         $formCreateContent = &$this->getForm('add-content');
+         $formCreateContent = $this->getForm('add-content');
          if ($formCreateContent->isSent() && $formCreateContent->isValid()) {
 
             $urlName = $formCreateContent->getFormElementByName('content-urlname')->getAttribute('value');
@@ -169,7 +169,7 @@ UNIQUE (`urlname`)
       // step 4: display content
       if ($configAvailable && $tableExists) {
 
-         $tmpl = &$this->getTemplate('step-4');
+         $tmpl = $this->getTemplate('step-4');
 
          $select = 'SELECT * FROM `' . self::$TABLE_NAME . '` ORDER BY `urlname` ASC';
          $result = $conn->executeTextStatement($select);
