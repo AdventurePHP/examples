@@ -41,7 +41,7 @@
       namespace:
    </p>
    <pre>
-$setup = new GenericORMapperManagementTool();
+$setup = $this->getServiceObject(GenericORMapperManagementTool::class);
 $setup->addMappingConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->addRelationConfiguration('APF\modules\usermanagement\data', 'umgt');
 $setup->setConnectionName(self::$CONFIG_SECTION_NAME);
